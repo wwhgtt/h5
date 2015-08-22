@@ -1,0 +1,32 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script src="./js/lib/zetpo.min.js"></script>
+		<script src="./js/script/config.js"></script>
+	</head>
+	<body>
+		<h2 class="assignment" style="margin-top:10%">完成订单</h2>
+		<img src="./img/six.png" class="complate">
+		<div class="clear"></div>
+		<div class="priceFor" >
+			<p class="priceThing" title="1"></p>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var enrollid=localStorage.getItem("enrollid");
+		$.post(BASE_URL+"/enroll/enroll/getvakey.do",{
+			enrollid:enrollid
+		},function(result){
+			var validatekey =result.validatekey;
+			$(".priceThing").html(validatekey);
+			localStorage.removeItem("enrollid");
+		})
+	})
+</script>

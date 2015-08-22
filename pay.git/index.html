@@ -1,0 +1,44 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script src="./js/lib/zetpo.min.js"></script>
+		<script src="./js/script/config.js"></script>
+		<script src="./js/lib/inobounce.min.js"></script>
+	</head>
+	<body>
+		<h2 class="assignment">益驾科技定金协议</h2>
+		<div class="content">
+			
+		</div>
+		<div class="side_foot">
+			<span><img src="./img/not.png" class="checkbox" title="1"></span>
+			<span style="margin-left:0.5em" >勾选即表示同意以上协议</span>
+		</div>
+		<div class="next_step">
+			<a class="ableHref"><button type="submit" class="payment">下一步</button></a>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(".checkbox").on("click",function(){
+		var title=$(this).attr("title");
+		// console.log(title);
+		if(title==1){
+			$(this).attr("src","./img/yes.png");
+			$(this).attr("title","2");
+			$(".payment").css("background-color","#4ab1ff");
+			$(".ableHref").attr("href","/payment.html")
+		}else{
+			$(this).attr("src","./img/not.png");
+			$(this).attr("title","1");
+			$(".payment").css("background-color","#dddddd");
+			$(".ableHref").removeAttr("href");
+		}
+		
+	})
+</script>

@@ -1,0 +1,124 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script src="./js/lib/zetpo.min.js"></script>
+		<script src="./js/script/config.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<div class="logoImg">
+					<img src="./img/logo.png">
+				</div>
+				<div class="company">
+					<p>益驾学车</p>
+				</div>
+			</div>
+			<div class="content">
+				<div class="main">
+					<span class="sideLeft">姓名</span>
+					<span class="sideRight"><input type="text" placeholder="姓名" class="name"></span>
+				</div>
+				<div class="main">
+					<span class="sideLeft">手机</span>
+					<span  class="sideRight"><input type="text" placeholder="手机号" class="phone"></span>
+					<br>
+					<small class="onerror">请确保输入正确</small>
+				</div>
+				<div class="main forPhone">
+					<span class="sideLeft">年龄</span>
+					<span  class="sideRight"><input type="text" placeholder="年龄" class="howOld"></span>
+				</div>
+				<div class="main">
+					<span class="sideLeft">性别</span>
+					<span  class="sideRight chose">男<img src="./img/arrow.png" class="arrow"></span>
+				</div>
+				<ul class="forSex">
+					<li>男</li>
+					<li>女</li>
+				</ul>
+				<div class="main">
+					<span class="sideLeft">行业</span>
+					<img src="./img/arrow.png" class="arrow" style="float:right;padding-right:10px">
+					<span  class="sideRight chosen" style="margin-right:0px">互联网</span>
+				</div>
+				<ul class="forWork">
+					<li>互联网</li>
+					<li>金融</li>
+					<li>公务员</li>
+					<li>学生</li>
+					<li>其他</li>
+				</ul>
+				<div class="main special">
+					<span class="sideLeft">区域</span>
+					<span  class="sideRight"><input type="text" placeholder="高新区" class="area"></span>
+				</div>
+			</div>
+			<div class="footer">
+				<button type="button" class="submit" >报名</button>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".chose").on("click",function(){
+			$(".forSex").toggle();;
+		})
+		$(".chosen").on("click",function(){
+			$(".forWork").toggle();;
+		})
+		$(".forSex li").on("click",function(){
+			$(".chose").html($(this).html()+"<img src='./img/arrow.png' class='arrow'>");
+			$(".forSex").css("display","none");
+		})
+		$(".forWork li").on("click",function(){
+			$(".chosen").html($(this).html());
+			$(".forWork").css("display","none");
+		})
+		$(".submit").on("click",function(){
+			var name=$(".name").val(),
+			    phone=$(".phone").val(),
+			    howOld=$(".howOld").val(),
+			    area=$(".area").val();
+			var sexChose=$(".chose").html();
+			var sex=sexChose.substr(0,1);
+			var work=$(".chosen").html();
+			if(area==""){
+				area="高新区";
+			}
+			if(!phone.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
+				$(".onerror").css("display","block");
+				$(".forPhone").css("margin-top","50px");
+			}else{
+				$(".onerror").css("display","none");
+				$(".forPhone").css("margin-top","0px");
+			}
+			if(name !=="" && phone!=="" && howOld !=="" && area!==""&& sex !=="" && work !==""){
+				$.post(BASE_URL+"/enroll/inforecord/insertinfo.do",{
+					rcdname:name,
+					phone:phone,
+					age:howOld,
+					area:area,
+					sex:sex,
+					vocation:work
+				},function(result){
+					if(result && result.resultcode=="0"){
+						alert("提交成功")
+					}else{
+						if(result && result.resultcode=="-3"){
+							alert("该帐号已经成功提交过,请勿重复提交");
+						}
+					}
+				})
+			}else{
+				alert("请确保输入完整");
+			}
+		})
+	})
+</script>

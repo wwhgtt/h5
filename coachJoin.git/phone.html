@@ -1,0 +1,93 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script src="./js/lib/zetpo.min.js"></script>
+		<script src="./js/script/config.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="phoneInput">
+				<input type="text" placeholder="请输入您的手机号" style="color: white;">
+				<button type="button" class="phoneButton">发送验证码</button> 
+			</div>
+			<div class="errorMessage"></div>
+			<div class="validate">
+				<input type="text" class="code" placeholder="请输入您的验证码">
+			</div>
+			<img src="./img/joinagain.png" class="submit">
+			<small id="agreeMent">点击立即加盟即代表我本人已点击阅读并同意</small>
+			<br>
+			<small class="iligle"><a href="/agreement.html" style="color:#00BFFF">益驾教练服务协议</a></small>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		// var countDown=60;
+		$.get(BASE_URL+"/basic/user/reload",{
+
+		},function(result){
+			if(result && result.success==true){
+				var id=result.userInfo.id;
+				location.href="/material.html?id="+id;
+			}
+		})
+		$(".phoneButton").on("click",function(){
+			var phoneNumber=$(".phoneInput input").val();
+			if(!phoneNumber.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
+				var html="<small style='color:red;z-index:20;padding-top:20px'>请输入正确的手机号</small>";
+				$(html).appendTo(".errorMessage");
+				return false;
+			}else{
+				$(".errorMessage").css("display","none");
+				$.get(BASE_URL+"/basic/register/code",{
+					phone:phoneNumber
+				},function(result){
+					if(result && result.success == true){
+						//改变button的html
+						 function jump(countDown) {
+			                window.setTimeout(function(){
+			                    countDown--;
+			                    if(countDown > 0){
+			                    	$(".phoneButton").attr("disabled","true");
+			                        $(".phoneButton").html(countDown +'秒后'+ '重发');
+			                        jump(countDown);
+			                    }else{
+			                        $(".phoneButton").html('发送验证码');
+			                        $(".phoneButton").removeAttr("disabled");
+			                    }
+			                },1000);
+			            }
+			            jump(60);
+					}else{
+						alert("发送失败")
+					}
+				})
+			}
+		})
+		$(".submit").on("click",function(){
+			var code=$(".code").val();
+			var phoneNumber=$(".phoneInput input").val();
+			if(code!=="" && phoneNumber!== "" ){
+				$.post(BASE_URL+"/basic/register/verifyUser",{
+					code:code
+				},function(result){
+					if(result.success == true){
+						var id=result.userInfo.id;
+						location.href ="/material.html?id="+id;
+					}else{
+						alert("验证码错误");
+					}
+				})
+			}else{
+				alert("请确保输入正确");
+			}
+		})
+	})
+</script>
+	

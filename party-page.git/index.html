@@ -1,0 +1,147 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>益驾科技请你"出名"</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script src="./js/lib/zetpo.min.js"></script>
+		<script src="./js/script/main.js"></script>
+		<script src="./js/script/config.js"></script>
+		<script src="./js/lib/inobounce.min.js"></script>
+	</head>
+	<body>
+		<div class="background_img">
+			<img src="./img/图层-21.png">
+		</div>
+		<div class="detailButton">
+			<img src="./img/take.png" class="rule_img" onclick="showDetile()">
+			<a href="/joinus.html"><img src="./img/postIdea.png" class="join_img"></a>
+			<img src="./img/list.png" class="look_img" onclick="showRank()">
+		</div>
+		<div class="detileRule">
+			<img src="./img/rule.png" class="ruleBack">
+			<img src="./img/close.png" class="close" onclick="closeRule()">
+			<div class="ruleDetile">
+				<p>一.奖品设置:</p>
+				<div class="forRules">
+					<small>1. 一等奖1名;最终被益驾采纳作为app的名字,赠送AppleWatch一枚(获奖人不重复得奖);</small>
+					<br>
+					<small>2.二等奖1名,排行榜第一名,红米手机(获奖人不重复得奖)</small>
+					<br>
+					<small>3. 三等奖3名,排行榜2、3、4名,小米手环(获奖人不重复得奖)</small>
+				</div>
+	            <p>二、活动8月3日24时截至,获奖名单于8月3号Q群公布</p>
+				<p>三、如何领取:提交名字后加入到QQ群,群号479843729,8.3号在群里公布结果及领奖时间地点</p>
+			</div>
+		</div>
+		<div class="detileRule_rank">
+			<img src="./img/rankList.png" class="ruleBack">
+			<img src="./img/close.png" class="close" onclick="closeRank()">
+			<div class="rankDetail">
+				
+			</div>
+		</div>
+		<img src="./img/shareArrow.png" class="shareArrow" >
+	</body>
+</html>
+<script type="text/javascript">
+	var pageSize = 8,isLoad = false;
+	function showDetile(){
+		$(".detileRule").css("display","block");
+	}
+	function closeRule(){
+		$(".detileRule").css("display","none");
+	}
+	var getName = function(pageNum){
+		isLoad = true;
+		$.post(BASE_URL + "/getname/allnames.do",{
+			pageNum:pageNum,
+			pageSize:pageSize
+		},function(result){
+			isLoad = false;
+			var names=result.names;
+			var rankListNum=$(".rankList").length +1;
+			for(index in names){
+				var name=names[index].name,
+					lovenum=names[index].lovenum;
+
+					newRankName=rankListNum+parseInt(index);
+				var txtHtml="<div class='rankList'><span class='rankName' style='width:35%'>"+newRankName+"."+name+"</span>\
+					<span class='ranknumber' style='width:20%;text-align:center'>"+lovenum+"</span>\
+					<span style='margin-left:8%;width:25%''><img src='./img/zan.png' style='width:60%'' class='zanImg' title='1' nameid='" + names[index].nameid + "'></span>\
+					</div>";
+				$(".rankDetail").append(txtHtml);
+			}
+		})
+	}
+	function showRank(){
+		$(".detileRule_rank").css("display","block");
+		if(!$(".rankList").length){
+			getName(1);
+		}
+	}
+	function closeRank(){
+		$(".detileRule_rank").css("display","none");
+		$(".rankDetail").html("");
+	}
+	$(".rankDetail").on("click",".zanImg",function(){
+		var zanList = localStorage.getItem("zanList");
+		if(zanList)zanList = zanList.split(",");
+		console.log("zanList ",zanList);
+		var nameid=$(this).attr("nameid");
+		if(!zanList || (zanList && zanList.indexOf(nameid) == -1)){
+			var myself=$(this);
+			var title=$(this).attr("title");
+			var number=$(this).parent().prev().html();
+			var numberNew=$(this).parent().prev();
+			$.post(BASE_URL + "/getname/addlove.do",{
+				nameid:nameid
+			},function(result){
+				var resultcode=result.resultcode;
+				if(resultcode == -2){
+					alert("你已经投过票");
+				}else{
+					var zanList = localStorage.getItem("zanList");
+					if(zanList){
+						zanList += "," + nameid;
+						localStorage.setItem("zanList",zanList);
+					}else{
+						localStorage.setItem("zanList",nameid);
+					}
+					var newNumber=parseInt(number)+1;
+					numberNew.html(newNumber);
+				}
+			})
+		}else{
+			alert("你已经点过赞了")
+		}
+		
+	});
+	$(".rankDetail").scroll(function(){
+		var scrollHeight = $(this).scrollTop();
+		var rankListCount = $(".rankList").length;
+		var rankListHeight = $(".rankList").height();
+		var rankListTotalHeight = rankListHeight * rankListCount;
+		var rankDetailHeight = $(".rankDetail").height();
+		var diffHeight = rankListTotalHeight - rankDetailHeight - scrollHeight;
+		//可以加载新数据
+		if(diffHeight >=0 && diffHeight < rankListHeight && isLoad == false){
+			var pageNum = Math.ceil(rankListCount / pageSize) + 1;
+			getName(pageNum);
+		}
+	})
+	if(location.href.indexOf("openRank=1") !== -1){
+		showRank();
+	}
+	// if(location.href.indexOf("showArrow=1") !== -1){
+	// 	$(".shareArrow").css("display","block");
+	// }
+	var showArrow = localStorage.getItem("showArrow");
+	console.log(showArrow);
+	if(showArrow == "1"){
+		$(".shareArrow").css("display","block");
+		localStorage.setItem("showArrow","0");
+	}
+</script>

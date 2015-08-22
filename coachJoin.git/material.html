@@ -1,0 +1,144 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script src="./js/lib/zetpo.min.js"></script>
+		<script src="./js/script/config.js"></script>
+	</head>
+	<body style="padding-top:0px">
+		<div class="container">
+			<div class="header">
+				<div class="examine">
+					<span class="imgwords"><img src="./img/1.png" ></span>
+					<span class="carwords">车辆档案</span>
+				</div>
+				<div class="examine negative">
+					<span class="imgwords"><img src="./img/2.png"  ></span>
+					<span class="carwords">个人资料</span>
+				</div>
+				<div class="examine negative ">
+					<span class="imgwords"><img src="./img/3.png" ></span>
+					<span class="carwords">证件照片</span>
+				</div>
+				<div class="examine negative">
+					<span class="imgwords"><img src="./img/4.png" ></span>
+					<span class="carwords">提交审核</span>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="content">
+				<p class="complateNew">您即将成为益驾好教练,请先完善车辆信息</p>
+				<div class="cityChosen">
+					<span style="width:40%">城市</span>
+					<span style="width:55%;text-align:center" >成都市</span>
+				</div>
+				<div class="cityChosen">
+					<span style="width:40%">车牌号</span>
+					<span style="width:55%;text-align:center;padding-top:0px"><input type="text" placeholder="请输入车牌号" class="carNumber"></span>
+				</div>
+				<div class="cityChosen">
+					<span style="width:40%">汽车品牌</span>
+					<span style="width:55%;text-align:center" class="carType" title="1">请选择品牌 ></span>
+				</div>
+				<a class="goforNext" ><img src="./img/next.png" class="submit"></a>
+			</div>		
+		</div>
+		<div class="coverModel">
+			<div class="mainContent">
+				<p class="zoomList">汽车品牌</p>
+				<div class="typeList">
+					<span>大众</span>
+					<span class="carDetail">捷达</span>
+				</div>
+				<div class="typeList">
+					<span>大众</span>
+					<span class="carDetail">老捷达</span>
+				</div>
+				<div class="typeList">
+					<span>大众</span>
+					<span class="carDetail">桑塔纳</span>
+				</div>
+				<div class="typeList">
+					<span>大众</span>
+					<span class="carDetail">老桑塔纳</span>
+				</div>
+				<div class="typeList">
+					<span>其他</span>
+					<span class="carDetailAno"><input type="text" placeholder="请输入您的车型" class="typeInputAno"></span>
+				</div>
+				<div class="typeListAno" >
+					<button class="forCarInput">确定</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$().ready(function(){
+		$.get(BASE_URL+"/basic/user/reload",{
+
+		},function(result){
+			if(result && result.success==true){
+				var plateNum=result.userInfo.plateNum;
+				var coachCar=result.userInfo.coachCar;
+				$(".carNumber").val(plateNum);
+				if(coachCar !== ""){
+					$(".carType").attr("title","2");
+					$(".carType").html(coachCar);
+				}
+				
+			}else{
+				if(result && result.errorInfo=="请先登录"){
+					location.href="/index.html";
+				}
+			}
+		})
+		$(".goforNext").on("click",function(){
+			var carNumber=$(".carNumber").val();
+			var title=$(".carType").attr("title");
+			var carType=$(".carType").html();
+			if(carNumber !== "" && title !== "1"){
+				$.post(BASE_URL+"/basic/user/profile",{
+					plateNum:carNumber,
+					coachCar:carType
+				},function(result){
+					if(result && result.success == true){
+						var href=location.href;
+						var id=href.replace(/^.+?id\=/,'');
+						location.href="/person.html?id="+id;
+					}else{
+						alert("系统出错,请稍后重试")
+					}
+				})
+			}else{
+				alert("请确保信息输入完整")
+			}
+		})
+		//选择车牌
+		$(".carType").on("click",function(){
+			$(".coverModel").css("display","block")
+		})
+		$(".carDetailAno").on("click",function(){
+			$(".typeListAno").css("display","block");
+		})
+		$(".carDetail").on("click",function(){
+			$(".carType").html($(this).html());
+			$(".carType").attr("title","2");
+			$(".coverModel").css("display","none")
+		})
+		$(".forCarInput").on("click",function(){
+			var value=$(".typeInputAno").val();
+			if(value!== ""){
+				$(".carType").html(value);
+				$(".carType").attr("title","2");
+				$(".coverModel").css("display","none")
+			}else{
+				alert("请先输入您的车型")
+			}
+		})
+	})
+</script>
