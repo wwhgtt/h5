@@ -16,20 +16,24 @@ html {overflow-y: scroll;}
 .header{
 	height: 50px;
 	line-height: 50px;
-	background-color:#DAA520; 
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #4ab1ff
 }
 .header div{
 	display: inline-block;
 }
 .logoImg{
-	width: 50%;
+	width: 49%;
 	float: left;
 	text-align: right;
+	border-right: 1px solid white;
 }
 .logoImg img{
-	height: 40px;
-	margin-top: 5px;
+	height: 30px;
+	margin-top: 8px;
 	padding-right: 5px;
+	padding-bottom: 5px;
 }
 .company{
 	width: 50%;
@@ -38,20 +42,14 @@ html {overflow-y: scroll;}
 .company p{
 	color: white;
 	padding-left: 5px;
-	letter-spacing: 3px
+	font-size: 16px;
+	font-weight: 500
 }
 .content{
 	width: 100%;
-	margin-top: 10%;
+	margin-top: 3%;
 }
-.main{
-	height: 50px;
-	line-height: 50px;
-	border-top:  1px solid #C0C0C0;
-}
-.main span{
-	display: inline-block;
-}
+
 .sideLeft{
 	padding-left: 10px;
 }
@@ -61,6 +59,40 @@ html {overflow-y: scroll;}
 	width: 100%;
 	text-align: center;
 	border-top: 1px solid #C0C0C0;
+}
+.question{
+	height: 50px;
+	line-height: 50px;
+	background-color: #c9e7fe;
+	text-indent: 4px;
+	font-size: 16px;
+	width: 100%
+}
+.specialQuestion{
+	height: 50px;
+	line-height: 50px;
+	background-color: #c9e7fe;
+	text-indent: 4px;
+	font-size: 16px;
+	width: 100%
+}
+.specialQuestion span{
+	display: inline-block;
+}
+.question span{
+	display: inline-block;
+}
+.main{
+	margin-bottom: 10px
+}
+.answer{
+	text-indent: 14px;
+	background-color: #fcfcfc;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: none;
 }
 .name{
 	height: 48px;
@@ -100,9 +132,11 @@ html {overflow-y: scroll;}
 }
 .arrow{
 	float: right;
-	margin-left: 5px;
-	width: 10px;
-	margin-top: 20px
+}
+.arrow img{
+	width: 15px;
+	padding-right: 15px;
+	margin-top: 21px
 }
 .side{
 	width: 50%;
@@ -151,4 +185,9 @@ html {overflow-y: scroll;}
 }
 .special{
 	border-bottom:  1px solid #C0C0C0
+}
+.answerImg img{
+	width: 100%;
+	margin-top: 10px;
+	display: none;
 }

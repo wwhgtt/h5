@@ -13,109 +13,99 @@
 		<div class="container">
 			<div class="header">
 				<div class="logoImg">
-					<img src="./img/logo.png">
+					<img src="./img/car.png">
 				</div>
 				<div class="company">
-					<p>益驾学车</p>
+					<p>学车常见Q&A</p>
 				</div>
 			</div>
 			<div class="content">
 				<div class="main">
-					<span class="sideLeft">姓名</span>
-					<span class="sideRight"><input type="text" placeholder="姓名" class="name"></span>
+					<div class="question">
+						<span>Q:你们是驾校吗？</span>
+						<span class="arrow"><img src="./img/arrowUp.png"></span>
+					</div>
+					<p class="answer">A:我们不是驾校，我们是集合全成都5%优秀教练的互联网学车平台，直接连接学员与教练。</p>
 				</div>
 				<div class="main">
-					<span class="sideLeft">手机</span>
-					<span  class="sideRight"><input type="text" placeholder="手机号" class="phone"></span>
-					<br>
-					<small class="onerror">请确保输入正确</small>
-				</div>
-				<div class="main forPhone">
-					<span class="sideLeft">年龄</span>
-					<span  class="sideRight"><input type="text" placeholder="年龄" class="howOld"></span>
+					<div class="question">
+						<span>Q:你们和传统驾校有什么不同？</span>
+						<span class="arrow"><img src="./img/arrowUp.png"></span>
+					</div>
+					<p class="answer">A:我们相对传统驾校价格透明、管理规范，无隐形费用。</p>
 				</div>
 				<div class="main">
-					<span class="sideLeft">性别</span>
-					<span  class="sideRight chose">男<img src="./img/arrow.png" class="arrow"></span>
+					<div class="question">
+						<span>Q:你们教学模式是一对一吗？</span>
+						<span class="arrow"><img src="./img/arrowUp.png"></span>
+					</div>
+					<p class="answer">A:我们平台所有教学模式都为1对1教学，这样可以替提升教学效率与质量。</p>
 				</div>
-				<ul class="forSex">
-					<li>男</li>
-					<li>女</li>
-				</ul>
 				<div class="main">
-					<span class="sideLeft">行业</span>
-					<img src="./img/arrow.png" class="arrow" style="float:right;padding-right:10px">
-					<span  class="sideRight chosen" style="margin-right:0px">互联网</span>
+					<div class="question">
+						<span>Q:你们那里能学什么驾照？</span>
+						<span class="arrow"><img src="./img/arrowUp.png"></span>
+					</div>
+					<p class="answer">A:目前我们只针对C1驾照的考取开展服务，后续可能会开通更多驾照类型的考取服务。</p>
 				</div>
-				<ul class="forWork">
-					<li>互联网</li>
-					<li>金融</li>
-					<li>公务员</li>
-					<li>学生</li>
-					<li>其他</li>
-				</ul>
-				<div class="main special">
-					<span class="sideLeft">区域</span>
-					<span  class="sideRight"><input type="text" placeholder="高新区" class="area"></span>
+				<div class="main">
+					<div class="specialQuestion">
+						<span>Q:2980元包含哪些费用？</span>
+						<span class="arrow"><img src="./img/arrowUp.png"></span>
+					</div>
+					<div class="answerImg">
+						<img src="./img/123.jpg">
+					</div>
 				</div>
-			</div>
-			<div class="footer">
-				<button type="button" class="submit" >报名</button>
+				<div class="main">
+					<div class="question">
+						<span>Q:我能在20个课时内学完吗？</span>
+						<span class="arrow"><img src="./img/arrowUp.png"></span>
+					</div>
+					<p class="answer">A:根据我们的调研分析，通常在20~30个课时可以取得驾照，最快在20个课时取得。</p>
+				</div>
+				<div class="main">
+					<div class="question">
+						<span>Q:我报名后在哪儿学车？</span>
+						<span class="arrow"><img src="./img/arrowUp.png"></span>
+					</div>
+					<p class="answer">A：我们会为您匹配最符合你地理位置的优秀教练，集中在西边：犀浦，IT大道，日月大道，南边：环球中心，华阳，中和等。</p>
+				</div>
+				<div class="main">
+					<div class="question">
+						<span>Q:报名后最快多久可以拿到驾照？</span>
+						<span class="arrow"><img src="./img/arrowUp.png"></span>
+					</div>
+					<p class="answer">A：要根据学员的学车时间而定，如果学员时间充足且都是一次性通过，就会很快拿到驾照，在益驾学车最快30天可拿到驾照。</p>
+				</div>
+				<div class="main">
+					<div class="question">
+						<span>Q: 益驾学车有哪些报名方式？</span>
+						<span class="arrow"><img src="./img/arrowUp.png"></span>
+					</div>
+					<p class="answer">A：目前用户可以通过线上线下两种方式报名，线上报名：用户可以直接通过益驾学车的微博“益驾学车”以及官方微信公众号“益驾学车”完成注册及报名；线下报名：用户可自行到益驾学车公司现场报名或益驾学车组织的活动现场报名。</p>
+				</div>
 			</div>
 		</div>
 	</body>
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".chose").on("click",function(){
-			$(".forSex").toggle();;
-		})
-		$(".chosen").on("click",function(){
-			$(".forWork").toggle();;
-		})
-		$(".forSex li").on("click",function(){
-			$(".chose").html($(this).html()+"<img src='./img/arrow.png' class='arrow'>");
-			$(".forSex").css("display","none");
-		})
-		$(".forWork li").on("click",function(){
-			$(".chosen").html($(this).html());
-			$(".forWork").css("display","none");
-		})
-		$(".submit").on("click",function(){
-			var name=$(".name").val(),
-			    phone=$(".phone").val(),
-			    howOld=$(".howOld").val(),
-			    area=$(".area").val();
-			var sexChose=$(".chose").html();
-			var sex=sexChose.substr(0,1);
-			var work=$(".chosen").html();
-			if(area==""){
-				area="高新区";
-			}
-			if(!phone.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
-				$(".onerror").css("display","block");
-				$(".forPhone").css("margin-top","50px");
+		$(".question").on("click",function(){
+			$(this).next().toggle();
+			if($(this).children(".arrow").children().attr("src") == "./img/arrowDown.png"){
+				$(this).children(".arrow").children().attr("src","./img/arrowUp.png")
 			}else{
-				$(".onerror").css("display","none");
-				$(".forPhone").css("margin-top","0px");
+				$(this).children(".arrow").children().attr("src","./img/arrowDown.png")
 			}
-			if(name !=="" && phone!=="" && howOld !=="" && area!==""&& sex !=="" && work !==""){
-				$.post(BASE_URL+"/enroll/inforecord/insertinfo.do",{
-					rcdname:name,
-					phone:phone,
-					age:howOld,
-					area:area,
-					sex:sex,
-					vocation:work
-				},function(result){
-					if(result && result.resultcode=="0"){
-						alert("提交成功")
-					}
-				})
+		})
+		$(".specialQuestion").on("click",function(){
+			if($(this).children(".arrow").children().attr("src") == "./img/arrowDown.png"){
+				$(this).children(".arrow").children().attr("src","./img/arrowUp.png")
 			}else{
-				alert("请确保输入完整");
+				$(this).children(".arrow").children().attr("src","./img/arrowDown.png")
 			}
-			
+			$(this).next().children().toggle();
 		})
 	})
 </script>
