@@ -1,1 +1,1 @@
-var BASE_URL = "/dev";
+var BASE_URL = "/sever";
