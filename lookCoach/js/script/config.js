@@ -1,1 +1,1 @@
-var BASE_URL = "/sever";
+var BASE_URL = "/sever-system";
