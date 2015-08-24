@@ -34,7 +34,7 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var pagesize=5;
+		var pagesize=20;
 		var isLoad = false;
 		var getItem=function(pageNum){
 			isLoad=true;
@@ -84,7 +84,7 @@
 			//可以加载新数据
 			if(diffHeight >=0 && diffHeight < rankListHeight && isLoad == false){
 				pageNum = Math.ceil(rankListCount / pageSize) + 1;
-				getName(pageNum);
+				getItem(pageNum);
 			}
 		})
 	})
