@@ -1,22 +1,155 @@
 <!DOCTYPE>
 <html>
 	<head>
-		<title></title>
+		<title>预约试驾</title>
 		<meta charset="utf-8"/>
 		<meta Content-Type="application/x-www-form-urlencoded" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-		<link rel="stylesheet" type="text/css" href="../../css/style.css">
-		<script src="../../js/lib/zetpo.min.js"></script>
-		<script src="../../js/lib/hammer.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script src="../js/lib/zetpo.min.js"></script>
+		<script src="../js/lib/weixin.js"></script>
+		<script src="../js/script/config.js"></script>
 	</head>
 	<body>
 		<div class="container">
-			
+			<div class="content" style="background-color:white">
+				<div class="mainList" style="border-bottom:1px solid #f1f1f1">
+					<span class="spanLeft" style="height:50px;line-height:50px;padding-left:0px">试乘试驾</span>
+					<span class="spanRight" style="height:50px;line-height:50px;padding-right:0px">免费/90分钟</span>
+				</div>
+				<div class="mainList siteInfoMore">
+					<p style="width:4em">练车场地</p>
+					<p style="width:8em;margin-left:5em;color:#c6c6c6;font-weight:800" class="forSite">选择练车地址</p>
+					<p style="width:1em;float:right;color:#c6c6c6;font-weight:800" class="siteArrow" >></p>
+				</div>
+				<div class="mainList">
+					<p style="width:4em">练车时间</p>
+					<p style="width:7em;margin-left:5em;color:#c6c6c6;font-weight:800">选择练车时间</p>
+					<p style="width:1em;float:right;color:#c6c6c6;font-weight:800" >></p>
+				</div>
+				<div class="mainList">
+					<input type="text" placeholder="如有其他需求请留言" class="leaveMessage">
+				</div>
+			</div>
+			<div class="mainList other" >
+				<p style="width:4em;padding-left: 1em">联系电话</p>
+				<p style="width:9em;margin-left:4em;color:#c6c6c6;font-weight:800">18200112686</p>
+			</div>
+			<div class="mainList other" >
+				<p style="width:4em;padding-left: 1em">联系人</p>
+				<input type="text" class="assoiate"  placeholder="请输入联系人">
+			</div>
+			<div class="foot">
+				<button class="login" style="margin-top:7px">立即预约</button>
+			</div>
+		</div>
+		<div class="container-fulid">
+			<div class="site">
+				<div class="headerAddress">
+					<span><img src="../img/location.png" class="location"></span>
+					<span class="myLocation"></span>
+				</div>
+				<p class="ready">正在获取位置。。。</p>
+				<ul class="siteInfo">
+					
+				</ul>
+			</div>
 		</div>
 	</body>
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+		var url;
+		if(navigator.userAgent.indexOf("ipad") !== -1 ||navigator.userAgent.indexOf("iphone") !== -1){
+			url = "http://wx.lja.so/";
+		}else{
+			url=location.href.split("#")[0];
+		}
+		$(".siteInfoMore").on("click",function(){
+			$(".container").css("display","none");
+	        $(".container-fulid").css("display","block");
+	        $(".ready").css("display","block");
+			$.get(BASE_URL+"/basic/wx/signature",{
+				url:url
+				},function(result){
+					if(result && result.success == true ){
+					var timestamp=result.result.timestamp,
+						nonceStr=result.result.noncestr;
+						signature=result.result.signature;
+					wx.config({
+					    debug: false, 
+					    appId: 'wx678c9951b011eabe', 
+					    timestamp:timestamp, 
+					    nonceStr: nonceStr,
+					    signature:signature,
+					    jsApiList: ["getLocation"] 
+					});
+					wx.getLocation({
+					    type: 'wgs84',
+					    success: function (res) {
+					        var lat = res.latitude; 
+					        var long = res.longitude;
+					        var speed = res.speed; 
+					        var accuracy = res.accuracy;
+					        var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location="+ lat+","+ long+"&output=json&pois=1";
+					        $.ajax({
+						        url:$url,
+						        type: 'GET',
+						        dataType: 'jsonp',
+						        jsonp:'callback',
+						        data:'json',
+						        success:function(result) {
+						        	$(".ready").css("display","none");  
+					   				if(result && result.status == 0){
+					   					var address=result.result.formatted_address;
+					   					$(".myLocation").html(address);
+					   					var distance="1000000000";
+										$.get(BASE_URL+"/basic/search/site/byLocation",{
+											distance:distance,
+											lat: lat,
+											long:long
+										},function(result){
+											if(result && result.success== true){
+												var siteList=result.siteList;
+												for(index in siteList){
+													var name=siteList[index].name;
+													var distances=siteList[index].distance;
+													var distan='"'+distances+'"';
+													var dis=distan.substr(1,8);
+													var html="<li class='siteList'>\
+													<span class='nameLeft'>"+name+"</span>\
+													<span class='nameRight'>"+dis+"m"+"</span>\
+													</li>";
+													$(".siteInfo").append(html);
+												}
+											}
+										})
+					   				}
+								},
+								error:function(){
+									alert("获取地理位置失败");
+								} 
+						    })
+					    },
+					    error:function(){
+					    	alert("sorry,系统报错")
+					    }
+					});
+
+				}else if(result && result.errorInfo ){
+					var errorInfo=result.errorInfo;
+		 			alert(errorInfo);
+		 		}
+			})
+		})
+		$(".siteInfo").on("click",".siteList",function(){
+			 var site=$(this).find(".nameLeft").html();
+	        $(".forSite").html(site);
+	        $(".siteArrow").css("display","none");
+	        $(".ready").css("display","none"); 
+	        $(".forSite").css({"width":"15em","margin-left":"2em","text-align":"right"});
+			$(".container").css("display","block");
+	        $(".container-fulid").css("display","none");
+		})
 	})
 </script>

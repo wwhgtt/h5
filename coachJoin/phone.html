@@ -45,25 +45,25 @@
 				return false;
 			}else{
 				$(".errorMessage").css("display","none");
+				function jump(countDown) {
+	                window.setTimeout(function(){
+	                    countDown--;
+	                    if(countDown > 0){
+	                    	$(".phoneButton").attr("disabled","true");
+	                        $(".phoneButton").html(countDown +'秒后'+ '重发');
+	                        jump(countDown);
+	                    }else{
+	                        $(".phoneButton").html('发送验证码');
+	                        $(".phoneButton").removeAttr("disabled");
+	                    }
+	                },1000);
+	            }
+	            jump(60);
 				$.get(BASE_URL+"/basic/register/code",{
 					phone:phoneNumber
 				},function(result){
 					if(result && result.success == true){
 						//改变button的html
-						 function jump(countDown) {
-			                window.setTimeout(function(){
-			                    countDown--;
-			                    if(countDown > 0){
-			                    	$(".phoneButton").attr("disabled","true");
-			                        $(".phoneButton").html(countDown +'秒后'+ '重发');
-			                        jump(countDown);
-			                    }else{
-			                        $(".phoneButton").html('发送验证码');
-			                        $(".phoneButton").removeAttr("disabled");
-			                    }
-			                },1000);
-			            }
-			            jump(60);
 					}else{
 						alert("发送失败")
 					}
