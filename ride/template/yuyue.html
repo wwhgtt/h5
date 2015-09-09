@@ -22,7 +22,7 @@
 					<p style="width:8em;margin-left:5em;color:#c6c6c6;font-weight:800" class="forSite">选择练车地址</p>
 					<p style="width:1em;float:right;color:#c6c6c6;font-weight:800" class="siteArrow" >></p>
 				</div>
-				<div class="mainList">
+				<div class="mainList siteFirst">
 					<p style="width:4em">练车时间</p>
 					<p style="width:7em;margin-left:5em;color:#c6c6c6;font-weight:800">选择练车时间</p>
 					<p style="width:1em;float:right;color:#c6c6c6;font-weight:800" >></p>
@@ -150,6 +150,12 @@
 	        $(".forSite").css({"width":"15em","margin-left":"2em","text-align":"right"});
 			$(".container").css("display","block");
 	        $(".container-fulid").css("display","none");
+		})
+		$(".siteFirst").on("click",function(){
+			var forSite=$(".forSite").html();
+			if(forSite == "选择练车地址"){
+				alert("请先选择练车场地")
+			}
 		})
 	})
 </script>
