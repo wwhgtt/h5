@@ -22,10 +22,10 @@
 					<p style="width:8em;margin-left:5em;color:#c6c6c6;font-weight:800" class="forSite">选择练车地址</p>
 					<p style="width:1em;float:right;color:#c6c6c6;font-weight:800" class="siteArrow" >></p>
 				</div>
-				<div class="mainList siteFirst">
+				<div class="mainList siteFirst" title="1">
 					<p style="width:4em">练车时间</p>
-					<p style="width:7em;margin-left:5em;color:#c6c6c6;font-weight:800">选择练车时间</p>
-					<p style="width:1em;float:right;color:#c6c6c6;font-weight:800" >></p>
+					<p style="width:7em;margin-left:5em;color:#c6c6c6;font-weight:800" class="practice">选择练车时间</p>
+					<p style="width:1em;float:right;color:#c6c6c6;font-weight:800" class="timeArrow" >></p>
 				</div>
 				<div class="mainList">
 					<input type="text" placeholder="如有其他需求请留言" class="leaveMessage">
@@ -33,11 +33,11 @@
 			</div>
 			<div class="mainList other" >
 				<p style="width:4em;padding-left: 1em">联系电话</p>
-				<p style="width:9em;margin-left:4em;color:#c6c6c6;font-weight:800">18200112686</p>
+				<p style="width:9em;margin-left:4em;color:#c6c6c6;font-weight:800" class="phoneNumber"></p>
 			</div>
 			<div class="mainList other" >
 				<p style="width:4em;padding-left: 1em">联系人</p>
-				<input type="text" class="assoiate"  placeholder="请输入联系人">
+				<input type="text" class="assoiate" placeholder="请输入联系人">
 			</div>
 			<div class="foot">
 				<button class="login" style="margin-top:7px">立即预约</button>
@@ -55,10 +55,27 @@
 				</ul>
 			</div>
 		</div>
+		<div class="hideModel">
+			<p class="firstChose"><i>请先选择日期</i></p>
+			<div class="modelLeft" >
+				<ul class="dayHide">
+					
+				</ul>
+			</div>
+			<div class="modelRight">
+				<ul class="timeHide">
+					
+				</ul>
+			</div>
+		</div>
 	</body>
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var href=location.href;
+		window.phone_num=href.replace(/^.+?title\=/,'');
+		console.log(window.phone_num)
+		$(".phoneNumber").html(window.phone_num);
 		var url;
 		if(navigator.userAgent.indexOf("ipad") !== -1 ||navigator.userAgent.indexOf("iphone") !== -1){
 			url = "http://wx.lja.so/";
@@ -114,11 +131,13 @@
 												for(index in siteList){
 													var name=siteList[index].name;
 													var distances=siteList[index].distance;
+													var id=siteList[index].id;
 													var distan='"'+distances+'"';
 													var dis=distan.substr(1,8);
 													var html="<li class='siteList'>\
 													<span class='nameLeft'>"+name+"</span>\
 													<span class='nameRight'>"+dis+"m"+"</span>\
+													<span class='forSiteId' style='display:none'>"+id+"</span>\
 													</li>";
 													$(".siteInfo").append(html);
 												}
@@ -135,7 +154,7 @@
 					    	alert("sorry,系统报错")
 					    }
 					});
-
+ 
 				}else if(result && result.errorInfo ){
 					var errorInfo=result.errorInfo;
 		 			alert(errorInfo);
@@ -143,7 +162,8 @@
 			})
 		})
 		$(".siteInfo").on("click",".siteList",function(){
-			 var site=$(this).find(".nameLeft").html();
+			var site=$(this).find(".nameLeft").html();
+			window.id=$(this).find(".forSiteId").html();
 	        $(".forSite").html(site);
 	        $(".siteArrow").css("display","none");
 	        $(".ready").css("display","none"); 
@@ -152,10 +172,120 @@
 	        $(".container-fulid").css("display","none");
 		})
 		$(".siteFirst").on("click",function(){
-			var forSite=$(".forSite").html();
-			if(forSite == "选择练车地址"){
-				alert("请先选择练车场地")
+			var title=$(this).attr("title");
+			var float=$(this).html();
+			if(title=="1"){
+				var forSite=$(".forSite").html();
+				if(forSite == "选择练车地址"){
+					alert("请先选择练车场地")
+				}else{
+					$(".siteFirst").attr("title","2");
+					$(".hideModel").css("display","block");
+					var siteid=window.id;
+					$.post(BASE_URL+"/enroll/trydirve/gettimeselect.do",{
+						siteid:siteid
+					},function(result){
+						if (result && result.resultcode == "0") {
+							var timelist=result.timelist;
+							window.timelistTemp = {};
+							timelist.forEach(function(time){
+								var day = time[0].day;
+								var tt=day.substr(8,2);
+								var dd=day.substr(5,2);
+								var dataTemp=dd+"月"+tt+"日";
+								var html="<li class='datDetaile'>"+dataTemp+"</li>";
+									$(".dayHide").append(html);
+								time.forEach(function(item){
+									if(!window.timelistTemp[dataTemp]){
+										window.timelistTemp[dataTemp] = [item];
+									}else{
+										window.timelistTemp[dataTemp].push(item);
+									}
+								})
+							});
+							console.log("window.timelistTemp",window.timelistTemp);
+						};
+					})
+				}
+			}else if(float !== "选择练车时间"){
+				$(".siteFirst").attr("title","1");
 			}
+			
+		})
+		var myData="";
+		$(".dayHide").on("click",".datDetaile",function(){
+			$("li[title='2']").css("display","none");
+			 var html=$(this).html();
+			 myData=$(this).html();
+			 var timelistTemp=window.timelistTemp;
+			 var tempList=timelistTemp[html];
+			 for(index in tempList){
+			 	var time=tempList[index].time;
+			 	var selecttimeid=tempList[index].selecttimeid;
+			 	var isabled=tempList[index].isabled;
+			 	if(isabled==false){
+			 		var word="约满"
+			 	}else{
+			 		var word=""
+			 	};
+			 	var timer=time.substr(0,5);
+			 	var html="<li class='timeDetaile' title='2'>"+timer+"<i class='wordState'>"+word+"</i>"+"<i class='selecttimeid'>"+selecttimeid+"</i></li>";
+			 	$(".timeHide").append(html);
+			 }
+		})
+		$(".timeHide").on("click",".timeDetaile",function(){
+			var word=$(this).find(".wordState").html();
+			window.selecttimeid=$(this).find(".selecttimeid").html();
+			var press=$(this).html();
+			var myHtml=press.substr(0,5);
+			if(word=="约满"){
+				alert("只能选择未预约时间段")
+			}else{
+				//添加html到div中
+				 $(".practice").css({"width":"15em","margin-left":"2em","text-align":"right"});
+				console.log(myData);
+				var htmler=myData+myHtml;
+				$(".practice").html(htmler);
+				$(".timeArrow").css("display","none");
+				$(".hideModel").css("display","none")
+			}
+		})
+		$(".timeComplate").on("click",function(){
+			$(".hideModel").css("display","none");
+		})
+		$(".login").on("click",function(){
+			var time=$(".practice").html();
+			var dd=time.substr(0,2);
+			var tt=time.substr(3,2);
+			var siteid=window.id,//出错
+				day="2015-"+dd+"-"+tt+"",
+				timeselectid=window.selecttimeid,
+				phonenum=window.phone_num;
+				username=$(".assoiate").val();
+			var leaveMessage=$(".leaveMessage").val();
+			if(siteid !== "" && day !== "" && timeselectid !=="" && username !==""){
+				$.post(BASE_URL+"/enroll/trydirve/recordtry.do",{
+					siteid:siteid,
+					day:day,
+					timeselectid:timeselectid,
+					phonenum:phonenum,
+					username:username,
+					addinfo:leaveMessage
+				},function(result){
+					if(result && result.resultcode =="0"){
+						location.href="/ride/template/success.html";
+					}else if(result && result.resultcode =="-4"){
+						location.href="/ride/template/lookpayMent.html";
+					}else if(result && result.resultcode =="-1"){
+						alert("sorry,系统出错")
+					}else if(result && result.resultcode =="-3"){
+						alert("手机号没有找到用户");
+					}
+				})
+			}else{
+				alert("请保证输入完整")
+			}
+			
 		})
 	})
 </script>

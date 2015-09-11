@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
 		<script src="../js/lib/zetpo.min.js"></script>
+		<script src="../js/script/config.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -40,6 +41,27 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+		$.post(BASE_URL+"/enroll/trydirve/gettrydrive.do",{
+
+		},function(result){
+			if(result && result.resultcode == "0"){
+				var phonenum=result.tryDrive.phonenum;
+					whichday=result.tryDrive.whichday,
+					fromtime=result.tryDrive.fromtime,
+					ordertime=result.tryDrive.ordertime,
+					address=result.tryDrive.address;
+				$(".timeout").html(ordertime);
+				$(".phoneOut").html(phonenum);
+				var html="<i class='siteTime'>"+whichday+"</i>"+fromtime;
+				$(".severout").html(html);
+				$(".addressout").html(address);
+			}else if(result && result.resultcode == "-3"){
+				// location.href="/ride/template/phone.html";
+			}else if(result && result.resultcode == "-1"){
+				// alert("sorry,程序错误");
+			}else if(result && result.resultcode == "-4"){
+				// location.href="/ride/template/yuyue.html";
+			}
+		})
 	})
 </script>

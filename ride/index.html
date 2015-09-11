@@ -40,7 +40,7 @@
 					<p class="wordList" style="padding-bottom:15px">2.预约成功后按时到达训练场,过时不候</p>
 				</div>
 				<div class="footer">
-					<a href="/ride/template/yuyue.html"><button class="login">立即预约</button></a>
+					<button class="login">立即预约</button>
 				</div>
 			</div>
 		</div>
@@ -48,5 +48,23 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
+		 $(".login").on("click",function(){
+			$.post(BASE_URL+"/enroll/trydirve/gettrydrive.do",{
+
+			},function(result){
+				console.log(result)
+				if(result && result.resultcode == "0"){
+					location.href="/ride/template/lookpayMent.html";
+				}else if(result && result.resultcode == "-3"){
+					location.href="/ride/template/phone.html";
+				}else if(result && result.resultcode == "-1"){
+					alert("sorry,程序错误");
+				}else if(result && result.resultcode == "-4"){
+					var title=result.tryDrive.phonenum;
+					// var phone=title.substr(2,11);
+					location.href="/ride/template/yuyue.html?title="+title;
+				}
+			})
+		})
 	})
 </script>
