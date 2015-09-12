@@ -77,158 +77,164 @@
 		console.log(window.phone_num)
 		$(".phoneNumber").html(window.phone_num);
 		var url=location.href.split("#")[0];
-		// if(navigator.userAgent.indexOf("ipad") !== -1 ||navigator.userAgent.indexOf("iphone") !== -1){
-		// 	url = "http://wx.lja.so/";
-		// }else{ 
-			// url
-		// }
-		var lat,long;
-		$.get(BASE_URL+"/basic/wx/signature",{
-			url:url
-			},function(result){
-				if(result && result.success == true ){
-				var timestamp=result.result.timestamp,
-					nonceStr=result.result.noncestr;
-					signature=result.result.signature;
-				wx.config({
-				    debug: false, 
-				    appId: 'wx678c9951b011eabe', 
-				    timestamp:timestamp, 
-				    nonceStr: nonceStr,
-				    signature:signature,
-				    jsApiList: ["getLocation"] 
-				});
-				wx.getLocation({
-				    type: 'wgs84',
-				    success: function (res) {
-				        lat = res.latitude; 
-				        long = res.longitude;
-				        var speed = res.speed; 
-				        var accuracy = res.accuracy;
-				    },
-				    error:function(){
-				    	alert("sorry,获取地理位置失败")
-				    }
-				});
-				wx.onMenuShareTimeline({
-				    title: '强烈推荐《驾考007》,3980包过班', // 分享标题
-				    link: 'http://mp.weixin.qq.com/s?__biz=MzIzMzA1ODMyNg==&mid=209112981&idx=1&sn=d3f3e9ec3db5717efb644a8b42f3f39f&scene=0&key=dffc561732c2265139eaf7bb1c972093fe3999a4ad807689188414433caf67ee891137f3a356a1ee967029b40f822aa6&ascene=0&uin=MjgyMTIxNTUwNg%3D%3D&devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.10.5+build(14F27)&version=11020201&pass_ticket=NvwGjbFyAKcUyJWLofLZRq4NRDVG0OJiX3jo71QsIo3T43hvOjLRWnr6l2kFaJ3K', // 分享链接
-				    imgUrl: '../img/logo.jpg', // 分享图标
-				    success: function (){ 
-				        // 用户确认分享后执行的回调函数
-				    },
-				    cancel: function () { 
-				        // 用户取消分享后执行的回调函数
-				    }
-				});
-				wx.onMenuShareAppMessage({
-				    title: '强烈推荐《驾考007》,3980包过班', // 分享标题
-				    desc: '', // 分享描述
-				    link: 'http://mp.weixin.qq.com/s?__biz=MzIzMzA1ODMyNg==&mid=209112981&idx=1&sn=d3f3e9ec3db5717efb644a8b42f3f39f&scene=0&key=dffc561732c2265139eaf7bb1c972093fe3999a4ad807689188414433caf67ee891137f3a356a1ee967029b40f822aa6&ascene=0&uin=MjgyMTIxNTUwNg%3D%3D&devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.10.5+build(14F27)&version=11020201&pass_ticket=NvwGjbFyAKcUyJWLofLZRq4NRDVG0OJiX3jo71QsIo3T43hvOjLRWnr6l2kFaJ3K', // 分享链接
-				    imgUrl: '../img/logo.jpg', // 分享图标
-				    type: 'link', // 分享类型,music、video或link，不填默认为link
-				    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-				    success: function () { 
-				        // 用户确认分享后执行的回调函数
-				    },
-				    cancel: function () { 
-				        // 用户取消分享后执行的回调函数
-				    }
-				});
-			}else if(result && result.errorInfo ){
-				var errorInfo=result.errorInfo;
-	 			alert(errorInfo);
-	 		}
-		})
 		$(".siteInfoMore").on("click",function(){
 			$(".container").css("display","none");
 	        $(".container-fulid").css("display","block");
 	        $(".ready").css("display","block");
-			if(lat == undefined && long == undefined ||lat == "" || long == ""){
-				var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location=30.780523,103.937261&output=json&pois=1";
-				$.ajax({
-			        url:$url,
-			        type: 'GET',
-			        dataType: 'jsonp',
-			        jsonp:'callback',
-			        data:'json',
-			        success:function(result){
-			        	$(".ready").css("display","none");  
-		   				if(result && result.status == 0){
-		   					var address=result.result.formatted_address;
-		   					$(".myLocation").html(address);
-		   					var distance="100000";
-	   						$.get(BASE_URL+"/basic/search/site/byLocation",{
-								distance:distance,
-								lat: "30.780523",
-								long:"103.937261"
-							},function(result){
-								if(result && result.success== true){
-									var siteList=result.siteList;
-									for(index in siteList){
-										var name=siteList[index].name;
-										var distances=siteList[index].distance;
-										var id=siteList[index].id;
-										var distan='"'+distances+'"';
-										var dis=distan.substr(1,8);
-										var html="<li class='siteList'>\
-										<span class='nameLeft'>"+name+"</span>\
-										<span class='nameRight'>"+dis+"m"+"</span>\
-										<span class='forSiteId' style='display:none'>"+id+"</span>\
-										</li>";
-										$(".siteInfo").append(html);
-									}
-								}
-							})
-		   				}
-					},
-					error:function(){
-						alert("获取地理位置失败");
-					} 
-			    })
-			}else{
-				var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location="+ lat+","+ long+"&output=json&pois=1";
-				$.ajax({
-			        url:$url,
-			        type: 'GET',
-			        dataType: 'jsonp',
-			        jsonp:'callback',
-			        data:'json',
-			        success:function(result) {
-			        	$(".ready").css("display","none");  
-		   				if(result && result.status == 0){
-		   					var address=result.result.formatted_address;
-		   					$(".myLocation").html(address);
-		   					var distance="100000";
-	   						$.get(BASE_URL+"/basic/search/site/byLocation",{
-								distance:distance,
-								lat: lat,
-								long:long
-							},function(result){
-								if(result && result.success== true){
-									var siteList=result.siteList;
-									for(index in siteList){
-										var name=siteList[index].name;
-										var distances=siteList[index].distance;
-										var id=siteList[index].id;
-										var distan='"'+distances+'"';
-										var dis=distan.substr(1,8);
-										var html="<li class='siteList'>\
-										<span class='nameLeft'>"+name+"</span>\
-										<span class='nameRight'>"+dis+"m"+"</span>\
-										<span class='forSiteId' style='display:none'>"+id+"</span>\
-										</li>";
-										$(".siteInfo").append(html);
-									}
-								}
-							})
-		   				}
-					},
-					error:function(){
-						alert("获取地理位置失败");
-					} 
-			    })
-			}
+			$.get(BASE_URL+"/basic/wx/signature",{
+				url:url
+				},function(result){
+					if(result && result.success == true ){
+					var timestamp=result.result.timestamp,
+						nonceStr=result.result.noncestr;
+						signature=result.result.signature;
+					wx.config({
+					    debug: false, 
+					    appId: 'wx678c9951b011eabe', 
+					    timestamp:timestamp, 
+					    nonceStr: nonceStr,
+					    signature:signature,
+					    jsApiList: ["getLocation"] 
+					});
+					wx.getLocation({
+					    type: 'wgs84',
+					    success: function (res) {
+					        var lat = res.latitude; 
+					        var long = res.longitude;
+					        var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location="+lat+","+long+"&output=json&pois=1";
+							$.ajax({
+						        url:$url,
+						        type: 'GET',
+						        dataType: 'jsonp',
+						        jsonp:'callback',
+						        data:'json',
+						        success:function(result){
+						        	$(".ready").css("display","none");  
+					   				if(result && result.status == 0){
+					   					var address=result.result.formatted_address;
+					   					$(".myLocation").html(address);
+					   					var distance="100000";
+				   						$.get(BASE_URL+"/basic/search/site/byLocation",{
+											distance:distance,
+											lat: lat,
+											long:long
+										},function(result){
+											if(result && result.success== true){
+												var siteList=result.siteList;
+												for(index in siteList){
+													var name=siteList[index].name;
+													var distances=siteList[index].distance;
+													var id=siteList[index].id;
+													var distan='"'+distances+'"';
+													var dis=distan.substr(1,8);
+													var html="<li class='siteList'>\
+													<span class='nameLeft'>"+name+"</span>\
+													<span class='nameRight'>"+dis+"m"+"</span>\
+													<span class='forSiteId' style='display:none'>"+id+"</span>\
+													</li>";
+													$(".siteInfo").append(html);
+												}
+											}
+										})
+					   				}
+								},
+								error:function(){
+									alert("获取地理位置失败");
+								} 
+						    })
+					    },
+					    cancel:function(){
+					    	var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location=30.780523,103.937261&output=json&pois=1";
+							$.ajax({
+						        url:$url,
+						        type: 'GET',
+						        dataType: 'jsonp',
+						        jsonp:'callback',
+						        data:'json',
+						        success:function(result){
+						        	$(".ready").css("display","none");  
+					   				if(result && result.status == 0){
+					   					var address=result.result.formatted_address;
+					   					$(".myLocation").html(address);
+					   					var distance="100000";
+				   						$.get(BASE_URL+"/basic/search/site/byLocation",{
+											distance:distance,
+											lat: "30.780523",
+											long:"103.937261"
+										},function(result){
+											if(result && result.success== true){
+												var siteList=result.siteList;
+												for(index in siteList){
+													var name=siteList[index].name;
+													var distances=siteList[index].distance;
+													var id=siteList[index].id;
+													var distan='"'+distances+'"';
+													var dis=distan.substr(1,8);
+													var html="<li class='siteList'>\
+													<span class='nameLeft'>"+name+"</span>\
+													<span class='nameRight'>"+dis+"m"+"</span>\
+													<span class='forSiteId' style='display:none'>"+id+"</span>\
+													</li>";
+													$(".siteInfo").append(html);
+												}
+											}
+										})
+					   				}
+								},
+								error:function(){
+									alert("获取地理位置失败");
+								} 
+						    })
+					    },
+					    fail:function(){
+					    	var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location=30.780523,103.937261&output=json&pois=1";
+							$.ajax({
+						        url:$url,
+						        type: 'GET',
+						        dataType: 'jsonp',
+						        jsonp:'callback',
+						        data:'json',
+						        success:function(result){
+						        	$(".ready").css("display","none");  
+					   				if(result && result.status == 0){
+					   					var address=result.result.formatted_address;
+					   					$(".myLocation").html(address);
+					   					var distance="100000";
+				   						$.get(BASE_URL+"/basic/search/site/byLocation",{
+											distance:distance,
+											lat: "30.780523",
+											long:"103.937261"
+										},function(result){
+											if(result && result.success== true){
+												var siteList=result.siteList;
+												for(index in siteList){
+													var name=siteList[index].name;
+													var distances=siteList[index].distance;
+													var id=siteList[index].id;
+													var distan='"'+distances+'"';
+													var dis=distan.substr(1,8);
+													var html="<li class='siteList'>\
+													<span class='nameLeft'>"+name+"</span>\
+													<span class='nameRight'>"+dis+"m"+"</span>\
+													<span class='forSiteId' style='display:none'>"+id+"</span>\
+													</li>";
+													$(".siteInfo").append(html);
+												}
+											}
+										})
+					   				}
+								},
+								error:function(){
+									alert("获取地理位置失败");
+								} 
+						    })
+					    }
+					});
+				}else if(result && result.errorInfo ){
+					var errorInfo=result.errorInfo;
+		 			alert(errorInfo);
+		 		}
+			})
 		})
 		$(".siteInfo").on("click",".siteList",function(){
 			var site=$(this).find(".nameLeft").html();

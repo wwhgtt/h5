@@ -7,7 +7,56 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
 		<script src="../js/lib/zetpo.min.js"></script>
+		<script src="../js/lib/weixin.js"></script>
 		<script src="../js/script/config.js"></script>
+		<script type="text/javascript">
+			var url=location.href.split("#")[0];
+			$.get(BASE_URL+"/basic/wx/signature",{
+				url:url
+				},function(result){
+					if(result && result.success == true ){
+					var timestamp=result.result.timestamp,
+						nonceStr=result.result.noncestr;
+						signature=result.result.signature;
+					wx.config({
+					    debug: false, 
+					    appId: 'wx678c9951b011eabe', 
+					    timestamp:timestamp, 
+					    nonceStr: nonceStr,
+					    signature:signature,
+					    jsApiList: ["onMenuShareAppMessage","onMenuShareTimeline"] 
+					});
+					wx.onMenuShareTimeline({
+					    title: '强烈推荐《驾考007》,3980包过班', // 分享标题
+					    link: 'http://mp.weixin.qq.com/s?__biz=MzIzMzA1ODMyNg==&mid=209112981&idx=1&sn=d3f3e9ec3db5717efb644a8b42f3f39f&scene=0&key=dffc561732c2265139eaf7bb1c972093fe3999a4ad807689188414433caf67ee891137f3a356a1ee967029b40f822aa6&ascene=0&uin=MjgyMTIxNTUwNg%3D%3D&devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.10.5+build(14F27)&version=11020201&pass_ticket=NvwGjbFyAKcUyJWLofLZRq4NRDVG0OJiX3jo71QsIo3T43hvOjLRWnr6l2kFaJ3K', // 分享链接
+					    imgUrl: 'http://party.idrv.com.cn/ride/img/logo.jpg', // 分享图标
+					    success: function (){ 
+					        // 用户确认分享后执行的回调函数
+					    },
+					    cancel: function () { 
+					        // 用户取消分享后执行的回调函数
+					    }
+					});
+					wx.onMenuShareAppMessage({
+					    title: '强烈推荐《驾考007》,3980包过班', // 分享标题
+					    desc: '', // 分享描述
+					    link: 'http://mp.weixin.qq.com/s?__biz=MzIzMzA1ODMyNg==&mid=209112981&idx=1&sn=d3f3e9ec3db5717efb644a8b42f3f39f&scene=0&key=dffc561732c2265139eaf7bb1c972093fe3999a4ad807689188414433caf67ee891137f3a356a1ee967029b40f822aa6&ascene=0&uin=MjgyMTIxNTUwNg%3D%3D&devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.10.5+build(14F27)&version=11020201&pass_ticket=NvwGjbFyAKcUyJWLofLZRq4NRDVG0OJiX3jo71QsIo3T43hvOjLRWnr6l2kFaJ3K', // 分享链接
+					    imgUrl: 'http://party.idrv.com.cn/ride/img/logo.jpg', // 分享图标
+					    type: 'link', // 分享类型,music、video或link，不填默认为link
+					    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+					    success: function () { 
+					        // 用户确认分享后执行的回调函数
+					    },
+					    cancel: function () { 
+					        // 用户取消分享后执行的回调函数
+					    }
+					});
+				}else if(result && result.errorInfo ){
+					var errorInfo=result.errorInfo;
+		 			alert(errorInfo);
+		 		}
+			})
+		</script>
 	</head>
 	<body>
 		<div class="container">
