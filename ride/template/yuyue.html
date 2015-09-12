@@ -82,43 +82,43 @@
 		// }else{ 
 			// url
 		// }
+		$.get(BASE_URL+"/basic/wx/signature",{
+			url:url
+			},function(result){
+				if(result && result.success == true ){
+				var timestamp=result.result.timestamp,
+					nonceStr=result.result.noncestr;
+					signature=result.result.signature;
+				wx.config({
+				    debug: false, 
+				    appId: 'wx678c9951b011eabe', 
+				    timestamp:timestamp, 
+				    nonceStr: nonceStr,
+				    signature:signature,
+				    jsApiList: ["getLocation"] 
+				});
+				wx.getLocation({
+				    type: 'wgs84',
+				    success: function (res) {
+				        window.lat = res.latitude; 
+				        window.long = res.longitude;
+				        var speed = res.speed; 
+				        var accuracy = res.accuracy;
+				    },
+				    error:function(){
+				    	alert("sorry,获取地理位置失败")
+				    }
+				});
+
+			}else if(result && result.errorInfo ){
+				var errorInfo=result.errorInfo;
+	 			alert(errorInfo);
+	 		}
+		})
 		$(".siteInfoMore").on("click",function(){
 			$(".container").css("display","none");
 	        $(".container-fulid").css("display","block");
 	        $(".ready").css("display","block");
-			$.get(BASE_URL+"/basic/wx/signature",{
-				url:url
-				},function(result){
-					if(result && result.success == true ){
-					var timestamp=result.result.timestamp,
-						nonceStr=result.result.noncestr;
-						signature=result.result.signature;
-					wx.config({
-					    debug: false, 
-					    appId: 'wx678c9951b011eabe', 
-					    timestamp:timestamp, 
-					    nonceStr: nonceStr,
-					    signature:signature,
-					    jsApiList: ["getLocation"] 
-					});
-					wx.getLocation({
-					    type: 'wgs84',
-					    success: function (res) {
-					        window.lat = res.latitude; 
-					        window.long = res.longitude;
-					        var speed = res.speed; 
-					        var accuracy = res.accuracy;
-					    },
-					    error:function(){
-					    	alert("sorry,获取地理位置失败")
-					    }
-					});
- 
-				}else if(result && result.errorInfo ){
-					var errorInfo=result.errorInfo;
-		 			alert(errorInfo);
-		 		}
-			})
 			if(window.lat == undefined && window.long == undefined || window.lat == "" || window.long == ""){
 				var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location=30.780523,103.937261&output=json&pois=1";
 				$.ajax({
