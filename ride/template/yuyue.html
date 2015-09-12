@@ -82,6 +82,7 @@
 		// }else{ 
 			// url
 		// }
+		var lat,long;
 		$.get(BASE_URL+"/basic/wx/signature",{
 			url:url
 			},function(result){
@@ -100,8 +101,8 @@
 				wx.getLocation({
 				    type: 'wgs84',
 				    success: function (res) {
-				        window.lat = res.latitude; 
-				        window.long = res.longitude;
+				        lat = res.latitude; 
+				        long = res.longitude;
 				        var speed = res.speed; 
 				        var accuracy = res.accuracy;
 				    },
@@ -143,7 +144,7 @@
 			$(".container").css("display","none");
 	        $(".container-fulid").css("display","block");
 	        $(".ready").css("display","block");
-			if(window.lat == undefined && window.long == undefined || window.lat == "" || window.long == ""){
+			if(lat == undefined && long == undefined ||lat == "" || long == ""){
 				var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location=30.780523,103.937261&output=json&pois=1";
 				$.ajax({
 			        url:$url,
@@ -186,7 +187,7 @@
 					} 
 			    })
 			}else{
-				var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location="+ window.lat+","+ window.long+"&output=json&pois=1";
+				var $url="http://api.map.baidu.com/geocoder/v2/?ak=cI6LCSFls9xLpzZ3VG9b2u4g&callback=renderReverse&location="+ lat+","+ long+"&output=json&pois=1";
 				$.ajax({
 			        url:$url,
 			        type: 'GET',
@@ -201,8 +202,8 @@
 		   					var distance="100000";
 	   						$.get(BASE_URL+"/basic/search/site/byLocation",{
 								distance:distance,
-								lat: window.lat,
-								long:window.long
+								lat: lat,
+								long:long
 							},function(result){
 								if(result && result.success== true){
 									var siteList=result.siteList;
