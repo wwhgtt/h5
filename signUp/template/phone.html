@@ -1,0 +1,146 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>登录注册</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script src="../js/lib/zetpo.min.js"></script>
+		<script src="../js/script/config.js"></script>
+	</head>
+	<body style="background-color:#f7f7f7">
+		<div class="container" >
+			<div class="header">
+				<p>登录/注册</p>
+			</div>
+			<div class="register">
+				<button class="loginButton">登录</button>
+				<button class="registerButton">注册</button>
+			</div>
+			<div class="mainPhone forRegister">
+				<div class="mainTop">
+					<input type="text" placeholder="手机号" class="phone  forPhoneList">
+					<button class="submitPhone">获取验证码</button>
+				</div>
+				<small class="error">请输入正确的手机号</small>
+				<div class="mainBottom">
+					<input type="text" placeholder="验证码"  class="identify">
+				</div>
+				<div class="mainBottom" style="margin-top:20px">
+					<input type="text" placeholder="请输入密码"  class="identify mima">
+				</div>
+			</div>
+			<p class="agreeMent forRegister"> 点击注册即代表同意驾考007服务协议</p>
+			<div class="goButton forRegister only">注册</div>
+			<div class="mainPhone forLogin" style="height:120px;width:90%">
+				<div class="mainTop">
+					<input type="text" placeholder="手机号" class="phone dengluCode" style="width:100%;">
+				</div>
+				<small class="errorInfo">请输入正确的手机号</small>
+				<div class="mainBottom">
+					<input type="password" placeholder="请输入密码"  class="identify dengluCodeMore">
+				</div>
+			</div>
+			<div class="goButton forLogin denglu">登录</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".loginButton").on("click",function(){
+			$(".forRegister").css("display","none");
+			$(".forLogin").css("display","block");
+			$(".registerButton").css({"background-color":"white","color":"#58c4ff"});
+			$(".loginButton").css({"background-color":"#58c4ff","color":"white"});
+		})
+		$(".registerButton").on("click",function(){
+			location.reload();
+		})
+		$(".submitPhone").on("click",function(){
+			var phoneNumber=$(".forPhoneList").val();
+			if(!phoneNumber.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
+				$(".error").css("visibility","visible");
+				return false;
+			}else{
+				$(".error").css("visibility","hidden");
+				function jump(countDown) {
+	                window.setTimeout(function(){
+	                    countDown--;
+	                    if(countDown > 0){
+	                    	$(".submitPhone").attr("disabled","true");
+	                        $(".submitPhone").html(countDown +'秒后'+ '重发');
+	                        jump(countDown);
+	                    }else{
+	                        $(".submitPhone").html('发送验证码');
+	                        $(".submitPhone").removeAttr("disabled");
+	                    }
+	                },1000);
+	            }
+	            jump(60);
+				$.get(BASE_URL+"/basic/register/code",{
+					phone:phoneNumber
+				},function(result){
+					if(result && result.success == true){
+						//改变button的html
+						 
+					}else{
+						alert("发送失败")
+					}
+				})
+			}
+		})
+		$(".only").on("click",function(){
+			var code=$(".identify").val();
+			var type=$(".mima").val();
+			var phoneNumber=$(".forPhoneList").val();
+			if(code!=="" && type !== "" ){
+				$.post(BASE_URL+"/basic/register/addUser",{
+					code:code,
+					pwd:type
+				},function(result){
+					if(result && result.success == true){
+						location.href="/template/yuyue.html?title="+phoneNumber;
+					}else{
+						var errorInfo=result.errorInfo;
+						alert(errorInfo);
+					}
+				})
+			}else{
+				alert("请确保输入完整");
+			}
+		})
+
+		//登录
+		$(".denglu").on("click",function(){
+			var phone=$(".dengluCode").val();
+			var code=$(".dengluCodeMore").val();
+			if(!phone.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
+				$(".errorInfo").css("visibility","visible");
+				return false;
+			}else if(phone !== "" && code !==""){
+				$.post(BASE_URL+"/basic/login",{
+					password:code,
+					phone:phone
+				},function(result){
+					if(result && result.success == true){
+						$.post(BASE_URL+"/enroll/trydirve/gettrydrive.do",{
+
+						},function(result){
+							if(result && result.resultcode =="0"){
+								location.href="/template/lookpayMent.html";
+							}else if(result && result.resultcode =="-4"){
+								location.href ="/template/yuyue.html?title="+phoneNumber;
+							}else if(result && result.resultcode =="-1"){
+								alert("sorry,系统出错")
+							}
+						})
+					}
+				})
+			}else{
+				var errorInfo=result.errorInfo;
+				alert(errorInfo)
+			}
+		})
+	})
+</script>

@@ -74,7 +74,6 @@
 	$(document).ready(function(){
 		var href=location.href;
 		window.phone_num=href.replace(/^.+?title\=/,'');
-		console.log(window.phone_num)
 		$(".phoneNumber").html(window.phone_num);
 		var url=location.href.split("#")[0];
 		$(".siteInfoMore").on("click",function(){

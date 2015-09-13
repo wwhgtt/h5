@@ -1,0 +1,64 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>驾考007</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script src="../js/lib/zetpo.min.js"></script>
+		<script src="../js/script/config.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<p>确认订单</p>
+			</div>
+			<div class="message">
+				<p class="mHeader">高校包过班(C1手动档)</p>
+				<div class="price">
+					<span style="padding-left:2em">总价</span>
+					<span class="priceDetaile">￥3980</span>
+				</div>
+			</div>
+			<div class="price" style="margin-top:15px;">
+				<span style="padding-left:2em">姓名</span>
+				<span class="priceDetaile" style="width:40%;"><input type="text" placeholder="输入姓名" class="namePrice"></span>
+			</div>
+			<div class="price" style="margin-top:25px;">
+				<span style="padding-left:2em">已绑定帐号</span>
+				<span class="priceDetaile">18200113686</span>
+			</div>
+			<div class="submitPrice" title="1">提交订单</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var href=location.href;
+		var phone_num=href.replace(/^.+?title\=/,'');
+		$(".priceDetaile").html(phone_num);
+		$('.namePrice').bind('input onchange', function() {
+			$(".submitPrice").css({"background-color":"#58c4ff","color":"white"}) 
+		}); 
+		$(".submitPrice").on("click",function(){
+			var name=$(".namePrice").val();
+			if(name !== ""){
+				$.post(BASE_URL+"/enroll/orders/takeporder.do",{
+					dealamount:"398000",
+					phonenum:phone_num,
+					username:name
+				},function(result){
+					if(result && result.resultcode == "0"){
+						var id=result.porder.tid;
+						location.href="/template/success.html?title="+id;
+					}else if(result && result.resultcode == "-1"){
+						alert("sorry,系统出错")
+					}
+				})
+			}else{
+				alert("请输入姓名")
+			}
+		})
+	})
+</script>

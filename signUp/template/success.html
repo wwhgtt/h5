@@ -1,0 +1,116 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>驾考007</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script src="../js/lib/zetpo.min.js"></script>
+		<script src="../js/script/config.js"></script>
+		<script src="../js/lib/pingpp_pay.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<p>确认支付</p>
+			</div>
+			<div class="message" >
+				<div class="price">
+					<span style="padding-left:2em">订单名称</span>
+					<span class="priceDetaile" style="color:black">高校包过班(C1手动档)</span>
+				</div>
+			</div>
+			<div class="price" style="margin-top:15px;border-bottom:1px solid #d7d7d7">
+				<span style="padding-left:2em">价格</span>
+				<span class="priceDetaile">￥3980</span>
+			</div>
+			<div class="price" style="margin-top:0px;">
+				<span style="padding-left:2em">支付金额</span>
+				<span class="priceDetaile">￥3980</span>
+			</div>
+			<div class="price forZhifu" style="margin-top:15px;border-bottom:1px solid #d7d7d7;height:40px" title="1">
+				<span style="padding-left:2em"><img src="../img/zhifubao.png" class="zhifubao"></span>
+				<span class="forMust">支付宝支付</span>
+				<span class="priceDetaile"><img src="../img/not.png" class="complate  myself"></span>
+			</div>
+			<div class="price foeWeixin" style="margin-top:0px;height:40px" title="1">
+				<span style="padding-left:2em;"><img src="../img/weixincopy.png" class="weixin"></span>
+				<span class="forMust">微信支付</span>
+				<span class="priceDetaile"><img src="../img/not.png" class="complate yourself"></span>
+			</div>
+			<div class="clear"></div>
+			<div class="submitPrice" style="background-color:#58c4ff;color:white" >开始支付</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var href=location.href;
+		var idNumber=href.replace(/^.+?title\=/,'');
+		$(".forZhifu").on("click",function(){
+			var title=$(this).attr("title");
+			if(title == "1"){
+				$(".myself").attr("src","../img/yes.png");
+				$(".yourself").attr("src","../img/not.png");
+			}
+		})
+		$(".foeWeixin").on("click",function(){
+			var title=$(this).attr("title");
+			if(title == "1"){
+				$(".myself").attr("src","../img/not.png");
+				$(".yourself").attr("src","../img/yes.png");
+			}
+		})
+		$(".submitPrice").on("click",function(){
+			var myself=$(".myself").attr("src");
+			var yourself=$(".yourself").attr("src");
+			var subject="驾考007",
+				channel="alipay_wap",
+				amount="1",
+				body="驾照报名";
+			var success_url="http://party.idrv.com.cn/signUp/template/lookpayMent.html"
+			if(myself == "../img/yes.png" && yourself=="../img/not.png"){ //支付宝支付
+				$.post(BASE_URL+"/enroll/orders/enrollpay.do",{
+					subject:subject,
+					porderid:idNumber,
+					channel:channel,
+					body:body,
+					amount:amount,
+	            	success_url:success_url 
+	 			},function(result){
+	 				if(result && result.resultcode=="0"){
+	 					var charge=result.charge;
+		 				pingpp.createPayment(charge,function(result, error){
+						    //只能处理微信支付的返回结果
+						});
+	 				}else if(result && result.resultcode=="-1"){
+	 					alert("sorry,系统出错")
+	 				}
+	 				
+	 			})
+			}else if(myself == "../img/not.png" && yourself=="../img/yes.png"){  //微信支付
+				var channelnox="wx";
+				$.post(BASE_URL+"/enroll/orders/enrollpay.do",{
+					subject:subject,
+					porderid:idNumber,
+					channel:channelnox,
+					amount:amount,
+					body:body,
+	            	success_url:success_url 
+	 			},function(result){
+	 				if(result && result.resultcode=="0"){
+	 					var charge=result.charge;
+		 				pingpp.createPayment(charge,function(result, error){
+						    //只能处理微信支付的返回结果
+						});
+	 				}else if(result && result.resultcode=="-1"){
+	 					alert("sorry,系统出错")
+	 				}
+	 			})
+			}else{ //没有选择支付方式
+				alert("请选择支付方式")
+			}
+		})
+	})
+</script>
