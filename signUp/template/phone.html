@@ -115,6 +115,7 @@
 		$(".denglu").on("click",function(){
 			var phone=$(".dengluCode").val();
 			var code=$(".dengluCodeMore").val();
+			var phoneNumber=$(".forPhoneList").val();
 			if(!phone.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
 				$(".errorInfo").css("visibility","visible");
 				return false;
