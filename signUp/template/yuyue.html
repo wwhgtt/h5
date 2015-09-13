@@ -27,7 +27,7 @@
 			</div>
 			<div class="price" style="margin-top:25px;">
 				<span style="padding-left:2em">已绑定帐号</span>
-				<span class="priceDetaile">18200113686</span>
+				<span class="priceDetaile fuck"></span>
 			</div>
 			<div class="submitPrice" title="1">提交订单</div>
 		</div>
@@ -37,7 +37,7 @@
 	$(document).ready(function(){
 		var href=location.href;
 		var phone_num=href.replace(/^.+?title\=/,'');
-		$(".priceDetaile").html(phone_num);
+		$(".fuck").html(phone_num);
 		$('.namePrice').bind('input onchange', function() {
 			$(".submitPrice").css({"background-color":"#58c4ff","color":"white"}) 
 		}); 
