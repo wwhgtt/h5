@@ -127,11 +127,11 @@
 						$.post(BASE_URL+"/enroll/trydirve/gettrydrive.do",{
 
 						},function(result){
-							if(result && result.resultcode =="0"){
+							if(result && result.resultcode == "0"){
 								location.href="/signUp/template/lookpayMent.html";
-							}else if(result && result.resultcode =="-4"){
+							}else if(result && result.resultcode == "-4"){
 								location.href="/signUp/template/yuyue.html?title="+phoneNumber;
-							}else if(result && result.resultcode =="-1"){
+							}else if(result && result.resultcode == "-1"){
 								alert("sorry,系统出错")
 							}
 						})
