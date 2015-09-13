@@ -100,7 +100,7 @@
 					pwd:type
 				},function(result){
 					if(result && result.success == true){
-						location.href="/template/yuyue.html?title="+phoneNumber;
+						location.href="/signUp/template/yuyue.html?title="+phoneNumber;
 					}else{
 						var errorInfo=result.errorInfo;
 						alert(errorInfo);
@@ -128,9 +128,9 @@
 
 						},function(result){
 							if(result && result.resultcode =="0"){
-								location.href="/template/lookpayMent.html";
+								location.href="/signUp/template/lookpayMent.html";
 							}else if(result && result.resultcode =="-4"){
-								location.href ="/template/yuyue.html?title="+phoneNumber;
+								location.href ="/signUp/template/yuyue.html?title="+phoneNumber;
 							}else if(result && result.resultcode =="-1"){
 								alert("sorry,系统出错")
 							}

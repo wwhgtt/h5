@@ -51,7 +51,7 @@
 				},function(result){
 					if(result && result.resultcode == "0"){
 						var id=result.porder.tid;
-						location.href="/template/success.html?title="+id;
+						location.href="/signUp/template/success.html?title="+id;
 					}else if(result && result.resultcode == "-1"){
 						alert("sorry,系统出错")
 					}

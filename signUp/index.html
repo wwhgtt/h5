@@ -170,14 +170,14 @@
 
 			},function(result){
 				if(result && result.resultcode == "0"){
-					location.href="/template/lookpayMent.html"
+					location.href="/signUp/template/lookpayMent.html"
 				}else if(result && result.resultcode == "-1"){
 					alert("sorry,程序错误");
 				}else if(result && result.resultcode == "-3"){
-					location.href="/template/phone.html"
+					location.href="/signUp/template/phone.html"
 				}else if(result && result.resultcode == "-4"){
 					var phone=result.phonenum;
-					location.href="/template/yuyue.html?title="+phone;
+					location.href="/signUp/template/yuyue.html?title="+phone;
 				}
 			})
 		})
