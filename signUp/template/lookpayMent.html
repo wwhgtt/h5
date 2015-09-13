@@ -39,11 +39,9 @@
 		},function(result){
 			if(result && result.resultcode == "0"){
 				var id=result.porder.tid,
-					amount=result.porder.amount,
 					ordertime=result.porder.ordertime;
 				$(".timeagain").html(id);
 				$(".tdAgain").html(ordertime);
-				$(".amountAgain").html(amount);
 			}else if(result && result.resultcode == "-1"){
 				alert("sorry,程序错误");
 			}
