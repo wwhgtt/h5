@@ -12,11 +12,7 @@
 	<body style="background-color:#f7f7f7">
 		<div class="container" >
 			<div class="header">
-				<p>登录/注册</p>
-			</div>
-			<div class="register">
-				<button class="loginButton">登录</button>
-				<button class="registerButton">注册</button>
+				<p>手机号登录</p>
 			</div>
 			<div class="mainPhone forRegister">
 				<div class="mainTop">
@@ -27,36 +23,14 @@
 				<div class="mainBottom">
 					<input type="text" placeholder="验证码"  class="identify">
 				</div>
-				<div class="mainBottom" style="margin-top:20px">
-					<input type="text" placeholder="请输入密码"  class="identify mima">
-				</div>
 			</div>
-			<p class="agreeMent forRegister"> 点击注册即代表同意驾考007服务协议</p>
-			<div class="goButton forRegister only">注册</div>
-			<div class="mainPhone forLogin" style="height:120px;width:90%">
-				<div class="mainTop">
-					<input type="text" placeholder="手机号" class="phone dengluCode" style="width:100%;">
-				</div>
-				<small class="errorInfo">请输入正确的手机号</small>
-				<div class="mainBottom">
-					<input type="password" placeholder="请输入密码"  class="identify dengluCodeMore">
-				</div>
-			</div>
-			<div class="goButton forLogin denglu">登录</div>
+			<p class="agreeMent forRegister"> 点击前往报名即代表同意驾考007服务协议</p>
+			<div class="goButton forRegister only">前往报名</div>
 		</div>
 	</body>
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".loginButton").on("click",function(){
-			$(".forRegister").css("display","none");
-			$(".forLogin").css("display","block");
-			$(".registerButton").css({"background-color":"white","color":"#58c4ff"});
-			$(".loginButton").css({"background-color":"#58c4ff","color":"white"});
-		})
-		$(".registerButton").on("click",function(){
-			location.reload();
-		})
 		$(".submitPhone").on("click",function(){
 			var phoneNumber=$(".forPhoneList").val();
 			if(!phoneNumber.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
@@ -92,12 +66,10 @@
 		})
 		$(".only").on("click",function(){
 			var code=$(".identify").val();
-			var type=$(".mima").val();
 			var phoneNumber=$(".forPhoneList").val();
-			if(code!=="" && type !== "" ){
-				$.post(BASE_URL+"/basic/register/addUser",{
-					code:code,
-					pwd:type
+			if(code!=="" ){
+				$.post(BASE_URL+"/basic/register/verifyUser",{
+					code:code
 				},function(result){
 					if(result && result.success == true){
 						location.href="/signUp/template/yuyue.html?title="+phoneNumber;
@@ -108,40 +80,6 @@
 				})
 			}else{
 				alert("请确保输入完整");
-			}
-		})
-
-		//登录
-		$(".denglu").on("click",function(){
-			var phone=$(".dengluCode").val();
-			var code=$(".dengluCodeMore").val();
-			if(!phone.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
-				$(".errorInfo").css("visibility","visible");
-				return false;
-			}else if(phone !== "" && code !==""){
-				$.post(BASE_URL+"/basic/login",{
-					password:code,
-					phone:phone
-				},function(result){
-					if(result && result.success == true){
-						$.post(BASE_URL+"/enroll/trydirve/gettrydrive.do",{
-
-						},function(result){
-							if(result && result.resultcode == "0"){
-								location.href="/signUp/template/lookpayMent.html";
-							}else if(result && result.resultcode == "-4"){
-								location.href="/signUp/template/yuyue.html?title="+phone;
-							}else if(result && result.resultcode == "-1"){
-								alert("sorry,系统出错")
-							}
-						})
-					}else{
-						alert("用户名或密码错误")
-					}
-				})
-			}else{
-				var errorInfo=result.errorInfo;
-				alert(errorInfo)
 			}
 		})
 	})

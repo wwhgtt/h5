@@ -51,7 +51,7 @@
 		$(".forZhifu").on("click",function(){
 			var title=$(this).attr("title");
 			if(title == "1"){
-				$(".myself").attr("src","../img/yes.png");
+				$(".myself").attr("src","../img/success.png");
 				$(".yourself").attr("src","../img/not.png");
 			}
 		})
@@ -59,7 +59,7 @@
 			var title=$(this).attr("title");
 			if(title == "1"){
 				$(".myself").attr("src","../img/not.png");
-				$(".yourself").attr("src","../img/yes.png");
+				$(".yourself").attr("src","../img/success.png");
 			}
 		})
 		$(".submitPrice").on("click",function(){
@@ -70,7 +70,7 @@
 				amount="398000",
 				body="驾照报名";
 			var success_url="http://party.idrv.com.cn/signUp/template/lookpayMent.html"
-			if(myself == "../img/yes.png" && yourself=="../img/not.png"){ //支付宝支付
+			if(myself == "../img/success.png" && yourself=="../img/not.png"){ //支付宝支付
 				$.post(BASE_URL+"/enroll/orders/enrollpay.do",{
 					subject:subject,
 					porderid:idNumber,
@@ -89,7 +89,7 @@
 	 				}
 	 				
 	 			})
-			}else if(myself == "../img/not.png" && yourself=="../img/yes.png"){  //微信支付
+			}else if(myself == "../img/not.png" && yourself=="../img/success.png"){  //微信支付
 				var channelnox="wx";
 				$.post(BASE_URL+"/enroll/orders/enrollpay.do",{
 					subject:subject,

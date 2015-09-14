@@ -16,15 +16,15 @@ body{
 .clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
 .clearfix { *zoom:1; }
 .header{
-	height: 30px;
-	line-height: 30px;
+	height: 40px;
+	line-height: 40px;
 	width: 100%;
 	background-color: #58c4ff
 }
 .header p{
 	width: 100%;
-	height: 30px;
-	line-height: 30px;
+	height: 40px;
+	line-height: 40px;
 	text-align: center;
 	color: white;
 }
@@ -178,7 +178,7 @@ body{
 	width: 95%;
 	margin-left: 2.5%;
 	background-color: white;
-	height: 180px;
+	height: 120px;
 	margin-top: 3%;
 	/*padding-left: 5%;*/
 	padding-top: 20px
@@ -244,7 +244,7 @@ body{
 	font-size: 0.8em;
 	width: 100%;
 	text-align: center;
-	margin-top:15px;
+	margin-top:20px;
 }
 .goButton{
 	width: 80%;
@@ -255,7 +255,7 @@ body{
 	color: white;
 	margin-left: 10%;
 	border-radius: 5px;
-	margin-top: 20px
+	margin-top: 5px
 }
 .forLogin{
 	display: none;
@@ -333,4 +333,7 @@ body{
 	width: 40%;
 	margin-left: 30%;
 	margin-top: 15%
+}
+.namePrice{
+	text-align: right;
 }
