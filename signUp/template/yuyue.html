@@ -54,6 +54,9 @@
 						location.href="/signUp/template/success.html?title="+id;
 					}else if(result && result.resultcode == "-1"){
 						alert("sorry,系统出错")
+					}else if(result && result.resultcode == "-3"){
+						alert("该用户已经报名");
+						location.href="/signUp/template/lookpayMent.html";
 					}
 				})
 			}else{
