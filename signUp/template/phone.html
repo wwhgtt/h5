@@ -72,7 +72,6 @@
 					code:code
 				},function(result){
 					if(result && result.success == true){
-						//查询订单
 						$.post(BASE_URL+"/enroll/orders/getporder.do",{
 
 						},function(result){
@@ -89,7 +88,6 @@
 								location.href="/signUp/template/lookpayMent.html"
 							}
 						})
-						location.href="/signUp/template/yuyue.html?title="+phoneNumber;
 					}else{
 						var errorInfo=result.errorInfo;
 						alert(errorInfo);
