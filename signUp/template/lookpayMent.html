@@ -44,6 +44,11 @@
 				$(".tdAgain").html(ordertime);
 			}else if(result && result.resultcode == "-1"){
 				alert("sorry,程序错误");
+			}else  if(result && result.resultcode == "1"){
+				var id=result.porder.tid,
+					ordertime=result.porder.ordertime;
+				$(".timeagain").html(id);
+				$(".tdAgain").html(ordertime);
 			}
 		})
 	})
