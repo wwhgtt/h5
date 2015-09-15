@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html>
 	<head>
-		<title>登录注册</title>
+		<title>驾考007</title>
 		<meta charset="utf-8"/>
 		<meta Content-Type="application/x-www-form-urlencoded" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
@@ -17,7 +17,7 @@
 			<div class="mainPhone forRegister">
 				<div class="mainTop">
 					<input type="text" placeholder="手机号" class="phone  forPhoneList">
-					<button class="submitPhone">获取验证码</button>
+					<button class="submitPhone" >获取验证码</button>
 				</div>
 				<small class="error">请输入正确的手机号</small>
 				<div class="mainBottom">
@@ -37,12 +37,12 @@
 				$(".error").css("visibility","visible");
 				return false;
 			}else{
+				$(".submitPhone").attr("disabled","true");
 				$(".error").css("visibility","hidden");
 				function jump(countDown) {
 	                window.setTimeout(function(){
 	                    countDown--;
 	                    if(countDown > 0){
-	                    	$(".submitPhone").attr("disabled","true");
 	                        $(".submitPhone").html(countDown +'秒后'+ '重发');
 	                        jump(countDown);
 	                    }else{

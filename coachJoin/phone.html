@@ -44,12 +44,12 @@
 				$(html).appendTo(".errorMessage");
 				return false;
 			}else{
+				$(".phoneButton").attr("disabled","true");
 				$(".errorMessage").css("display","none");
 				function jump(countDown) {
 	                window.setTimeout(function(){
 	                    countDown--;
 	                    if(countDown > 0){
-	                    	$(".phoneButton").attr("disabled","true");
 	                        $(".phoneButton").html(countDown +'秒后'+ '重发');
 	                        jump(countDown);
 	                    }else{
