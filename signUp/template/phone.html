@@ -72,6 +72,23 @@
 					code:code
 				},function(result){
 					if(result && result.success == true){
+						//查询订单
+						$.post(BASE_URL+"/enroll/orders/getporder.do",{
+
+						},function(result){
+							if(result && result.resultcode == "0"){
+								location.href="/signUp/template/lookpayMent.html"
+							}else if(result && result.resultcode == "-1"){
+								alert("sorry,程序错误");
+							}else if(result && result.resultcode == "-4"){
+								var phone=result.phonenum;
+								location.href="/signUp/template/yuyue.html?title="+phoneNumber;
+							}else if(result && result.resultcode == "1"){
+								location.href="/signUp/template/success.html"
+							}else if(result && result.resultcode == "2"){
+								location.href="/signUp/template/lookpayMent.html"
+							}
+						})
 						location.href="/signUp/template/yuyue.html?title="+phoneNumber;
 					}else{
 						var errorInfo=result.errorInfo;

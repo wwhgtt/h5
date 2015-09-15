@@ -178,6 +178,10 @@
 				}else if(result && result.resultcode == "-4"){
 					var phone=result.phonenum;
 					location.href="/signUp/template/yuyue.html?title="+phone;
+				}else if(result && result.resultcode == "1"){
+					location.href="/signUp/template/success.html"
+				}else if(result && result.resultcode == "2"){
+					location.href="/signUp/template/lookpayMent.html"
 				}
 			})
 		})
