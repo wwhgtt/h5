@@ -50,6 +50,25 @@
 		var href=location.href;
 		if (href.indexOf("code") !== -1) {
 			$(".yourself").attr("src","../img/success.png");
+			var href=location.href;
+			var code=href.replace(/^.+?code\=/,'');
+			window.coder=code.replace(/&state=/,'');
+			var secret="89651e9b54a3898ac90257cf36ad2d6a";
+			var $url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx49a9db1095de4f65&secret="+secret+"&code="+window.coder+"&grant_type=authorization_code";
+			$.ajax({
+				async: false, 
+		        url:$url,
+		        type:'GET',
+		        dataType:'jsonp',
+		        jsonp:'callback',
+		        data:'json',
+		        success:function(result){
+		        	window.openid=result.openid;
+				},
+				error:function(error){
+					alert("授权失败");
+				} 
+		    })
 		}else{
 			$(".yourself").attr("src","../img/not.png");
 		};
@@ -67,7 +86,7 @@
 				$(".myself").attr("src","../img/not.png");
 				$(".yourself").attr("src","../img/success.png");
 			}
-			location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx49a9db1095de4f65&redirect_uri=http%3a%2f%2fparty.idrv.com.cn%2fsignUp%2ftemplate%2fsuccess.html%0d%0a&response_type=code&scope=snsapi_base#wechat_redirect";
+			location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx49a9db1095de4f65&redirect_uri=http%3a%2f%2fparty.idrv.com.cn%2ftemplate%2fsuccess.html&response_type=code&scope=snsapi_base#wechat_redirect";
 			
 		})
 		$(".submitPrice").on("click",function(){
@@ -99,25 +118,6 @@
 	 			})
 			}else if(myself == "../img/not.png" && yourself=="../img/success.png"){  //微信支付
 				var channelnox="wx_pub";
-				var href=location.href;
-				var code=href.replace(/^.+?code\=/,'');
-				var coder=code.replace(/&state=/,'');
-				var secret="89651e9b54a3898ac90257cf36ad2d6a";
-				var $url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx49a9db1095de4f65&secret="+secret+"&code="+coder+"&grant_type=authorization_code";
-				console.log($url)
-				$.ajax({
-			        url:$url,
-			        type:'GET',
-			        dataType:'jsonp',
-			        jsonp:'callback',
-			        data:'json',
-			        success:function(result){
-			        	window.openid=result.openid;
-					},
-					error:function(){
-						alert("授权失败");
-					} 
-			    })
 				$.post(BASE_URL+"/enroll/orders/enrollpay.do",{
 					openid:window.openid,
 					subject:subject,
