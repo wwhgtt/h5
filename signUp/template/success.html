@@ -41,8 +41,8 @@
 				<span class="priceDetaile"><img src="../img/not.png" class="complate yourself"></span>
 			</div>
 			<div class="clear"></div>
-			<div class="submitPrice" style="background-color:#58c4ff;color:white" >开始支付</div>
-			<input type="hidden" class="hiddenInput">
+			<div class="submitPrice coloaPrice" style="background-color:#58c4ff;color:white" >开始支付</div>
+			<!-- <input type="hidden" class="hiddenInput"> -->
 		</div>
 	</body>
 </html>
@@ -69,7 +69,7 @@
 				if(result && result.resultcode=="0"){
 					window.openid=result.openid;
 					// alert(window.openid)
-					$(".submitPrice").css("siaplay","block")
+					$(".coloaPrice").css("siaplay","block")
 				}
 			})
 		}else{
@@ -78,7 +78,7 @@
 		};
 		$(".forZhifu").on("click",function(){
 			var title=$(this).attr("title");
-			$(".submitPrice").css("display","block")
+			$(".coloaPrice").css("display","block")
 			if(title == "1"){
 				$(".myself").attr("src","../img/success.png");
 				$(".yourself").attr("src","../img/not.png");
@@ -86,7 +86,7 @@
 		})
 		$(".foeWeixin").on("click",function(){
 			var title=$(this).attr("title");
-			$(".submitPrice").css("siaplay","none")
+			$(".coloaPrice").css("siaplay","none")
 			if(title == "1"){
 				$(".myself").attr("src","../img/not.png");
 				$(".yourself").attr("src","../img/success.png");
