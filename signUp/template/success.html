@@ -42,6 +42,7 @@
 			</div>
 			<div class="clear"></div>
 			<div class="submitPrice" style="background-color:#58c4ff;color:white" >开始支付</div>
+			<input type="hidden" class="hiddenInput">
 		</div>
 	</body>
 </html>
@@ -51,28 +52,29 @@
 		if (href.indexOf("code") !== -1) {
 			$(".yourself").attr("src","../img/success.png");
 			var href=location.href;
-			var code=href.replace(/^.+?code\=/,'');
-			window.coder=code.replace(/&state=/,'');
-			var secret="89651e9b54a3898ac90257cf36ad2d6a";
-			var $url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx49a9db1095de4f65&secret="+secret+"&code="+window.coder+"&grant_type=authorization_code";
-			$.ajax({
-				async: false, 
-		        url:$url,
-		        type:'GET',
-		        dataType:'jsonp',
-		        jsonp:'callback',
-		        data:'json',
-		        success:function(result){
-		        	window.openid=result.openid;
-				},
-				error:function(error){
-					alert("授权失败");
-				} 
-		    })
+			window.coder=href.replace(/^.+&state\=/,'');
+			var getQueryStr=function(code){
+				var reg = new RegExp("(^|&)" + code + "=([^&]*)(&|$)", "i");
+			    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+			    if (r != null){
+			    	return (r[2]);
+			    }else{
+			    	return null;
+			    } 
+			}
+			var codeMax=getQueryStr("code");
+			$.post(BASE_URL+"/enroll/orders/getopenid.do",{
+				wxcode:codeMax
+			},function(result){
+				if(result && result.resultcode=="0"){
+					window.openid=result.openid;
+					// alert(window.openid)
+				}
+			})
 		}else{
+			window.idNumber=href.replace(/^.+?title\=/,'');
 			$(".yourself").attr("src","../img/not.png");
 		};
-		var idNumber=href.replace(/^.+?title\=/,'');
 		$(".forZhifu").on("click",function(){
 			var title=$(this).attr("title");
 			if(title == "1"){
@@ -86,51 +88,81 @@
 				$(".myself").attr("src","../img/not.png");
 				$(".yourself").attr("src","../img/success.png");
 			}
-			location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx49a9db1095de4f65&redirect_uri=http%3a%2f%2fparty.idrv.com.cn%2fsignUp%2ftemplate%2fsuccess.html%0d%0a&response_type=code&scope=snsapi_base#wechat_redirect";
-			
+			location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx49a9db1095de4f65&redirect_uri=http%3a%2f%2fparty.idrv.com.cn%2ftemplate%2fsuccess.html&response_type=code&scope=snsapi_base&state="+window.idNumber+"#wechat_redirect";
 		})
-		$(".submitPrice").on("click",function(){
+		$(".submitPrice").on("click",function(){ 
 			var myself=$(".myself").attr("src");
 			var yourself=$(".yourself").attr("src");
 			var subject="驾考007",
 				channel="alipay_wap",
-				amount="398000",
+				amount="1",
 				body="驾照报名";
+
 			var success_url="http://party.idrv.com.cn/signUp/template/lookpayMent.html"
 			if(myself == "../img/success.png" && yourself=="../img/not.png"){ //支付宝支付
-				$.post(BASE_URL+"/enroll/orders/enrollpay.do",{
-					subject:subject,
-					porderid:idNumber,
-					channel:channel,
-					body:body,
-					amount:amount,
-	            	success_url:success_url 
-	 			},function(result){
-	 				if(result && result.resultcode=="0"){
-	 					var charge=result.charge;
-		 				pingpp.createPayment(charge,function(result, error){
-						    //只能处理微信支付的返回结果
-						});
-	 				}else if(result && result.resultcode=="-1"){
-	 					alert("sorry,系统出错")
-	 				}
-	 				
-	 			})
+				var href=location.href;
+				if(href.indexOf("code") !== -1){
+					$.post(BASE_URL+"/enroll/orders/enrollpay.do",{
+						subject:subject,
+						porderid:window.coder,
+						channel:channel,
+						body:body,
+						amount:amount,
+		            	success_url:success_url 
+		 			},function(result){
+		 				if(result && result.resultcode=="0"){
+		 					var charge=result.charge;
+			 				pingpp.createPayment(charge,function(result, error){
+							    //只能处理微信支付的返回结果
+							});
+		 				}else if(result && result.resultcode=="-1"){
+		 					alert("sorry,系统出错")
+		 				}
+		 				
+		 			})
+				}else{
+					$.post(BASE_URL+"/enroll/orders/enrollpay.do",{
+						subject:subject,
+						porderid:window.idNumber,
+						channel:channel,
+						body:body,
+						amount:amount,
+		            	success_url:success_url 
+		 			},function(result){
+		 				if(result && result.resultcode=="0"){
+		 					var charge=result.charge;
+			 				pingpp.createPayment(charge,function(result, error){
+							    //只能处理微信支付的返回结果
+							});
+		 				}else if(result && result.resultcode=="-1"){
+		 					alert("sorry,系统出错")
+		 				}
+		 				
+		 			})
+				}
 			}else if(myself == "../img/not.png" && yourself=="../img/success.png"){  //微信支付
 				var channelnox="wx_pub";
+				// alert(window.openid)
 				$.post(BASE_URL+"/enroll/orders/enrollpay.do",{
 					openid:window.openid,
 					subject:subject,
-					porderid:idNumber,
+					porderid:window.coder,
 					channel:channelnox,
 					amount:amount,
 					body:body,
 	            	success_url:success_url 
 	 			},function(result){
-	 				if(result && result.resultcode=="0"){
+	 				if(result && result.resultcode == "0"){
 	 					var charge=result.charge;
+	 					// alert(charge)
 		 				pingpp.createPayment(charge,function(result, error){
-						    //只能处理微信支付的返回结果
+						    if (result == "success") {
+						        location.href="http://party.idrv.com.cn/signUp/template/lookpayMent.html"
+						    } else if (result == "fail") {
+						        alert("未知错误")
+						    } else if (result == "cancel") {
+						        // 微信公众账号支付取消支付
+						    }
 						});
 	 				}else if(result && result.resultcode=="-1"){
 	 					alert("sorry,系统出错")

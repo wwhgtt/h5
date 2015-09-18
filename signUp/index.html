@@ -179,7 +179,8 @@
 					var phone=result.phonenum;
 					location.href="/signUp/template/yuyue.html?title="+phone;
 				}else if(result && result.resultcode == "1"){
-					location.href="/signUp/template/success.html"
+					var id=result.porder.tid;
+					location.href="/signUp/template/success.html?title="+id;
 				}else if(result && result.resultcode == "2"){
 					location.href="/signUp/template/lookpayMent.html"
 				}

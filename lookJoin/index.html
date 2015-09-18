@@ -38,9 +38,10 @@
 		var isLoad = false;
 		var getItem=function(pageNum){
 			isLoad=true;
-			$.post(BASE_URL+"/enroll/inforecord/listinfo.do ",{
+			$.get(BASE_URL+"/enroll/inforecord/listinfo.do ",{
 				pageNum:pageNum
 			},function(result){
+				console.log(result)
 				var inforecords=result.inforecords;
 				for(index in inforecords){
 					var name=inforecords[index].rcdname,
