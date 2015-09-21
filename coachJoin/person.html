@@ -57,7 +57,7 @@
 				$(".idNumber").val(idNumber);
 			}else{
 				if(result && result.errorInfo=="请先登录"){
-					location.href="/index.html";
+					location.href="/coachJoin/index.html";
 				}
 			}
 		})
@@ -73,7 +73,7 @@
 					if(result && result.success==true){
 						var href=location.href;
 						var id=href.replace(/^.+?id\=/,'');
-						location.href="/photo.html?id="+id;
+						location.href="/coachJoin/photo.html?id="+id;
 					}else{
 						alert("提交失败,请稍后重试");
 					}

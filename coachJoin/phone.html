@@ -22,7 +22,7 @@
 			<img src="./img/joinagain.png" class="submit">
 			<small id="agreeMent">点击立即加盟即代表我本人已点击阅读并同意</small>
 			<br>
-			<small class="iligle"><a href="/agreement.html" style="color:#00BFFF">益驾教练服务协议</a></small>
+			<small class="iligle"><a href="/coachJoin/agreement.html" style="color:#00BFFF">益驾教练服务协议</a></small>
 		</div>
 	</body>
 </html>
@@ -34,7 +34,7 @@
 		},function(result){
 			if(result && result.success==true){
 				var id=result.userInfo.id;
-				location.href="/material.html?id="+id;
+				location.href="/coachJoin/material.html?id="+id;
 			}
 		})
 		$(".phoneButton").on("click",function(){
@@ -79,7 +79,7 @@
 				},function(result){
 					if(result.success == true){
 						var id=result.userInfo.id;
-						location.href ="/material.html?id="+id;
+						location.href ="/coachJoin/material.html?id="+id;
 					}else{
 						alert("验证码错误");
 					}

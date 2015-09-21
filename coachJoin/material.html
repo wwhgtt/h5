@@ -108,7 +108,7 @@
 				
 			}else{
 				if(result && result.errorInfo=="请先登录"){
-					location.href="/index.html";
+					location.href="/coachJoin/index.html";
 				}
 			}
 		})
@@ -126,7 +126,7 @@
 					if(result && result.success == true){
 						var href=location.href;
 						var id=href.replace(/^.+?id\=/,'');
-						location.href="/person.html?id="+id;
+						location.href="/coachJoin/person.html?id="+id;
 					}else{
 						alert("系统出错,请稍后重试")
 					}
