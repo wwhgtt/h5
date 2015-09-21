@@ -46,7 +46,7 @@
 				</div>
 				<div class="cityChosen">
 					<span style="width:40%">练车场地</span>
-					<span style="width:55%;text-align:center" class="placeType" title="1">请选择场地 ></span>
+					<span style="width:55%;text-align:center" class="placeType" style="overflow:hidden" title="1">请选择场地 ></span>
 				</div>
 				<a class="goforNext" ><img src="./img/next.png" class="submit"></a>
 			</div>		
@@ -82,10 +82,10 @@
 		<div class="coverModule">
 			<div class="mainContent">
 				<p class="zoomList" style="border-bottom:none">训练场地</p>
-				<div class="sideLeft">
+				<div class="sideLeft" style="width:48%;float:left;border-right:1px solid #dcdcdc">
 					
 				</div>
-				<div class="sideRight">
+				<div class="sideRight" style="width:50%;float:left">
 					
 				</div>
 			</div>
@@ -100,12 +100,17 @@
 			if(result && result.success==true){
 				var plateNum=result.userInfo.plateNum;
 				var coachCar=result.userInfo.coachCar;
+				var site=result.userInfo.site;
 				$(".carNumber").val(plateNum);
-				if(coachCar !== ""){
+				if(coachCar !== "" && coachCar !== null){
 					$(".carType").attr("title","2");
 					$(".carType").html(coachCar);
 				}
-				
+				if(site !== "" && site !== null){
+					var name=site.name;
+					window.siteId=site.id;
+					$(".placeType").html(name);
+				}
 			}else{
 				if(result && result.errorInfo=="请先登录"){
 					location.href="/coachJoin/index.html";
@@ -114,14 +119,14 @@
 		})
 		$(".goforNext").on("click",function(){
 			var carNumber=$(".carNumber").val();
-			var placeType=$(".placeType").val();
+			var placeType=$(".placeType").html();
 			var title=$(".carType").attr("title");
 			var carType=$(".carType").html();
-			if(carNumber !== "" && title !== "1" && placeType !==""){
+			if(carNumber !== "" && title !== "1" && placeType !=="" && placeType !=="请选择场地 >"){
 				$.post(BASE_URL+"/basic/user/profile",{
 					plateNum:carNumber,
 					coachCar:carType,
-
+					site:window.siteId
 				},function(result){
 					if(result && result.success == true){
 						var href=location.href;
@@ -141,11 +146,63 @@
 		})
 		$(".placeType").on("click",function(){
 			$(".coverModule").css("display","block");
-			$.get(BASE_URL+"",{
-
+			$(".sideLeft").html("");
+			$.get(BASE_URL+"/basic/search/site/area",{
+				cityId:"1930"
 			},function(result){
-				
+				if(result && result.success == true){
+					var areaList=result.areaList;
+					for(index in areaList){
+						var html="<div class='areaList'>\
+							<span class='nameList'>"+areaList[index].name+"</span>\
+							<span class='countList'>"+areaList[index].count+"</sapn>\
+							<span class='IDsList' style='display:none' >"+areaList[index].areaId+"</span>\
+							</div>";
+						$(".sideLeft").append(html);
+					}
+					var area=areaList[0];
+					var areaId=area.areaId;
+					$.get(BASE_URL+"/basic/search/site/byArea",{
+						areaId:areaId
+					},function(result){
+						if(result && result.success == true){
+							var siteList=result.siteList;
+							for(index in siteList){
+								var html="<div class='areaList' style='padding-left:1em'>\
+									<span class='nameList'>"+siteList[index].name+"</span>\
+									</div>";
+								$(".sideRight").append(html);
+							}
+						}
+					})
+				}
 			})
+		})
+		$(".sideLeft").on("click",".areaList",function(){
+			var areaId=$(this).find(".IDsList").html();
+			$(".sideRight").html("");
+			$.get(BASE_URL+"/basic/search/site/byArea",{
+				areaId:areaId
+			},function(result){
+				if(result && result.success == true){
+					var siteList=result.siteList;
+					for(index in siteList){
+						var html="<div class='areaList' style='padding-left:1em'>\
+							<span class='nameList'>"+siteList[index].name+"</span>\
+							<span class='idList' style='display:none'>"+siteList[index].id+"</span>\
+							</div>";
+						$(".sideRight").append(html);
+					}
+				}
+			})
+		})
+		$(".sideRight").on("click",".areaList",function(){
+			var html=$(this).find(".nameList").html();
+			window.siteId=$(this).find(".idList").html();
+			$(".placeType").html(html);
+			// $(".mainContent").html("");
+			$(".coverModule").css("display","none");
+
 		})
 		$(".carDetailAno").on("click",function(){
 			$(".typeListAno").css("display","block");

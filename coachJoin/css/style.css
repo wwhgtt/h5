@@ -366,3 +366,19 @@ body{
 	margin-bottom:5%;
 	font-weight: 800
 }
+.areaList{
+	height: 30px;
+	line-height: 30px;
+	/*border-bottom: 1px solid #DCDCDC;*/
+	padding-left: 2em;
+
+}
+.areaList span{
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	overflow: hidden
+}
+.countList{
+	margin-left: 1em
+}
