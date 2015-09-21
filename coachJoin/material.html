@@ -46,7 +46,7 @@
 				</div>
 				<div class="cityChosen">
 					<span style="width:40%">练车场地</span>
-					<span style="width:55%;text-align:center" class="placeType" style="overflow:hidden" title="1">请选择场地 ></span>
+					<span style="width:55%;text-align:center" class="placeType" style="overflow:hidden" title="1">请选择场地</span>
 				</div>
 				<a class="goforNext" ><img src="./img/next.png" class="submit"></a>
 			</div>		
@@ -122,7 +122,7 @@
 			var placeType=$(".placeType").html();
 			var title=$(".carType").attr("title");
 			var carType=$(".carType").html();
-			if(carNumber !== "" && title !== "1" && placeType !=="" && placeType !=="请选择场地 >"){
+			if(carNumber !== "" && title !== "1" && placeType !=="" && placeType !== "请选择场地"){
 				$.post(BASE_URL+"/basic/user/profile",{
 					plateNum:carNumber,
 					coachCar:carType,
