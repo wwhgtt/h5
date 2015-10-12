@@ -250,7 +250,7 @@
 			var float=$(this).html();
 			if(title=="1"){
 				var forSite=$(".forSite").html();
-				if(forSite == "选择练车地址"){
+				if(forSite !== "选择练车地址"){
 					alert("请先选择练车场地")
 				}else{
 					$(".siteFirst").attr("title","2");
