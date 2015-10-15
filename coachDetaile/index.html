@@ -66,7 +66,7 @@
 		}
 		var coachId=getQueryStr("id");
 		$.get(BASE_URL+"/basic/search/coach/byId",{
-			coachId:150
+			coachId:coachId
 		},function(result){
 			if(result && result.success == true){
 				var coach=result.coach;
