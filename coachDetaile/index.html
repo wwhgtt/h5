@@ -103,8 +103,8 @@
 				$(".practiceSite").html(coach.site.name);
 				$(".siteTip").html(coach.site.address)
 			}else if(result && result.success == false){
-				var errofInfo=result.errofInfo;
-				alert(errofInfo)
+				var errorInfo=result.errorInfo;
+				alert(errorInfo)
 			}else{
 				alert("未知错误,请退出重试")
 			}
