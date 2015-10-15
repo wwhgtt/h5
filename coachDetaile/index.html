@@ -1,0 +1,108 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>助驾帮-超级教练</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script src="./js/lib/zetpo.min.js"></script>
+		<script src="./js/lib/moment.js"></script>
+		<script src="./js/script/config.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<p>教练详情</p>
+			</div>
+			<div class="content">
+				<div class="coachItem">
+					<img src="" class="coachIMG">
+					<h2 class="coachName"></h2><img src="./img/agree.png" class="agreeMent" width="20">
+					<br>
+					<a href="" style="float:left;color:#80c0fe;margin-top:30px" class="coachPhoneTEl">电话:<strong style="margin-left:5px" class="coachPhone">18200112686</strong></a>
+				</div>
+				<div class="coachItem coachIntroduce" style="padding-left:5%;" >
+					<span>教练介绍</span><span style="padding-left:24px;"><strong class="coachSignature"></strong></span>
+				</div>
+				<div class="coachItem coachIntroduce" style="padding-left:5%;" >
+					<span style="letter-spacing:28px;">年龄</span><span ><strong class="coachBirth"></strong></span>
+				</div>
+				<div class="coachItem coachIntroduce" style="padding-left:5%;margin-top:20px" >
+					<span style="letter-spacing:28px">教龄</span><span ><strong class="coachCoachLisenceDate"></strong></span>
+				</div>
+				<div class="coachItem coachIntroduce" style="padding-left:5%;" >
+					<span>教学模式</span><span style="padding-left:24px;"><strong class="coachTeachType"></strong></span>
+				</div>
+				<div class="coachIntroduce coachItem" style="padding-left:5%;" >
+					<span>教学特点</span><span style="padding-left:24px;"><strong class="coachTrait"></strong></span>
+				</div>
+				<div class=" coachIntroduce coachItem" style="padding-left:5%;margin-top:20px" >
+					<span style="letter-spacing:28px">学校</span><span ><strong class="driveSchool"></strong></span>
+				</div>
+				<div class="coachIntroduce coachItem" style="padding-left:5%;" >
+					<span style="letter-spacing:28px">车型</span><span ><strong class="coachCar"></strong></span>
+				</div>
+				<div class="coachIntroduce coachItem" style="padding-left:5%;" >
+					<span>练车场地</span><span style="padding-left:24px;"><strong class="practiceSite"></strong></span>
+				</div>
+				<div class="coachIntroduce coachItem" style="padding-left:5%;" >
+					<span>场地位置</span><span style="padding-left:24px;"><strong class="siteTip"></strong></span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var getQueryStr=function(id){
+			var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)", "i");
+		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+		    if (r != null){
+		    	return (r[2]);
+		    }else{
+		    	return null;
+		    } 
+		}
+		var coachId=getQueryStr("id");
+		$.get(BASE_URL+"/basic/search/coach/byId",{
+			coachId:150
+		},function(result){
+			if(result && result.success == true){
+				var coach=result.coach;
+				$(".coachIMG").attr("src",coach.avator.middle);
+				$(".coachName").html(coach.name);
+				var applyCoachState=coach.applyCoachState;
+				if(applyCoachState == "agree"){
+					$(".agreeMent").css("display","block")
+				}
+				if(coach.phone !== null && coach.phone !== "" && coach.phone !== undefined){
+					var phone=coach.phone;
+					$(".coachPhoneTEl").css("display","block");
+					$(".coachPhoneTEl").attr("href","tel:phone")
+				}
+				$(".coachSignature").html(coach.signature);
+				var dateItem=moment().format("YYYY")+"";
+				var birthdayTemp=coach.birthday+"";
+				var birthdayItem=birthdayTemp.substr(0,4);
+				var birthday=moment(dateItem).diff(birthdayItem,"years");
+				$(".coachBirth").html(birthday+"岁");
+				var coachLisenceDate=coach.coachLisenceDate+"";
+				var dateTemp=coachLisenceDate.substr(0,4);
+				var date=moment(dateItem).diff(dateTemp,"years");
+				$(".coachCoachLisenceDate").html(date+"年");
+				var teach=coach.teachType;
+				if(teach == 0){
+					$(".coachTeachType").html("一对一")
+				}else if(teach == 1){
+					$(".coachTeachType").html("一对多")
+				}
+				$(".coachTrait").html(coach.coachTrait);
+				$(".driveSchool").html(coach.driveSchool.name);
+				$(".coachCar").html(coach.coachCar);
+				$(".practiceSite").html(coach.site.name);
+				$(".siteTip").html(coach.site.address)
+			}
+		})
+	})
+</script>
