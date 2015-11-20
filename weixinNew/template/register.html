@@ -1,0 +1,22 @@
+<ion-view title="助驾帮-登录">
+	<ion-content>
+		<div class="container" style="width:100%">
+			<div class="headerLogo">
+				<img src="./img/logo.png">
+			</div>
+			<div class="mainPhone">
+				<div class="mainTop">
+					<input type="text" placeholder="请输入手机号" class="phone" ng-model="login.phone" style="height:48px;padding-left: 1em;line-height:48px;">
+					<button class="submitPhone"  ng-click="getIdentify()">验证</button>
+				</div>
+				<div class="mainBottom">
+					<input type="text" placeholder="请输入验证码"  class="identify" ng-model="login.identify" style="height: 48px;line-height: 48px;margin-bottom: 1px">
+				</div>
+				<small class="error phoneMessage">请输入正确的手机号</small>
+				<br>
+				<small class="error codeMessage">验证码错误</small>
+			</div>
+			<button class="goButton" ng-click="register()">完成</button>
+		</div>
+	</ion-content>
+</ion-view>
