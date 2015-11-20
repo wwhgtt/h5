@@ -50,20 +50,7 @@ angular.module("controllers.reloadr",[])
 		    } 
 		}
 		var code=getQueryStr("code");
-		var getQueryString=function(phone){
-			var reg = new RegExp("(^|&)" + phone + "=([^&]*)(&|$)", "i");
-		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
-		    if (r != null){
-		    	return (r[2]);
-		    }else{
-		    	return null;
-		    } 
-		}
-		var phone=getQueryString("phone");
-		alert(state);
-		alert(code);
-		alert(phone);
-		$getOpenID.getOpenID(code,phone,state,function(err,result){
+		$getOpenID.getOpenID(code,state,function(err,result){
 			if(err){
 				$ionicPopup.alert({
 					title:"sorry,系统出错"

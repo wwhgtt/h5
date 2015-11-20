@@ -441,10 +441,9 @@ angular.module("services.common",[])
 	$http
 ){
 	return {
-		getOpenID:function(code,phone,state,callback){
+		getOpenID:function(code,state,callback){
 			$http.post(BASE_URL + "/bindopenId/",{
 				wxcode:code,
-				phone:phone,
 				userid:state
 			})
 			.success(function(data){

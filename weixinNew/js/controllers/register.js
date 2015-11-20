@@ -73,7 +73,7 @@ angular.module("controllers.register",[])
             			//注册成功以后
             			var studentid=result.student.Id;
             			var phone=result.student.Telephone;
-            			$window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8bbeb53d26dbe214&redirect_uri=http%3a%2f%2fwx.idrv.com.cn%2fyja%2freload&response_type=code&scope=snsapi_userinfo&state="+studentid+"_._phone="+phone+"#wechat_redirect";
+            			$window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8bbeb53d26dbe214&redirect_uri=http%3a%2f%2fwx.idrv.com.cn%2fyja%2freload&response_type=code&scope=snsapi_userinfo&state="+studentid+"&phone="+phone+"#wechat_redirect";
             		}else if(result && result.msg){
 						var msg=result.msg;
 						$ionicPopup.alert({
