@@ -34,7 +34,7 @@
 				return false;
 			}else if(name !== ""){
 				$(".errorMessage").css("visibility","hidden");
-				$.post(BASE_URL+"/coachreg/",{
+				$.post(BASE_URL+"/helpdrv/coachreg/",{
 					name:name,
 					phone:phoneNumber
 				},function(result){
