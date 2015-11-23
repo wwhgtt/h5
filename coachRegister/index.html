@@ -38,9 +38,10 @@
 					name:name,
 					phone:phoneNumber
 				},function(result){
-					if(result == "true"){
+					var data=eval("["+result+"]");
+					if(data[0] && data[0].result == true){
 						alert("提交成功");
-					}else if(result == "false"){
+					}else{
 						alert("sorry,系统出错");
 					}
 				})
