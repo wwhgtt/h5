@@ -30,7 +30,7 @@ html {overflow-y: scroll;}
 .side{
 	width: 34%;
 	/*height: 1px;*/
-	border: 1px solid #aa6288;
+	border-top: 1px solid #a776be;
 }
 .middle{
 	height: 30px;
@@ -38,7 +38,7 @@ html {overflow-y: scroll;}
 	color: white;
 	border-radius: 10px;
 	text-align: center;
-	background-color:#aa6288; 
+	background-color:#a776be; 
 	width: 30%
 }
 .footer{
@@ -55,4 +55,5 @@ html {overflow-y: scroll;}
 .content p{
 	margin-top: 15px;
 	font-size: 16px;
+	line-height: 20px
 }
