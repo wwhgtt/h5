@@ -72,7 +72,7 @@
 		    } 
 		}
 		var coachId=getQueryStr("id");
-		$.post(BASE_URL+"/helpdrv/getcoach/",{
+		$.post("/helpdrv/getcoach/",{
 			coachid:coachId
 		},function(data){
 			var result=JSON.parse(data);
