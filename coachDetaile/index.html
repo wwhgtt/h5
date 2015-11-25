@@ -10,46 +10,53 @@
 		<script src="./js/lib/moment.js"></script>
 		<script src="./js/script/config.js"></script>
 	</head>
-	<body>
-		<div class="container">
-			<div class="header">
-				<p>教练详情</p>
+	<body style="margin:0px">
+		<div class="container forHideEvent" style="background-color:white;margin-bottom:60px">
+		<img src="./img/banner640.png" style="width:100%">
+		<div class="coachTemp " style="margin-top:-40px;position:absolute;width:100%">
+			<img class="coachAvator" src="" style="width:80px;border-radius:40px;float:left;margin-left:1.5em">
+			<div class="header-line" style="width:100px;margin-left:100px;padding-top:12px" >
+				<span style="color:white;margin-left:1em" class="coachNameTemp"></span>
+				<span style="margin-left:8px"><img src="" class="coachIMAgeTemp" style="width:10px" /></span>
+				<br>
+				<span style="margin-left:8px"><img src="" class="checkImg" style="width:80px;margin-top:15px;margin-left:-10px" /></span>
 			</div>
-			<div class="content">
-				<div class="coachItem">
-					<img src="" class="coachIMG">
-					<h2 class="coachName"></h2><img src="./img/agree.png" class="agreeMent" width="20">
-					<br>
-					<a href="" style="float:left;color:#80c0fe;margin-top:30px" class="coachPhoneTEl">电话:<strong style="margin-left:5px" class="coachPhone"></strong></a>
-				</div>
-				<div class="coachItem coachIntroduce" style="padding-left:5%;" >
-					<span>教练介绍</span><span style="padding-left:24px;"><strong class="coachSignature"></strong></span>
-				</div>
-				<div class="coachItem coachIntroduce" style="padding-left:5%;" >
-					<span style="letter-spacing:28px;">年龄</span><span ><strong class="coachBirth"></strong></span>
-				</div>
-				<div class="coachItem coachIntroduce" style="padding-left:5%;margin-top:20px" >
-					<span style="letter-spacing:28px">教龄</span><span ><strong class="coachCoachLisenceDate"></strong></span>
-				</div>
-				<div class="coachItem coachIntroduce" style="padding-left:5%;" >
-					<span>教学模式</span><span style="padding-left:24px;"><strong class="coachTeachType"></strong></span>
-				</div>
-				<div class="coachIntroduce coachItem" style="padding-left:5%;" >
-					<span>教学特点</span><span style="padding-left:24px;"><strong class="coachTrait"></strong></span>
-				</div>
-				<div class=" coachIntroduce coachItem" style="padding-left:5%;margin-top:20px" >
-					<span style="letter-spacing:28px">学校</span><span ><strong class="driveSchool"></strong></span>
-				</div>
-				<div class="coachIntroduce coachItem" style="padding-left:5%;" >
-					<span style="letter-spacing:28px">车型</span><span ><strong class="coachCar"></strong></span>
-				</div>
-				<div class="coachIntroduce coachItem" style="padding-left:5%;" >
-					<span>练车场地</span><span style="padding-left:24px;"><strong class="practiceSite"></strong></span>
-				</div>
-				<div class="coachIntroduce coachItem" style="padding-left:5%;" >
-					<span>场地位置</span><span style="padding-left:24px;"><strong class="siteTip"></strong></span>
-				</div>
-			</div>
+			<a href="" class="coachPhoneTEl" style="margin-right:1.5em"><img src="./img/icon_phone.png" style="float:right;margin-top:-20px;width:60px"></a>
+		</div>
+		<div class="clear"></div>
+		<div class="kongbai" style="height:20px;background-color:#ededed;width:100%;margin-top:45px"></div>
+		<div class="item item-avatar myArrayNative" style="padding-left:5%;" >
+			<p style="margin-bottom:10px">教学特色</p>
+			<span style="background-color:#3398cc" class="coachItemFirst"></span><span style="background-color:#65cc33" class="coachItemSecond"></span><span style="background-color:#ffcc33" class="coachItemThird"></span>
+		</div>
+		<div class="item item-avatar  forCarIMG" style="padding-left:5%;" >
+			<p style="margin-bottom:10px">车辆照片</p>
+			<img class="coachItemFirstIMG" src=""><img class="coachItemSecondIMG" src=""><img class="coachItemThirdIMG" src=""><img class="coachItemFourthIMG"  src="">
+		</div>
+		<div class="item item-avatar forCarIMG" style="padding-left:5%;" >
+			<p style="margin-bottom:10px">场地照片</p>
+			<img class="coachItemFirstimg" src=""><img class="coachItemSecondimg" src=""><img class="coachItemThirdimg" src=""><img class="coachItemFourthimg" src="">
+		</div>
+		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+			<span>所属驾校</span><span style="padding-left:24px;"><strong class="DrivingSchool"></strong></span>
+		</div>
+		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+			<span>教学模式</span><span style="padding-left:24px;"><strong class="TeachType"></strong></span>
+		</div>
+		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+			<span>练车场地</span><span style="padding-left:24px;"><strong class="TeachSite"></strong></span>
+		</div>
+		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+			<span>最新价格</span><span style="padding-left:24px;"><strong class="Price"></strong></span>
+		</div>
+		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+			<span>个人简介</span><span style="padding-left:24px;overflow:hidden"><strong class="Introduction"></strong></span>
+		</div>
+		<div class="footerr" ng-hide="onlyStudent"></div>
+		<a href="http://viewer.maka.im/k/IQLAURKV"><button class="footButton">我要制作</button></a>
+		<!-- <div class="container-model" ng-show="haveImage">
+			<img ng-src="{{model.img}}" title="first">
+		</div> -->
 		</div>
 	</body>
 </html>
@@ -65,47 +72,93 @@
 		    } 
 		}
 		var coachId=getQueryStr("id");
-		$.get(BASE_URL+"/basic/search/coach/byId",{
-			coachId:coachId
-		},function(result){
-			if(result && result.success == true){
+		$.post(BASE_URL+"/helpdrv/getcoach/",{
+			coachid:coachId
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true){
 				var coach=result.coach;
-				$(".coachIMG").attr("src",coach.avator.middle);
-				$(".coachName").html(coach.name);
-				var applyCoachState=coach.applyCoachState;
-				if(applyCoachState == "agree"){
-					$(".agreeMent").css("display","block")
+
+				var srcTemp=$(".coachAvator").attr("src");
+				srcTemp=coach.Avator+"_large";
+
+				var sex=coach.Sex;
+				var srcSex=$(".coachIMAgeTemp").attr("src")
+				if(sex == 1){
+					srcSex="http://party.idrv.com.cn/coachDetaile/img/icon_man.png";
+				}else{
+					srcSex="http://party.idrv.com.cn/coachDetaile/img/icon_woman.png"
 				}
-				if(coach.phone !== null && coach.phone !== "" && coach.phone !== undefined){
-					var phone=coach.phone;
+				var status=coach.Status;
+				var srcCkeck=$(".checkImg").attr("src")
+				if(status == 2){
+					srcCkeck="http://party.idrv.com.cn/coachDetaile/img/renzheng.png";
+				}else{
+					$(".checkImg").css("display","none");
+				}
+				if(coach.Phone !== null && coach.Phone !== "" && coach.Phone !== undefined){
+					var phone=coach.Phone;
 					$(".coachPhoneTEl").css("display","block");
-					$(".coachPhoneTEl").attr("href","tel:phone")
+					$(".coachPhoneTEl").attr("href","tel:"+phone);
 				}
-				$(".coachSignature").html(coach.signature);
-				var dateItem=moment().format("YYYY")+"";
-				var birthdayTemp=coach.birthday+"";
-				var birthdayItem=birthdayTemp.substr(0,4);
-				var birthday=moment(dateItem).diff(birthdayItem,"years");
-				$(".coachBirth").html(birthday+"岁");
-				var coachLisenceDate=coach.coachLisenceDate+"";
-				var dateTemp=coachLisenceDate.substr(0,4);
-				var date=moment(dateItem).diff(dateTemp,"years");
-				$(".coachCoachLisenceDate").html(date+"年");
-				var teach=coach.teachType;
-				if(teach == 0){
-					$(".coachTeachType").html("一对一")
-				}else if(teach == 1){
-					$(".coachTeachType").html("一对多")
+				$(".coachNameTemp").html(coach.Name);
+				var TeachCharacteristics =coach.TeachCharacteristics;
+				var myArray=[];
+				myArray=TeachCharacteristics.split("-");
+				$(".coachItemFirst").html(myArray[1]);
+				$(".coachItemSecond").html(myArray[2]);
+				$(".coachItemThird").html(myArray[3]);
+
+				var Carpics=[];
+				var Carpics=coach.Carpics;
+				if(Carpics !== "" && Carpics !== null && Carpics !== undefined){
+					if(Carpics[0]){
+						$(".coachItemFirstIMG").attr("src",Carpics[0]);
+					}
+					if(Carpics[1]){
+						$(".coachItemSecondIMG").attr("src",Carpics[1]);
+					}
+					if(Carpics[2]){
+						$(".coachItemThirdIMG").attr("src",Carpics[2]);
+					}
+					if(Carpics[3]){
+						$(".coachItemFourthIMG").attr("src",Carpics[3]);
+					}
 				}
-				$(".coachTrait").html(coach.coachTrait);
-				$(".driveSchool").html(coach.driveSchool.name);
-				$(".coachCar").html(coach.coachCar);
-				$(".practiceSite").html(coach.site.name);
-				$(".siteTip").html(coach.site.address)
-			}else if(result && result.success == false){
-				var errorInfo=result.errorInfo;
-				alert(errorInfo)
+				
+				var Sitepics=[];
+				var Sitepics=coach.Sitepics;
+				if(Sitepics !== "" && Sitepics !== null && Sitepics !== undefined){
+					if(Sitepics[0]){
+						$(".coachItemFirstimg").attr("src",Sitepics[0]);
+					}
+					if(Sitepics[1]){
+						$(".coachItemFirstimg").attr("src",Sitepics[1]);
+					}
+					if(Sitepics[2]){
+						$(".coachItemFirstimg").attr("src",Sitepics[2]);
+					}
+					if(Sitepics[3]){
+						$(".coachItemFirstimg").attr("src",Sitepics[3]);
+					}
+				}
+				
+				if(coach.TeachType == "1"){
+					$(".TeachType").html("一车多人");
+				}else{
+					$(".TeachType").html("一车一人");
+				}
+
+				$(".DrivingSchool").html(coach.DrivingSchool);
+				$(".TeachSite").html(coach.TeachSite);
+				$(".Price").html("￥"+coach.Price);
+				$(".Introduction").html(coach.Introduction);
+
+			}else if(result && result.msg){
+				var errorInfo=result.msg;
+				alert(errorInfo);
 			}else{
+				console.log(result)
 				alert("未知错误,请退出重试")
 			}
 		})
