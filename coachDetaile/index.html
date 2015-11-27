@@ -79,15 +79,13 @@
 			if(result && result.result == true){
 				var coach=result.coach;
 
-				var srcTemp=$(".coachAvator").attr("src");
-				srcTemp=coach.Avator+"_large";
-
+				$(".coachAvator").attr("src",coach.Avator+"_large");
 				var sex=coach.Sex;
-				var srcSex=$(".coachIMAgeTemp").attr("src")
+				
 				if(sex == 1){
-					srcSex="http://party.idrv.com.cn/coachDetaile/img/icon_man.png";
+					$(".coachIMAgeTemp").attr("src","http://party.idrv.com.cn/coachDetaile/img/icon_man.png");
 				}else{
-					srcSex="http://party.idrv.com.cn/coachDetaile/img/icon_woman.png"
+					$(".coachIMAgeTemp").attr("src","http://party.idrv.com.cn/coachDetaile/img/icon_woman.png");
 				}
 				var status=coach.Status;
 				var srcCkeck=$(".checkImg").attr("src")
