@@ -88,9 +88,8 @@
 					$(".coachIMAgeTemp").attr("src","http://party.idrv.com.cn/coachDetaile/img/icon_woman.png");
 				}
 				var status=coach.Status;
-				var srcCkeck=$(".checkImg").attr("src")
 				if(status == 2){
-					srcCkeck="http://party.idrv.com.cn/coachDetaile/img/renzheng.png";
+					$(".checkImg").attr("src","http://party.idrv.com.cn/coachDetaile/img/renzheng.png");
 				}else{
 					$(".checkImg").css("display","none");
 				}
@@ -143,7 +142,7 @@
 				
 				if(coach.TeachType == "1"){
 					$(".TeachType").html("一车多人");
-				}else{
+				}else if(coach.TeachType == "2"){
 					$(".TeachType").html("一车一人");
 				}
 
