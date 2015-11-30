@@ -54,11 +54,11 @@
 		</div>
 		<div class="footerr" ng-hide="onlyStudent"></div>
 		<a href="http://viewer.maka.im/k/IQLAURKV"><button class="footButton">我要制作</button></a>
-		<!-- <div class="container-model" ng-show="haveImage">
-			<img ng-src="{{model.img}}" title="first">
-		</div> -->
 		</div>
 	</body>
+	<div class="container-model" style="display:none">
+		<img src="" class="hideImage" />
+	</div>
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -72,7 +72,7 @@
 		    } 
 		}
 		var coachId=getQueryStr("id");
-		$.post("/helpdrv/getcoach/",{
+		$.post("/dev/helpdrv/getcoach/",{
 			coachid:coachId
 		},function(data){
 			var result=JSON.parse(data);
@@ -158,6 +158,16 @@
 				console.log(result)
 				alert("未知错误,请退出重试")
 			}
+		})
+		$(".forCarIMG img").on("click",function(){
+			$(".container-model").css("display","block");
+			$(body).css("display","none");
+			var src=$(this).attr("src");
+			$(".hideImage").attr("src",src);
+		})
+		$(".container-model").on("click",function(){
+			$(".container-model").css("display","none");
+			$(body).css("display","block");
 		})
 	})
 </script>
