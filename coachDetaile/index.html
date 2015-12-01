@@ -102,12 +102,48 @@
 				}
 				$(".coachNameTemp").html(coach.Name);
 				var TeachCharacteristics =coach.TeachCharacteristics;
+				var modelArray=["定点接送","不吸烟","一费制","分期付款","一人一车","计时收费"];
 				var myArray=[];
+				var realMyArray=[];
 				myArray=TeachCharacteristics.split("-");
-				$(".coachItemFirst").html(myArray[1]);
-				$(".coachItemSecond").html(myArray[2]);
-				$(".coachItemThird").html(myArray[3]);
-
+				var index = 1 ;
+				if(myArray.indexOf("true") !== -1){
+					for(var i=0;i<=myArray.length;i++){
+						if(myArray[i] == "true"){ realMyArray[index] = modelArray[i-1]; index ++;}
+					}
+					if(!realMyArray[1]){
+						// console.log(myArray[1])
+						$(".coachItemFirst").css("display","none");
+					}else{
+						$(".coachItemFirst").html(realMyArray[1]);
+					}
+					if(!realMyArray[2]){
+						$(".coachItemSecond").css("display","none");
+					}else{
+						$(".coachItemSecond").html(realMyArray[2]);
+					}
+					if(!realMyArray[3]){
+						$(".coachItemThird").css("display","none");
+					}else{
+						$(".coachItemThird").html(realMyArray[3]);
+					}
+				}else{
+					if(!myArray[1]){
+						$(".coachItemFirst").css("display","none");
+					}else{
+						$(".coachItemFirst").html(myArray[1]);
+					}
+					if(!myArray[2]){
+						$(".coachItemSecond").css("display","none");
+					}else{
+						$(".coachItemSecond").html(myArray[2]);
+					}
+					if(!myArray[3]){
+						$(".coachItemThird").css("display","none");
+					}else{
+						$(".coachItemThird").html(myArray[3]);
+					}
+				}
 				var Carpics=[];
 				var Carpics=coach.Carpics;
 				if(Carpics !== "" && Carpics !== null && Carpics !== undefined){
