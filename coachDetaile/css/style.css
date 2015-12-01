@@ -697,7 +697,8 @@ a{
 	width: 67px;
 	height: 67px;
 	margin-left: 1.8%;
-	border: none
+	border: none;
+	visibility: hidden;
 }
 .container-model{
 	width: 100%;
