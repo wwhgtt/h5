@@ -198,10 +198,12 @@
 			}
 		})
 		$(".forCarIMG img").on("click",function(){
-			$(".container-model").css("display","block");
-			$("#body").css("display","none");
 			var src=$(this).attr("src");
-			$(".hideImage").attr("src",src);
+			if(src !== "" &&　src !== null && src !== undefined){
+				$(".container-model").css("display","block");
+				$("#body").css("display","none");
+				$(".hideImage").attr("src",src);
+			}
 		})
 		$(".container-model").on("click",function(){
 			$(".container-model").css("display","none");
