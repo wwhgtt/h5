@@ -10,55 +10,57 @@
 		<script src="./js/lib/moment.js"></script>
 		<script src="./js/script/config.js"></script>
 	</head>
-	<body style="margin:0px" id="body">
-		<div class="container forHideEvent" style="background-color:white;margin-bottom:60px">
-		<img src="./img/banner640.png" style="width:100%">
-		<div class="coachTemp " style="margin-top:-40px;position:absolute;width:100%">
-			<img class="coachAvator" src="" style="width:80px;border-radius:40px;float:left;margin-left:1.5em">
-			<div class="header-line" style="width:100px;margin-left:100px;padding-top:12px" >
-				<span style="color:white;margin-left:1em" class="coachNameTemp"></span>
-				<span style="margin-left:8px"><img src="" class="coachIMAgeTemp" style="width:10px" /></span>
-				<br>
-				<span style="margin-left:8px"><img src="" class="checkImg" style="width:80px;margin-top:15px;margin-left:5px" /></span>
+	<body style="margin:0px" >
+		<div id="body">
+			<div class="container forHideEvent" style="background-color:white;margin-bottom:60px">
+			<img src="./img/banner640.png" style="width:100%">
+			<div class="coachTemp " style="margin-top:-40px;position:absolute;width:100%">
+				<img class="coachAvator" src="" style="width:80px;border-radius:40px;float:left;margin-left:1.5em">
+				<div class="header-line" style="width:100px;margin-left:100px;padding-top:12px" >
+					<span style="color:white;margin-left:1em" class="coachNameTemp"></span>
+					<span style="margin-left:8px"><img src="" class="coachIMAgeTemp" style="width:10px" /></span>
+					<br>
+					<span style="margin-left:8px"><img src="" class="checkImg" style="width:80px;margin-top:15px;margin-left:5px" /></span>
+				</div>
+				<a href="" class="coachPhoneTEl" style="margin-right:1.5em"><img src="./img/icon_phone.png" style="float:right;margin-top:-20px;width:60px"></a>
 			</div>
-			<a href="" class="coachPhoneTEl" style="margin-right:1.5em"><img src="./img/icon_phone.png" style="float:right;margin-top:-20px;width:60px"></a>
+			<div class="clear"></div>
+			<div class="kongbai" style="height:20px;background-color:#ededed;width:100%;margin-top:45px"></div>
+			<div class="item item-avatar myArrayNative" style="padding-left:5%;" >
+				<p style="margin-bottom:10px">教学特色</p>
+				<span style="background-color:#3398cc" class="coachItemFirst"></span><span style="background-color:#65cc33" class="coachItemSecond"></span><span style="background-color:#ffcc33" class="coachItemThird"></span>
+			</div>
+			<div class="item item-avatar  forCarIMG" style="padding-left:5%;" >
+				<p style="margin-bottom:10px">车辆照片</p>
+				<img class="coachItemFirstIMG" src=""><img class="coachItemSecondIMG" src=""><img class="coachItemThirdIMG" src=""><img class="coachItemFourthIMG"  src="">
+			</div>
+			<div class="item item-avatar forCarIMG" style="padding-left:5%;" >
+				<p style="margin-bottom:10px">场地照片</p>
+				<img class="coachFirstimg" src=""><img class="coachSecondimg" src=""><img class="coachThirdimg" src=""><img class="coachFourthimg" src="">
+			</div>
+			<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+				<span>所属驾校</span><span style="padding-left:24px;"><strong class="DrivingSchool"></strong></span>
+			</div>
+			<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+				<span>教学模式</span><span style="padding-left:24px;"><strong class="TeachType"></strong></span>
+			</div>
+			<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+				<span>练车场地</span><span style="padding-left:24px;"><strong class="TeachSite"></strong></span>
+			</div>
+			<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+				<span>最新价格</span><span style="padding-left:24px;"><strong class="Price"></strong></span>
+			</div>
+			<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
+				<span>个人简介</span><span style="padding-left:24px;overflow:hidden"><strong class="Introduction"></strong></span>
+			</div>
+			<div class="footerr" ng-hide="onlyStudent"></div>
+			<a href="http://viewer.maka.im/k/IQLAURKV"><button class="footButton">我要制作</button></a>
+			</div>
 		</div>
-		<div class="clear"></div>
-		<div class="kongbai" style="height:20px;background-color:#ededed;width:100%;margin-top:45px"></div>
-		<div class="item item-avatar myArrayNative" style="padding-left:5%;" >
-			<p style="margin-bottom:10px">教学特色</p>
-			<span style="background-color:#3398cc" class="coachItemFirst"></span><span style="background-color:#65cc33" class="coachItemSecond"></span><span style="background-color:#ffcc33" class="coachItemThird"></span>
-		</div>
-		<div class="item item-avatar  forCarIMG" style="padding-left:5%;" >
-			<p style="margin-bottom:10px">车辆照片</p>
-			<img class="coachItemFirstIMG" src=""><img class="coachItemSecondIMG" src=""><img class="coachItemThirdIMG" src=""><img class="coachItemFourthIMG"  src="">
-		</div>
-		<div class="item item-avatar forCarIMG" style="padding-left:5%;" >
-			<p style="margin-bottom:10px">场地照片</p>
-			<img class="coachFirstimg" src=""><img class="coachSecondimg" src=""><img class="coachThirdimg" src=""><img class="coachFourthimg" src="">
-		</div>
-		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
-			<span>所属驾校</span><span style="padding-left:24px;"><strong class="DrivingSchool"></strong></span>
-		</div>
-		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
-			<span>教学模式</span><span style="padding-left:24px;"><strong class="TeachType"></strong></span>
-		</div>
-		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
-			<span>练车场地</span><span style="padding-left:24px;"><strong class="TeachSite"></strong></span>
-		</div>
-		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
-			<span>最新价格</span><span style="padding-left:24px;"><strong class="Price"></strong></span>
-		</div>
-		<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
-			<span>个人简介</span><span style="padding-left:24px;overflow:hidden"><strong class="Introduction"></strong></span>
-		</div>
-		<div class="footerr" ng-hide="onlyStudent"></div>
-		<a href="http://viewer.maka.im/k/IQLAURKV"><button class="footButton">我要制作</button></a>
+		<div class="container-model" style="display:none">
+			<img src="" class="hideImage" />
 		</div>
 	</body>
-	<div class="container-model" style="display:none">
-		<img src="" class="hideImage" />
-	</div>
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
