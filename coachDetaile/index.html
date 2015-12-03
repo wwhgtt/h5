@@ -195,7 +195,11 @@
 				$(".DrivingSchool").html(coach.DrivingSchool);
 				$(".TeachSite").html(coach.TeachSite);
 				$(".Price").html("￥"+coach.Price);
-				$(".Introduction").html(coach.Introduction);
+				var Introduction=coach.Introduction;
+				if(Introduction !== "cdyjwlkjyxzrgs"){
+					$(".Introduction").html(coach.Introduction);
+				}
+				
 
 			}else if(result && result.msg){
 				var errorInfo=result.msg;
