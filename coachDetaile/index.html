@@ -210,7 +210,10 @@
 				}
 
 				$(".DrivingSchool").html(coach.DrivingSchool);
-				$(".TeachSite").html(coach.TeachSite);
+				var TeachSite=coach.TeachSite;
+				if(TeachSite !== "cdyjwlkjyxzrgs"){
+					$(".TeachSite").html(coach.TeachSite);
+				}
 				$(".Price").html("￥"+coach.Price);
 				var Introduction=coach.Introduction;
 				if(Introduction !== "cdyjwlkjyxzrgs"){
