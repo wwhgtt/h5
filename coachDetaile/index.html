@@ -53,8 +53,8 @@
 			<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto" >
 				<span style="display:inline-block">个人简介</span><span style="display:inline-block"><strong style="padding-left:24px;font-weight:600" class="Introduction"></strong></span>
 			</div>
-			<div class="footerr" ng-hide="onlyStudent"></div>
-			<a href="http://e.eqxiu.com/s/p00JHE7B"><button class="footButton">我要制作</button></a>
+			<div class="footerr"></div>
+				<a href="http://e.eqxiu.com/s/p00JHE7B" class="state"><button class="footButton">我要制作</button></a>
 			</div>
 		</div>
 		<div class="container-model" style="display:none">
@@ -74,6 +74,24 @@
 		    } 
 		}
 		var coachId=getQueryStr("id");
+		var getQueryStr=function(state){
+			var reg = new RegExp("(^|&)" + state + "=([^&]*)(&|$)", "i");
+		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+		    if (r != null){
+		    	return (r[2]);
+		    }else{
+		    	return null;
+		    } 
+		}
+		var state=getQueryStr("state");
+		alert(state)
+		if(state == "" || state == null || state == undefined){
+			//适用于分享
+		}else{
+			//适用于教练名片
+			$(".state").css("display","none");
+			$(".footerr").css("display","none");
+		}
 		$.post("/helpdrv/getcoach/",{
 			coachid:coachId
 		},function(data){
