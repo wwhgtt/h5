@@ -98,7 +98,7 @@
 			if(result && result.result == true){
 				var coach=result.coach;
 
-				$(".coachAvator").attr("src",coach.Avator+"_large?time="+new Date());
+				$(".coachAvator").attr("src",coach.Avator+"_large?time="+new Date().getTime());
 				var sex=coach.Sex;
 				
 				if(sex == 1){
