@@ -9,6 +9,7 @@
 		<script src="./js/lib/zetpo.min.js"></script>
 		<script src="./js/lib/moment.js"></script>
 		<script src="./js/script/config.js"></script>
+		<script src="./js/script/weixin.js"></script>
 	</head>
 	<body style="margin:0px" >
 		<div id="body">
@@ -220,13 +221,60 @@
 				if(Introduction !== "cdyjwlkjyxzrgs"){
 					$(".Introduction").html(coach.Introduction);
 				}
-				
-
+				var url=location.href.split("#")[0];
+				$.post("/helpdrv/wxgetsignature/",{
+					url:url
+				},function(result){
+					if(result && result.result == true ){
+						var timestamp=result.timestamp,
+							nonceStr=result.noncestr,
+							signature=result.signature;
+						wx.config({
+						    debug: false, 
+						    appId: 'wx8bbeb53d26dbe214', 
+						    timestamp:timestamp, 
+						    nonceStr: nonceStr,
+						    signature:signature,
+						    jsApiList: [
+						    	"onMenuShareTimeline",
+						    	"onMenuShareAppMessage"
+						    ] 
+						});
+						wx.ready(function(){
+							wx.onMenuShareTimeline({
+						        title: '推荐我的驾校教练——'+coach.Name, // 分享标题
+							    link: 'http://party.idrv.com.cn/coachDetaile?id='+coachId, // 分享链接  寻找教练webview
+							    imgUrl: coach.Avator+"_large?time="+new Date().getTime(), // 分享图标
+						        success: function () { 
+						            // $window.location.href="/yja/person";
+						        },
+						        cancel: function () { 
+						            // 用户取消分享后执行的回调函数
+						        }
+						    });
+						})
+					    wx.onMenuShareAppMessage({
+					        title: '推荐我的驾校教练——'+name, // 分享标题
+						    link: 'http://party.idrv.com.cn/coachDetaile?id='+coachId, // 分享链接
+						    imgUrl: coach.Avator+"_large?time="+new Date().getTime(), // 分享图标
+					        type: '', // 分享类型,music、video或link，不填默认为link
+					        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+					        success: function (){ 
+					            // $window.location.href="/yja/person";
+					        },
+					        cancel: function (){ 
+					            // 用户取消分享后执行的回调函数
+					        }
+					    });
+					}else if(result && result.msg){
+						var errorInfo=result.msg;
+			 			alert(errorInfo);
+			 		}
+				})
 			}else if(result && result.msg){
 				var errorInfo=result.msg;
 				alert(errorInfo);
 			}else{
-				console.log(result)
 				alert("未知错误,请退出重试")
 			}
 		})
