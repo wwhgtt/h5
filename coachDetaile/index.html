@@ -224,7 +224,8 @@
 				var url=location.href.split("#")[0];
 				$.post("/helpdrv/wxgetsignature/",{
 					url:url
-				},function(result){
+				},function(data){
+					var result=JSON.parse(data);
 					if(result && result.result == true ){
 						var timestamp=result.timestamp,
 							nonceStr=result.noncestr,
