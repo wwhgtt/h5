@@ -175,6 +175,7 @@ a{
 .coachIntroduce{
 	height: 40px;
 	line-height: 40px;
+	border-top: none;
 }
 .coachImage{
 	height: 100px !important;
@@ -714,4 +715,7 @@ a{
 .hideImage{
 	position: absolute;
 	left:0%;
+}
+.Introduction{
+	line-height: 30px;
 }
