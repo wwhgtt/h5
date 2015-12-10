@@ -654,7 +654,8 @@ a{
 .header-line span{
 	font-size: 18px;
 	display: inline-block;
-	float: left
+	float: left;
+	border-radius:15px; 
 }
 .descirbe{
 	height: 20px;
