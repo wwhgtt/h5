@@ -655,7 +655,7 @@ a{
 	font-size: 18px;
 	display: inline-block;
 	float: left;
-	border-radius:15px; 
+	/*border-radius:15px */
 }
 .descirbe{
 	height: 20px;
@@ -688,7 +688,7 @@ a{
 	display: inline-block;
 	height: 30px;
 	line-height: 30px;
-	border-radius: 10px;
+	border-radius: 15px;
 	color: white;
 	width: 30%;
 	text-align: center;
