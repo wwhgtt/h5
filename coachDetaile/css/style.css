@@ -717,5 +717,8 @@ a{
 	left:0%;
 }
 .Introduction{
-	line-height: 30px;
+	line-height: 1.6em;
+}
+.item{
+	border: none
 }
