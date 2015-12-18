@@ -99,7 +99,7 @@
 			$(".state").css("display","none");
 			$(".footerr").css("display","none");
 		}
-		$.post(BASE_URL+"/helpdrv/getcoach/",{
+		$.post("/helpdrv/getcoach/",{
 			coachid:coachId
 		},function(data){
 			var result=JSON.parse(data);
