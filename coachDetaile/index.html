@@ -68,19 +68,13 @@
 			</div>
 		</div>
 		<div class="container-model swiper-container" style="display:none;height:100%">
-			<div class="swiper-wrapper" style="height:100%">
-				<div class="swiper-slide  a" style="height:100%"><img class="coachItemFirstIMG hideImageFirstIMG" src=""></div>
-				<div class="swiper-slide b" style="height:100%;display:none"><img class="coachItemSecondIMG hideImageSecondIMG" src=""></div>
-				<div class="swiper-slide c" style="height:100%;display:none"><img class="coachItemThirdIMG hideImageThirdIMG" src=""></div>
-				<div class="swiper-slide d" style="height:100%;display:none"><img class="coachItemFourthIMG hideImageFourthIMG"  src=""></div>
+			<div class="swiper-wrapper carImages" style="height:100%">
+				<div class="swiper-slide  " style="height:100%"><img class="coachItemFirstIMG hideImageFirstIMG" src=""></div>
 			</div>
 		</div>
 		<div class="container-model2 swiper-container2" style="display:none;height:100%">
 			<div class="swiper-wrapper" style="height:100%">
-				<div class="swiper-slide e" style="height:100%"><img class="coachFirst hideImageFirst" src=""></div>
-				<div class="swiper-slide f" style="height:100%;display:none"><img class="coachSecond hideImageSecond" src=""></div>
-				<div class="swiper-slide g" style="height:100%;display:none"><img class="coachThird hideImageThird" src=""></div>
-				<div class="swiper-slide h" style="height:100%;display:none"><img class="coachFourth hideImageFourth"  src=""></div>
+				<div class="swiper-slide " style="height:100%"><img class="coachFirst hideImageFirst" src=""></div>
 			</div>
 		</div>
 	</body>
@@ -231,18 +225,21 @@
 						$(".coachItemFirstIMG").attr("src",Carpics[0]);
 					}
 					if(Carpics[1]){
-						$(".b").css("display","block");
 						$(".coachItemSecondIMG").css("display","inline-block");
+						
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachItemSecondIMG hideImageSecondIMG' src=''></div>").appendTo(".carImages");
 						$(".coachItemSecondIMG").attr("src",Carpics[1]);
 					}
 					if(Carpics[2]){
-						$(".c").css("display","block");
 						$(".coachItemThirdIMG").css("display","inline-block");
+						
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachItemThirdIMG hideImageThirdIMG' src=''></div>").appendTo(".carImages");
 						$(".coachItemThirdIMG").attr("src",Carpics[2]);
 					}
 					if(Carpics[3]){
-						$(".d").css("display","block");
 						$(".coachItemFourthIMG").css("display","inline-block");
+						
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachItemFourthIMG hideImageFourthIMG' src=''></div>").appendTo(".carImages");
 						$(".coachItemFourthIMG").attr("src",Carpics[3]);
 					}
 				}else{
@@ -258,18 +255,19 @@
 						$(".coachFirst").attr("src",Sitepics[0]);
 					}
 					if(Sitepics[1]){
-						$(".f").css("display","block");
 						$(".coachSecond").css("display","inline-block");
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachSecond hideImageSecond' src=''></div>").appendTo(".carImages");
 						$(".coachSecond").attr("src",Sitepics[1]);
+
 					}
 					if(Sitepics[2]){
-						$(".g").css("display","block");
 						$(".coachThird").css("display","inline-block");
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachThird hideImageThird' src=''></div>").appendTo(".carImages");
 						$(".coachThird").attr("src",Sitepics[2]);
 					}
 					if(Sitepics[3]){
-						$(".f").css("display","block");
 						$(".coachFourth").css("display","inline-block");
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachFourth hideImageFourth' src=''></div>").appendTo(".carImages");
 						$(".coachFourth").attr("src",Sitepics[3]);
 					}
 				}else{
