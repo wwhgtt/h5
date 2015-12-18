@@ -69,12 +69,10 @@
 		</div>
 		<div class="container-model swiper-container" style="display:none;height:100%">
 			<div class="swiper-wrapper carImages" style="height:100%">
-				<div class="swiper-slide  " style="height:100%"><img class="coachItemFirstIMG hideImageFirstIMG" src=""></div>
 			</div>
 		</div>
 		<div class="container-model2 swiper-container2" style="display:none;height:100%">
 			<div class="swiper-wrapper carImagesItem" style="height:100%">
-				<div class="swiper-slide " style="height:100%"><img class="coachFirst hideImageFirst" src=""></div>
 			</div>
 		</div>
 	</body>
@@ -134,7 +132,7 @@
 			$(".state").css("display","none");
 			$(".footerr").css("display","none");
 		}
-		$.post("/helpdrv/getcoach/",{
+		$.post("/dev/helpdrv/getcoach/",{
 			coachid:coachId
 		},function(data){
 			var result=JSON.parse(data);
@@ -222,6 +220,7 @@
 				if(Carpics !== "" && Carpics !== null && Carpics !== undefined){
 					if(Carpics[0]){
 						$(".coachItemFirstIMG").css("display","inline-block");
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachItemFirstIMG hideImageFirstIMG' src=''></div>").appendTo(".carImages");
 						$(".coachItemFirstIMG").attr("src",Carpics[0]);
 					}
 					if(Carpics[1]){
@@ -252,6 +251,7 @@
 				if(Sitepics !== "" && Sitepics !== null && Sitepics !== undefined){
 					if(Sitepics[0]){
 						$(".coachFirst").css("display","inline-block");
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachFirst hideImageFirst' src=''></div>").appendTo(".carImagesItem");
 						$(".coachFirst").attr("src",Sitepics[0]);
 					}
 					if(Sitepics[1]){
