@@ -73,7 +73,7 @@
 			</div>
 		</div>
 		<div class="container-model2 swiper-container2" style="display:none;height:100%">
-			<div class="swiper-wrapper" style="height:100%">
+			<div class="swiper-wrapper carImagesItem" style="height:100%">
 				<div class="swiper-slide " style="height:100%"><img class="coachFirst hideImageFirst" src=""></div>
 			</div>
 		</div>
@@ -256,18 +256,18 @@
 					}
 					if(Sitepics[1]){
 						$(".coachSecond").css("display","inline-block");
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachSecond hideImageSecond' src=''></div>").appendTo(".carImages");
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachSecond hideImageSecond' src=''></div>").appendTo(".carImagesItem");
 						$(".coachSecond").attr("src",Sitepics[1]);
 
 					}
 					if(Sitepics[2]){
 						$(".coachThird").css("display","inline-block");
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachThird hideImageThird' src=''></div>").appendTo(".carImages");
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachThird hideImageThird' src=''></div>").appendTo(".carImagesItem");
 						$(".coachThird").attr("src",Sitepics[2]);
 					}
 					if(Sitepics[3]){
 						$(".coachFourth").css("display","inline-block");
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachFourth hideImageFourth' src=''></div>").appendTo(".carImages");
+						$("<div class='swiper-slide' style='height:100%;'><img class='coachFourth hideImageFourth' src=''></div>").appendTo(".carImagesItem");
 						$(".coachFourth").attr("src",Sitepics[3]);
 					}
 				}else{
