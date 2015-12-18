@@ -81,29 +81,25 @@
 	$(document).ready(function(){
 		var anotherSwiper = new Swiper('.swiper-container', {
 	        direction: 'horizontal',
-	        loop: false,
+	        loop: true,
 	        speed: 300,
 	        a11y: true,
 	        prevSlideMessage: '',
 		    nextSlideMessage: '',
     	    spaceBetween: 0,
     	    shortSwipes : true,
-    	    autoplay: 0,
-    	    height : window.innerHeight,
-    	    width : window.innerWidth,
+    	    autoplay: 0
 	    })
 	    var anotherSwiper = new Swiper('.swiper-container2', {
 	        direction: 'horizontal',
-	        loop: false,
+	        loop: true,
 	        speed: 300,
 	        a11y: true,
 	        prevSlideMessage: '',
 		    nextSlideMessage: '',
     	    spaceBetween: 0,
     	    shortSwipes : true,
-    	    autoplay: 0,
-    	    height : window.innerHeight,
-    	    width : window.innerWidth,
+    	    autoplay: 0
 	    })
 		var getQueryStr=function(id){
 			var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)", "i");
