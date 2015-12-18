@@ -140,7 +140,7 @@
 			$(".state").css("display","none");
 			$(".footerr").css("display","none");
 		}
-		$.post("/dev/helpdrv/getcoach/",{
+		$.post("/helpdrv/getcoach/",{
 			coachid:coachId
 		},function(data){
 			var result=JSON.parse(data);
