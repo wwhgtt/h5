@@ -116,6 +116,8 @@
 					$(".coachIMAgeTemp").attr("src","http://party.idrv.com.cn/coachDetaile/img/icon_man.png");
 				}else if(sex == 2){
 					$(".coachIMAgeTemp").attr("src","http://party.idrv.com.cn/coachDetaile/img/icon_woman.png");
+				}else{
+					$(".coachIMAgeTemp").css("display","none")
 				}
 				var status=coach.Status;
 				if(status == 2){
