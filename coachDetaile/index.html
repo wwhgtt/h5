@@ -32,14 +32,17 @@
 			<div class="item item-avatar myArrayNative" style="padding-left:5%;padding-bottom:15px;border-bottom:1px solid #f2f2f4" >
 				<p style="margin-bottom:10px;color:#666666">教学特色</p>
 				<span style="background-color:#3398cc" class="coachItemFirst"></span><span style="background-color:#65cc33" class="coachItemSecond"></span><span style="background-color:#ffcc33" class="coachItemThird"></span>
+				<p style="color:#cccccc;display:none" class="firstTemp"></p>
 			</div>
 			<div class="item item-avatar  forCarIMG" style="padding-left:5%;padding-bottom:15px;border-bottom:1px solid #f2f2f4" >
 				<p style="margin-bottom:10px;color:#666666">车辆照片</p>
 				<img class="coachItemFirstIMG" src=""><img class="coachItemSecondIMG" src=""><img class="coachItemThirdIMG" src=""><img class="coachItemFourthIMG"  src="">
+				<p style="color:#cccccc;display:none" class="secondTemp"></p>
 			</div>
 			<div class="item item-avatar forCarIMG" style="padding-left:5%;padding-bottom:15px;border-bottom:1px solid #f2f2f4" >
 				<p style="margin-bottom:10px;color:#666666">场地照片</p>
 				<img class="coachFirstimg" src=""><img class="coachSecondimg" src=""><img class="coachThirdimg" src=""><img class="coachFourthimg" src="">
+				<p style="color:#cccccc;display:none" class="thirdTemp"></p>
 			</div>
 			<div class="kongbai" style="height:20px;background-color:#ededed;width:100%;"></div>
 			<div class="item item-avatar coachItem coachIntroduce" style="padding-left:5%;height:auto;border-bottom:1px solid #f2f2f4" >
@@ -96,16 +99,19 @@
 			$(".state").css("display","none");
 			$(".footerr").css("display","none");
 		}
-		$.post("/helpdrv/getcoach/",{
+		$.post(BASE_URL+"/helpdrv/getcoach/",{
 			coachid:coachId
 		},function(data){
 			var result=JSON.parse(data);
 			if(result && result.result == true){
 				var coach=result.coach;
-
-				$(".coachAvator").attr("src",coach.Avator+"_large?time="+new Date().getTime());
-				var sex=coach.Sex;
+				if(!coach.Avator){
+					$(".coachAvator").attr("src","http://party.idrv.com.cn/coachDetaile/img/no.jpg");
+				}else{
+					$(".coachAvator").attr("src",coach.Avator+"_large?time="+new Date().getTime());
+				}
 				
+				var sex=coach.Sex;
 				if(sex == 1){
 					$(".coachIMAgeTemp").attr("src","http://party.idrv.com.cn/coachDetaile/img/icon_man.png");
 				}else{
@@ -129,83 +135,97 @@
 				var realMyArray=[];
 				myArray=TeachCharacteristics.split("-");
 				var index = 1 ;
-				if(myArray.indexOf("true") !== -1){
-					for(var i=0;i<=myArray.length;i++){
-						if(myArray[i] == "true"){ realMyArray[index] = modelArray[i-1]; index ++;}
-					}
-					if(!realMyArray[1]){
-						// console.log(myArray[1])
-						$(".coachItemFirst").css("display","none");
-					}else{
-						$(".coachItemFirst").html(realMyArray[1]);
-					}
-					if(!realMyArray[2]){
-						$(".coachItemSecond").css("display","none");
-					}else{
-						$(".coachItemSecond").html(realMyArray[2]);
-					}
-					if(!realMyArray[3]){
-						$(".coachItemThird").css("display","none");
-					}else{
-						$(".coachItemThird").html(realMyArray[3]);
-					}
+				if(!TeachCharacteristics){
+					$(".firstTemp").css("display","block");
+					$(".firstTemp").html("这个教练很懒,都没有写教学特色");
+					$(".coachItemFirst").css("display","none");
+					$(".coachItemSecond").css("display","none");
+					$(".coachItemThird").css("display","none");
 				}else{
-					if(!myArray[1]){
-						$(".coachItemFirst").css("display","none");
+					if(myArray.indexOf("true") !== -1){
+						for(var i=0;i<=myArray.length;i++){
+							if(myArray[i] == "true"){ realMyArray[index] = modelArray[i-1]; index ++;}
+						}
+						if(!realMyArray[1]){
+							// console.log(myArray[1])
+							$(".coachItemFirst").css("display","none");
+						}else{
+							$(".coachItemFirst").html(realMyArray[1]);
+						}
+						if(!realMyArray[2]){
+							$(".coachItemSecond").css("display","none");
+						}else{
+							$(".coachItemSecond").html(realMyArray[2]);
+						}
+						if(!realMyArray[3]){
+							$(".coachItemThird").css("display","none");
+						}else{
+							$(".coachItemThird").html(realMyArray[3]);
+						}
 					}else{
-						$(".coachItemFirst").html(myArray[1]);
-					}
-					if(!myArray[2]){
-						$(".coachItemSecond").css("display","none");
-					}else{
-						$(".coachItemSecond").html(myArray[2]);
-					}
-					if(!myArray[3]){
-						$(".coachItemThird").css("display","none");
-					}else{
-						$(".coachItemThird").html(myArray[3]);
+						if(!myArray[1]){
+							$(".coachItemFirst").css("display","none");
+						}else{
+							$(".coachItemFirst").html(myArray[1]);
+						}
+						if(!myArray[2]){
+							$(".coachItemSecond").css("display","none");
+						}else{
+							$(".coachItemSecond").html(myArray[2]);
+						}
+						if(!myArray[3]){
+							$(".coachItemThird").css("display","none");
+						}else{
+							$(".coachItemThird").html(myArray[3]);
+						}
 					}
 				}
 				var Carpics=[];
 				var Carpics=coach.Carpics;
 				if(Carpics !== "" && Carpics !== null && Carpics !== undefined){
 					if(Carpics[0]){
-						$(".coachItemFirstIMG").css("visibility","visible");
+						$(".coachItemFirstIMG").css("display","inline-block");
 						$(".coachItemFirstIMG").attr("src",Carpics[0]);
 					}
 					if(Carpics[1]){
-						$(".coachItemSecondIMG").css("visibility","visible");
+						$(".coachItemSecondIMG").css("display","inline-block");
 						$(".coachItemSecondIMG").attr("src",Carpics[1]);
 					}
 					if(Carpics[2]){
-						$(".coachItemThirdIMG").css("visibility","visible");
+						$(".coachItemThirdIMG").css("display","inline-block");
 						$(".coachItemThirdIMG").attr("src",Carpics[2]);
 					}
 					if(Carpics[3]){
-						$(".coachItemFourthIMG").css("visibility","visible");
+						$(".coachItemFourthIMG").css("display","inline-block");
 						$(".coachItemFourthIMG").attr("src",Carpics[3]);
 					}
+				}else{
+					$(".secondTemp").css("display","block");
+					$(".secondTemp").html("这个教练很懒,一张车辆照片都没传")
 				}
 				
 				var Sitepics=[];
 				var Sitepics=coach.Sitepics;
 				if(Sitepics !== "" && Sitepics !== null && Sitepics !== undefined){
 					if(Sitepics[0]){
-						$(".coachFirstimg").css("visibility","visible");
+						$(".coachFirstimg").css("display","inline-block");
 						$(".coachFirstimg").attr("src",Sitepics[0]);
 					}
 					if(Sitepics[1]){
-						$(".coachSecondimg").css("visibility","visible");
+						$(".coachSecondimg").css("display","inline-block");
 						$(".coachSecondimg").attr("src",Sitepics[1]);
 					}
 					if(Sitepics[2]){
-						$(".coachThirdimg").css("visibility","visible");
+						$(".coachThirdimg").css("display","inline-block");
 						$(".coachThirdimg").attr("src",Sitepics[2]);
 					}
 					if(Sitepics[3]){
-						$(".coachFourthimg").css("visibility","visible");
+						$(".coachFourthimg").css("display","inline-block");
 						$(".coachFourthimg").attr("src",Sitepics[3]);
 					}
+				}else{
+					$(".thirdTemp").css("display","block");
+					$(".thirdTemp").html("这个教练很懒,一张场地照片都没传")
 				}
 				
 				if(coach.TeachType == "1"){
