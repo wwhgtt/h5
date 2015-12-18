@@ -67,12 +67,20 @@
 				<a href="http://e.eqxiu.com/s/p00JHE7B" class="state" style="display:inline-block"><button class="footButton" style="left:50%">我要制作</button></a>
 			</div>
 		</div>
-		<div class="container-model swiper-container" style="display:none;height:100%">
-			<div class="swiper-wrapper carImages" style="height:100%">
+		<div class="container-model swiper-container" >
+			<div class="swiper-wrapper carImages" >
+				<div class='swiper-slide' ><img class='coachItemFirstIMG hideImageFirstIMG' src=''></div>
+				<div class='swiper-slide'><img class='coachItemSecondIMG hideImageSecondIMG' src=''></div>
+				<div class='swiper-slide'><img class='coachItemThirdIMG hideImageThirdIMG' src=''></div>
+				<div class='swiper-slide'><img class='coachItemFourthIMG hideImageFourthIMG' src=''></div>
 			</div>
 		</div>
-		<div class="container-model2 swiper-container2" style="display:none;height:100%">
-			<div class="swiper-wrapper carImagesItem" style="height:100%">
+		<div class="container-model2 swiper-container2">
+			<div class="swiper-wrapper carImagesItem">
+				<div class='swiper-slide' style='height:100%;'><img class='coachFirst hideImageFirst' src=''></div>
+				<div class='swiper-slide' style='height:100%;'><img class='coachSecond hideImageSecond' src=''></div>
+				<div class='swiper-slide' style='height:100%;'><img class='coachThird hideImageThird' src=''></div>
+				<div class='swiper-slide' style='height:100%;'><img class='coachFourth hideImageFourth' src=''></div>
 			</div>
 		</div>
 	</body>
@@ -81,26 +89,30 @@
 	$(document).ready(function(){
 		var anotherSwiper = new Swiper('.swiper-container', {
 	        direction: 'horizontal',
-	        loop: true,
+	        loop: false,
 	        speed: 300,
 	        a11y: true,
 	        prevSlideMessage: '',
 		    nextSlideMessage: '',
-    	    spaceBetween: 0,
-    	    shortSwipes : true,
-    	    autoplay: 0
+		    effect : 'coverflow',
+    	    autoplay: 0,
+    	    freeMode : false,
+	        spaceBetween: 30
 	    })
 	    var anotherSwiper = new Swiper('.swiper-container2', {
 	        direction: 'horizontal',
-	        loop: true,
+	        loop: false,
 	        speed: 300,
 	        a11y: true,
 	        prevSlideMessage: '',
+	        effect : 'coverflow',
 		    nextSlideMessage: '',
-    	    spaceBetween: 0,
-    	    shortSwipes : true,
-    	    autoplay: 0
+    	    spaceBetween: 30,
+    	    autoplay: 0,
+    	    freeMode : false
 	    })
+	    $(".container-model").css("display","none");
+	     $(".container-model2").css("display","none");
 		var getQueryStr=function(id){
 			var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)", "i");
 		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
@@ -128,7 +140,7 @@
 			$(".state").css("display","none");
 			$(".footerr").css("display","none");
 		}
-		$.post("/helpdrv/getcoach/",{
+		$.post("/dev/helpdrv/getcoach/",{
 			coachid:coachId
 		},function(data){
 			var result=JSON.parse(data);
@@ -216,25 +228,25 @@
 				if(Carpics !== "" && Carpics !== null && Carpics !== undefined){
 					if(Carpics[0]){
 						$(".coachItemFirstIMG").css("display","inline-block");
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachItemFirstIMG hideImageFirstIMG' src=''></div>").appendTo(".carImages");
+						// $("").appendTo(".carImages");
 						$(".coachItemFirstIMG").attr("src",Carpics[0]);
 					}
 					if(Carpics[1]){
 						$(".coachItemSecondIMG").css("display","inline-block");
 						
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachItemSecondIMG hideImageSecondIMG' src=''></div>").appendTo(".carImages");
+						// $("").appendTo(".carImages");
 						$(".coachItemSecondIMG").attr("src",Carpics[1]);
 					}
 					if(Carpics[2]){
 						$(".coachItemThirdIMG").css("display","inline-block");
 						
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachItemThirdIMG hideImageThirdIMG' src=''></div>").appendTo(".carImages");
+						// $("").appendTo(".carImages");
 						$(".coachItemThirdIMG").attr("src",Carpics[2]);
 					}
 					if(Carpics[3]){
 						$(".coachItemFourthIMG").css("display","inline-block");
 						
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachItemFourthIMG hideImageFourthIMG' src=''></div>").appendTo(".carImages");
+						// $("").appendTo(".carImages");
 						$(".coachItemFourthIMG").attr("src",Carpics[3]);
 					}
 				}else{
@@ -247,23 +259,23 @@
 				if(Sitepics !== "" && Sitepics !== null && Sitepics !== undefined){
 					if(Sitepics[0]){
 						$(".coachFirst").css("display","inline-block");
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachFirst hideImageFirst' src=''></div>").appendTo(".carImagesItem");
+						// $("").appendTo(".carImagesItem");
 						$(".coachFirst").attr("src",Sitepics[0]);
 					}
 					if(Sitepics[1]){
 						$(".coachSecond").css("display","inline-block");
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachSecond hideImageSecond' src=''></div>").appendTo(".carImagesItem");
+						// $("").appendTo(".carImagesItem");
 						$(".coachSecond").attr("src",Sitepics[1]);
 
 					}
 					if(Sitepics[2]){
 						$(".coachThird").css("display","inline-block");
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachThird hideImageThird' src=''></div>").appendTo(".carImagesItem");
+						// $("").appendTo(".carImagesItem");
 						$(".coachThird").attr("src",Sitepics[2]);
 					}
 					if(Sitepics[3]){
 						$(".coachFourth").css("display","inline-block");
-						$("<div class='swiper-slide' style='height:100%;'><img class='coachFourth hideImageFourth' src=''></div>").appendTo(".carImagesItem");
+						// $("").appendTo(".carImagesItem");
 						$(".coachFourth").attr("src",Sitepics[3]);
 					}
 				}else{
