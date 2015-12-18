@@ -6,8 +6,10 @@
 		<meta Content-Type="application/x-www-form-urlencoded" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
 		<link rel="stylesheet" type="text/css" href="./css/style.css">
-		<script src="./js/lib/zetpo.min.js"></script>
-		<script src="./js/lib/moment.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/swiper.css">
+		<script src="./js/lib/jquery.min.js"></script>
+		<script src="./js/lib/swiper.jquery.min.js"></script>
+		<script src="./js/lib/swiper.min.js"></script>
 		<script src="./js/script/config.js"></script>
 		<script src="./js/script/weixin.js"></script>
 	</head>
@@ -39,9 +41,9 @@
 				<img class="coachItemFirstIMG" src=""><img class="coachItemSecondIMG" src=""><img class="coachItemThirdIMG" src=""><img class="coachItemFourthIMG"  src="">
 				<p style="color:#cccccc;display:none" class="secondTemp"></p>
 			</div>
-			<div class="item item-avatar forCarIMG" style="padding-left:5%;padding-bottom:15px;border-bottom:1px solid #f2f2f4" >
+			<div class="item item-avatar forCarIMGItem" style="padding-left:5%;padding-bottom:15px;border-bottom:1px solid #f2f2f4" >
 				<p style="margin-bottom:10px;color:#666666">场地照片</p>
-				<img class="coachFirstimg" src=""><img class="coachSecondimg" src=""><img class="coachThirdimg" src=""><img class="coachFourthimg" src="">
+				<img class="coachFirst" src=""><img class="coachSecond" src=""><img class="coachThird" src=""><img class="coachFourth" src="">
 				<p style="color:#cccccc;display:none" class="thirdTemp"></p>
 			</div>
 			<div class="kongbai" style="height:20px;background-color:#ededed;width:100%;"></div>
@@ -65,13 +67,52 @@
 				<a href="http://e.eqxiu.com/s/p00JHE7B" class="state" style="display:inline-block"><button class="footButton" style="left:50%">我要制作</button></a>
 			</div>
 		</div>
-		<div class="container-model" style="display:none">
-			<img src="" class="hideImage" />
+		<div class="container-model swiper-container" style="display:none;height:100%">
+			<div class="swiper-wrapper" style="height:100%">
+				<div class="swiper-slide  a" style="height:100%"><img class="coachItemFirstIMG hideImageFirstIMG" src=""></div>
+				<div class="swiper-slide b" style="height:100%;display:none"><img class="coachItemSecondIMG hideImageSecondIMG" src=""></div>
+				<div class="swiper-slide c" style="height:100%;display:none"><img class="coachItemThirdIMG hideImageThirdIMG" src=""></div>
+				<div class="swiper-slide d" style="height:100%;display:none"><img class="coachItemFourthIMG hideImageFourthIMG"  src=""></div>
+			</div>
+		</div>
+		<div class="container-model2 swiper-container2" style="display:none;height:100%">
+			<div class="swiper-wrapper" style="height:100%">
+				<div class="swiper-slide e" style="height:100%"><img class="coachFirst hideImageFirst" src=""></div>
+				<div class="swiper-slide f" style="height:100%;display:none"><img class="coachSecond hideImageSecond" src=""></div>
+				<div class="swiper-slide g" style="height:100%;display:none"><img class="coachThird hideImageThird" src=""></div>
+				<div class="swiper-slide h" style="height:100%;display:none"><img class="coachFourth hideImageFourth"  src=""></div>
+			</div>
 		</div>
 	</body>
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var anotherSwiper = new Swiper('.swiper-container', {
+	        direction: 'horizontal',
+	        loop: false,
+	        speed: 300,
+	        a11y: true,
+	        prevSlideMessage: '',
+		    nextSlideMessage: '',
+    	    spaceBetween: 0,
+    	    shortSwipes : true,
+    	    autoplay: 0,
+    	    height : window.innerHeight,
+    	    width : window.innerWidth,
+	    })
+	    var anotherSwiper = new Swiper('.swiper-container2', {
+	        direction: 'horizontal',
+	        loop: false,
+	        speed: 300,
+	        a11y: true,
+	        prevSlideMessage: '',
+		    nextSlideMessage: '',
+    	    spaceBetween: 0,
+    	    shortSwipes : true,
+    	    autoplay: 0,
+    	    height : window.innerHeight,
+    	    width : window.innerWidth,
+	    })
 		var getQueryStr=function(id){
 			var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)", "i");
 		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
@@ -99,7 +140,7 @@
 			$(".state").css("display","none");
 			$(".footerr").css("display","none");
 		}
-		$.post("/helpdrv/getcoach/",{
+		$.post("/dev/helpdrv/getcoach/",{
 			coachid:coachId
 		},function(data){
 			var result=JSON.parse(data);
@@ -190,14 +231,17 @@
 						$(".coachItemFirstIMG").attr("src",Carpics[0]);
 					}
 					if(Carpics[1]){
+						$(".b").css("display","block");
 						$(".coachItemSecondIMG").css("display","inline-block");
 						$(".coachItemSecondIMG").attr("src",Carpics[1]);
 					}
 					if(Carpics[2]){
+						$(".c").css("display","block");
 						$(".coachItemThirdIMG").css("display","inline-block");
 						$(".coachItemThirdIMG").attr("src",Carpics[2]);
 					}
 					if(Carpics[3]){
+						$(".d").css("display","block");
 						$(".coachItemFourthIMG").css("display","inline-block");
 						$(".coachItemFourthIMG").attr("src",Carpics[3]);
 					}
@@ -210,20 +254,23 @@
 				var Sitepics=coach.Sitepics;
 				if(Sitepics !== "" && Sitepics !== null && Sitepics !== undefined){
 					if(Sitepics[0]){
-						$(".coachFirstimg").css("display","inline-block");
-						$(".coachFirstimg").attr("src",Sitepics[0]);
+						$(".coachFirst").css("display","inline-block");
+						$(".coachFirst").attr("src",Sitepics[0]);
 					}
 					if(Sitepics[1]){
-						$(".coachSecondimg").css("display","inline-block");
-						$(".coachSecondimg").attr("src",Sitepics[1]);
+						$(".f").css("display","block");
+						$(".coachSecond").css("display","inline-block");
+						$(".coachSecond").attr("src",Sitepics[1]);
 					}
 					if(Sitepics[2]){
-						$(".coachThirdimg").css("display","inline-block");
-						$(".coachThirdimg").attr("src",Sitepics[2]);
+						$(".g").css("display","block");
+						$(".coachThird").css("display","inline-block");
+						$(".coachThird").attr("src",Sitepics[2]);
 					}
 					if(Sitepics[3]){
-						$(".coachFourthimg").css("display","inline-block");
-						$(".coachFourthimg").attr("src",Sitepics[3]);
+						$(".f").css("display","block");
+						$(".coachFourth").css("display","inline-block");
+						$(".coachFourth").attr("src",Sitepics[3]);
 					}
 				}else{
 					$(".thirdTemp").css("display","block");
@@ -305,14 +352,29 @@
 			}
 		})
 		$(".forCarIMG img").on("click",function(){
-			var src=$(this).attr("src");
+			// var src=$(this).attr("src");
 			$(".container-model").css("display","block");
 			$("#body").css("display","none");
-			$(".hideImage").attr("src",src);
-			$(".hideImage").css("top",($(window).height() - $(".hideImage").height())/2);
+			$(".hideImageSecondIMG").css("margin-top",($(window).height() - $(".hideImageSecondIMG").height())/2);
+			$(".hideImageThirdIMG").css("margin-top",($(window).height() - $(".hideImageThirdIMG").height())/2);
+			$(".hideImageFourthIMG").css("margin-top",($(window).height() - $(".hideImageFourthIMG").height())/2);
+			$(".hideImageFirstIMG").css("margin-top",($(window).height() - $(".hideImageFirstIMG").height())/2);
+		})
+		$(".forCarIMGItem img").on("click",function(){
+			// var src=$(this).attr("src");
+			$(".container-model2").css("display","block");
+			$("#body").css("display","none");
+			$(".hideImageSecond").css("margin-top",($(window).height() - $(".hideImageSecond").height())/2);
+			$(".hideImageThird").css("margin-top",($(window).height() - $(".hideImageThird").height())/2);
+			$(".hideImageFourth").css("margin-top",($(window).height() - $(".hideImageFourth").height())/2);
+			$(".hideImageFirst").css("margin-top",($(window).height() - $(".hideImageFirst").height())/2);
 		})
 		$(".container-model").on("click",function(){
 			$(".container-model").css("display","none");
+			$("#body").css("display","block");
+		})
+		$(".container-model2").on("click",function(){
+			$(".container-model2").css("display","none");
 			$("#body").css("display","block");
 		})
 	})
