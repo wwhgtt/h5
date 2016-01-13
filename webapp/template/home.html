@@ -20,7 +20,7 @@
 			</div>
 			<p style="line-height:30px;height:30px;width:100%;text-align:center;font-size:1.2em;border-bottom:1px solid #ebebeb">由<span class="coachName"></span>教练推荐</p>
 			<div class="clear" style="clear:both"></div>
-			<div class="callforinfo" style="">
+			<div class="callforinfo" style="margin-bottom:10px;">
 				<p style="numberTemp">已有<span class="number"></span>人咨询</p>
 				<div class="showPhoto">
 				</div>
@@ -184,7 +184,7 @@
 			},function(data){
 				var result=JSON.parse(data);
 				if(result && result.result == true){
-					location.href="/template/mission.html"
+					location.href="/template/mission.html?id="+wxID
 				}else if(result && result.msg){
 					alert(result.msg)
 				}

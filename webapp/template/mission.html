@@ -81,6 +81,16 @@
 	</body>
 </html>
 <script type="text/javascript">
+	var getQueryStr=function(id){
+		var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+	    if (r != null){
+	    	return (r[2]);
+	    }else{
+	    	return null;
+	    } 
+	}
+	var wxID=getQueryStr("id");
 	function getphoto(type){
 		$('.driveCode[title="'+type +'"]').trigger("click");
 	}
@@ -252,7 +262,8 @@
 					identityb:array.second,
 					runcertificate:array.third,
 					certificate:array.sure,
-					receipt:array.check
+					receipt:array.check,
+					wxstuid:wxID
 				},function(data){
 					var result= JSON.parse(data);
 					if(result && result.result == true){
