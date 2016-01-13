@@ -1,0 +1,116 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script src="../js/lib/weixin.js"></script>
+		<script src="../js/lib/zetpo.min.js"></script>
+		<script src="../js/script/config.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<img src="../img/check.png" class="check"  style="width:60%;position:absolute;top:80%;left:20%">
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//获取openid
+		var getQueryStr=function(code){
+			var reg = new RegExp("(^|&)" + code + "=([^&]*)(&|$)", "i");
+		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+		    if (r != null){
+		    	return (r[2]);
+		    }else{
+		    	return null;
+		    } 
+		}
+		var codeMax=getQueryStr("code");
+		var openID;
+		var coachID;
+		$.post(BASE_URL+"/zhujbwx/getopenid",{
+			wxcode:codeMax
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true ){
+				openID=result.openid;
+				var Wxavator;
+				$.post(BASE_URL +"/zhujbwx/addwxcoach",{
+					openid:openID
+				},function(data){
+					var result=JSON.parse(data);
+					if(result && result.result == true){
+						Wxavator=result.coach.Wxavator;
+						coachID=result.coach.Id;
+					}else if(result.msg){
+						alert(result.msg)
+					}
+				})
+				var url=location.href.split("#")[0];
+				$.post(BASE_URL+"/zhujbwx/getsignature/",{
+					url:url
+				},function(data){
+					var result=JSON.parse(data);
+					if(result && result.result == true ){
+						var timestamp=result.timestamp,
+							nonceStr=result.noncestr,
+							signature=result.signature;
+						wx.config({
+						    debug: false, 
+						    appId: 'wx8bbeb53d26dbe214', 
+						    timestamp:timestamp, 
+						    nonceStr: nonceStr,
+						    signature:signature,
+						    jsApiList: [
+						    	"onMenuShareTimeline",
+						    	"onMenuShareAppMessage"
+						    ] 
+						});
+						wx.ready(function(){
+							wx.onMenuShareTimeline({
+						        title: '猴年购车大礼包第一弹 神秘来袭', // 分享标题
+							    link: 'http://party.idrv.com.cn?coachID='+coachID, // 分享链接  寻找教练webview
+							    imgUrl:Wxavator, // 分享图标
+						        success: function () { 
+						            // $window.location.href="/yja/person";
+						        },
+						        cancel: function () { 
+						            // 用户取消分享后执行的回调函数
+						        }
+						    });
+						    wx.onMenuShareAppMessage({
+						        title: '猴年购车大礼包第一弹 神秘来袭', // 分享标题
+							    link: 'http://party.idrv.com.cn?coachID='+coachID, // 分享链接
+							    imgUrl:Wxavator, // 分享图标
+						        type: '', // 分享类型,music、video或link，不填默认为link
+						        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+						        success: function (){ 
+						            // $window.location.href="/yja/person";
+						        },
+						        cancel: function (){ 
+						            // 用户取消分享后执行的回调函数
+						        }
+						    });
+						})
+					}else if(result && result.msg){
+						var errorInfo=result.msg;
+			 			alert(errorInfo);
+			 		}
+				})
+			}else if(result && result.msg){
+				var errorInfo=result.msg;
+	 			alert(errorInfo);
+	 		}
+		})
+		$(".check").on("click",function(){
+			if(openID){
+				window.location.href="/template/grap.html?openID="+openID;
+			}else{
+
+			}
+		})
+	})
+</script>

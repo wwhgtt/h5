@@ -1,0 +1,187 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background:#fff; color:#555; font-size:14px; /*font-family: Verdana, Arial, Helvetica, sans-serif; */}
+td,th,caption { font-size:14px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:underline; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll;} 
+
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+.infocheck{
+  height: 50px;
+  background-color: white;
+  border-bottom: 1px solid #ededed;
+  width:100%;
+}
+.errorMessage{
+  color: red;
+  font-size: 0.8em;
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.infocheck span{
+  display: inline-block;
+  height: 50px;
+  line-height: 50px
+}
+.newinput{
+  height: 50px;
+  line-height: 50px;
+  border: none;
+}
+.navLeft{
+  width:6em;
+  margin-left: 1em;
+  text-align: left;
+}
+.photoCheck{
+  width:28%;
+  margin-left: 3.5%;
+  border:none;
+  background-color: #ededed;
+  height:100px; 
+}
+.content .photoCheck{
+  display: inline-block;
+  margin-top: 10px
+}
+.forFileCheck{
+  height: 40px;
+  position: relative;
+  top: -35px;
+  width: 100%;
+  text-align: center;
+}
+.forFileCheck p{
+  margin-top: 5px;
+  font-size:14px;
+  color: #4dd0e1
+}
+.makeSure{
+  text-align: center;
+  margin-top: 30px;
+  line-height: 20px;
+}
+.footer{
+  width: 90%;
+  margin-left: 5%;
+  height: 50px;
+  line-height: 50px;
+  color: white;
+  border-radius: 5px;
+  background-color: #4dd0e1;
+  border: none;
+  margin-top:10px;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.choseAgain{
+  display: none;
+  margin-top: 4px;
+  text-align: center;
+  color: white;
+  /*font-weight: bold;*/
+  background-color: black
+}
+.footerButtons{
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  height: 80px;
+  padding: 0px;
+  border-top: 1px solid #f3e0ae
+}
+.footerButtons button{
+  display: inline-block;
+  width: 40%;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.goprice{
+  margin-left:0%; 
+  height: 50px;
+  margin-top: 15px;
+  background-color: #ef5450;
+  border-radius: 5px;
+}
+.callformessage{
+  margin-left: 5%;
+  height: 50px;
+  margin-top: 15px;
+  background-color: #f5a302;
+  border-radius: 5px;
+}
+.modelInput{
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-bottom: 1px solid #DCDCDC;
+  text-align: left;
+}
+.modelInput span{
+  display: inline-block;
+  height: 60px;
+  margin-left: 0px;
+  font-size: 1.2em
+}
+.modelInput span input{
+  height: 50px;
+  margin-top: 5px;
+  padding-left: 0.5em;
+  /*font-weight: bold;*/
+  border: none;
+}
+.wordpress{
+  margin-top: 40px;
+  width: 100%;
+  margin-bottom: 0px;
+  display: none;
+}
+.wordpress p{
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5px;
+}
+.information{
+  padding-top:15px;
+  background-color: white;
+  width: 100%;
+  padding-bottom: 80px;
+}
+.callforinfo{
+  height: 40px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.callforinfo p{
+  margin-left: 15px;
+  height: 40px;
+  line-height: 40px;
+  float: left;
+}
+.callforinfo div{
+  height: 40px;
+  float: right;
+  margin-right: 10px;
+}
+.showPhoto img{
+  width: 30px;
+  margin-top:5px;
+  margin-left: 4px;
+  border-radius: 15px;
+}

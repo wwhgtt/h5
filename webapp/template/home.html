@@ -1,0 +1,158 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>助驾帮教练签约协议</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+		<script src="../js/lib/weixin.js"></script>
+		<script src="../js/lib/jquery.min.js"></script>
+		<script src="../js/lib/bootstrap.min.js"></script>
+		<script src="../js/script/config.js"></script>
+	</head>
+	<body style="background-color:#ededed;text-align:center">
+		<img src="../img/header.jpg" style="width:100%">
+		<div class="information">
+			<div style="width:100%;text-align:center;border-radius:40px;margin:0px 15px 5px 0px;border:none">
+				<img src="" style="width:80px;border:none;border-radius:40px;" class="coachPhoto">
+			</div>
+			<p style="line-height:30px;height:30px;width:100%;text-align:center;font-size:1.2em;border-bottom:1px solid #ebebeb">由<span class="coachName"></span>教练推荐</p>
+			<div class="clear" style="clear:both"></div>
+			<div class="callforinfo" style="">
+				<p style="numberTemp">已有<span class="number">3000</span>人咨询</p>
+				<div class="showPhoto">
+					<img src="../img/ok_img.png" >
+					<img src="../img/ok_img.png" >
+					<img src="../img/ok_img.png" >
+					<img src="../img/ok_img.png" >
+					<img src="../img/ok_img.png" >
+				</div>
+			</div>
+		</div>
+		<div class="footerButtons">
+			<button class="goprice">直接获取报价</button>
+			<button class=" btn btn-warning callformessage" style="vertical-align:baseline" data-toggle="modal" data-target=".as-example-modal-lg-">咨询</button>
+		</div>
+		<div class="modal fade as-example-modal-lg-" style="margin-top:30%"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		    	<div class="modelInput" style="width:100%;">
+		    		<span style="width:4em;text-align:center">姓名</span>
+		    		<span><input type="text" placeholder="请输入您的姓名" class="name" ></span>
+		    	</div>
+		    	<div class="modelInput" style="width:100%;">
+		    		<span style="width:4em;text-align:center">电话</span>
+		    		<span><input type="phone" placeholder="请输入您的电话" class="phone" ></span>
+		    	</div>
+		    	<div  class="wordpress">
+		    		<p>提交成功</p>
+		    		<p>我们会尽快联系您</p>
+		    	</div>
+		    	<button class="btn btn-warning submit" style="width:50%;height:50px;margin-top:15px;font-size:1.3em;margin-bottom:15px;">提交</button>
+		    </div>
+		  </div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var getQueryStr=function(code){
+			var reg = new RegExp("(^|&)" + code + "=([^&]*)(&|$)", "i");
+		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+		    if (r != null){
+		    	return (r[2]);
+		    }else{
+		    	return null;
+		    } 
+		}
+		var wxcode=getQueryStr("code");
+		var wxnick;
+		var wxavator;
+		var wxID;
+		$.post(BASE_URL+"/zhujbwx/getwxstuinfo",{
+			wxcode:wxcode
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true){
+				wxnick=result.student.Wxnick;
+				wxavator=result.student.WxAvator;
+				wxID=result.student.Id;
+				$(".coachName").html(wxnick);
+				$(".coachPhoto").attr("src",wxavator);
+				$.post(BASE_URL + "/zhujbwx/recordoper",{
+					operatetype:"openinsureshow",
+					beobjid:"1",
+					objid:wxID
+				},function(data){
+					var result=JSON.parse(data);
+					if(result && result.result == true){
+
+					}else if(result && result.msg){
+						alert(result.msg)
+					}
+				})
+			}else if(result && result.msg){
+				alert(result.msg)
+			}
+		})
+		$(".submit").on("click",function(){
+			var html=$(".submit").html();
+			if(html == "提交"){
+				var name=$(".name").val();
+				var phone=$(".phone").val();
+				if(!phone.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
+					alert("电话号码格式错误");
+				}else if(!name){
+					alert("请填入姓名")
+				}else{
+					$.post(BASE_URL+"/zhujbwx/insuranceinquire",{
+						name:name,
+						phone:phone,
+						goodid:'1'
+					},function(data){
+						var result = JSON.parse(data);
+						if(result && result.result == true){
+							$(".modelInput").css("display","none");
+							$(".wordpress").css("display","block");
+							$(".submit").html("知道了");
+						}else if(result && result.msg){
+							alert(result.msg)
+						}
+					})
+				}
+			}else{
+				$('.modal').modal('hide')
+			}
+		})
+		$(".callformessage").on("click",function(){
+			$.post(BASE_URL + "/zhujbwx/recordoper",{
+				operatetype:"openinsureinquire",
+				beobjid:"1",
+				objid:wxID
+			},function(data){
+				var result=JSON.parse(data);
+				if(result && result.result == true){
+
+				}else if(result && result.msg){
+					alert(result.msg)
+				}
+			})
+		})
+		$(".goprice").on("click",function(){
+			$.post(BASE_URL + "/zhujbwx/recordoper",{
+				operatetype:"openinsureapply",
+				beobjid:"1",
+				objid:wxID
+			},function(data){
+				var result=JSON.parse(data);
+				if(result && result.result == true){
+					location.href="/template/mission.html"
+				}else if(result && result.msg){
+					alert(result.msg)
+				}
+			})
+		})
+	})
+</script>

@@ -1,0 +1,267 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>助驾帮教练签约协议</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script src="../js/lib/weixin.js"></script>
+		<script src="../js/lib/jquery.min.js"></script>
+		<script src="../js/script/config.js"></script>
+	</head>
+	<body style="background-color:#ededed">
+		<h1 style="width:90%;font-size:0.8em;text-align:left;margin-top:14px;margin-bottom:14px;margin-left:5%;">我们需要您提供详细投保信息,才能给您提供准确报价</h1>
+		<div class="infocheck">
+			<span class="navLeft">姓名</span>
+			<span><input type="text" placeholder="请输入投保人姓名" class="newinput name"></span>
+		</div>
+		<div class="infocheck">
+			<span class="navLeft">手机号码</span>
+			<span><input type="text" placeholder="请输入手机号码" class="newinput phone"></span>
+		</div>
+		<div class="infocheck">
+			<span class="navLeft">购保方式</span>
+			<span class="forAudio">
+				<input type="radio" checked="checked"  name="insure" value="1"  style="margin-right:0.5em;" />新入保
+				<input type="radio" name="insure" value="2" style="margin-right:0.5em;margin-left:10px" />续保
+			</span>
+		</div>
+		<h1 style="width:90%;font-size:0.8em;text-align:left;margin-top:34px;margin-bottom:14px;margin-left:5%;">需提供完备的行驶证,合格证,身份证,发票等证明材料</h1>
+		<p class="errorMessage">上传文件中,如果文件过大,会占用较大内存,请先清理内存后上传</p>
+		<div class="content" style="background-color:white;width:100%;padding-bottom:10px">
+			<div class="photoCheck" >
+				<input type="file" accept="image/*" class="driveCode" title="drive" style="visibility: hidden;width:100%;height:1px;"  onchange="showPhoto(this,'drive')">
+				<canvas class="myCanvas" style="height:60px;width:100%" title="drive">Fallback content, in case the browser does not support Canvas.</canvas>
+				<div class="forFileCheck" title="drive" onClick="getphoto('drive')">
+					<p>+</p>
+					<p>行驶证</p>
+				</div>
+				<p style="width:100%;height:20px;line-height:20px" class="choseAgain" onClick="getphoto('drive')" title="drive">重新选择</p>
+			</div>
+			<div class="photoCheck" >
+				<input type="file" accept="image/*" class="driveCode" title="identitya" style="visibility: hidden;width:100%;height:1px;"  onchange="showPhoto(this,'identitya')">
+				<canvas class="myCanvas" style="height:60px;width:100%" title="identitya">Fallback content, in case the browser does not support Canvas.</canvas>
+				<div class="forFileCheck" title="identitya" onClick="getphoto('identitya')">
+					<p>+</p>
+					<p>身份证正面</p>
+				</div>
+				<p style="width:100%;height:20px;line-height:20px" class="choseAgain" onClick="getphoto('identitya')" title="identitya">重新选择</p>
+			</div>
+			<div class="photoCheck" >
+				<input type="file" accept="image/*" class="driveCode" title="identityb" style="visibility: hidden;width:100%;height:1px;"  onchange="showPhoto(this,'identityb')">
+				<canvas class="myCanvas" style="height:60px;width:100%" title="identityb">Fallback content, in case the browser does not support Canvas.</canvas>
+				<div class="forFileCheck" title="identityb" onClick="getphoto('identityb')">
+					<p>+</p>
+					<p>身份证反面</p>
+				</div>
+				<p style="width:100%;height:20px;line-height:20px" class="choseAgain" onClick="getphoto('identityb')" title="identityb">重新选择</p>
+			</div>
+			<div class="photoCheck" >
+				<input type="file" accept="image/*" class="driveCode" title="sure" style="visibility: hidden;width:100%;height:1px;"  onchange="showPhoto(this,'sure')">
+				<canvas class="myCanvas" style="height:60px;width:100%" title="sure">Fallback content, in case the browser does not support Canvas.</canvas>
+				<div class="forFileCheck"  title="sure" onClick="getphoto('sure')">
+					<p>+</p>
+					<p>合格证</p>
+				</div>
+				<p style="width:100%;height:20px;line-height:20px" class="choseAgain" onClick="getphoto('sure')" title="sure">重新选择</p>
+			</div>
+			<div class="photoCheck" >
+				<input type="file" accept="image/*" class="driveCode" title="check" style="visibility: hidden;width:100%;height:1px;"  onchange="showPhoto(this,'check')">
+				<canvas class="myCanvas" style="height:60px;width:100%" title="check">Fallback content, in case the browser does not support Canvas.</canvas>
+				<div class="forFileCheck" title="check" onClick="getphoto('check')">
+					<p>+</p>
+					<p>发票</p>
+				</div>
+				<p style="width:100%;height:20px;line-height:20px" onClick="getphoto('check')" class="choseAgain" title="check">重新选择</p>
+			</div>
+		</div>
+		<p class="makeSure">请仔细确认所有材料都齐全后再提交</p>
+		<button class="footer">已确认并提交</button>
+	</body>
+</html>
+<script type="text/javascript">
+	function getphoto(type){
+		$('.driveCode[title="'+type +'"]').trigger("click");
+	}
+	var myArray=[];
+	function showPhoto(ele,type){
+		var files=ele.files,
+  		 	file=files[0];
+  		var typeTemp=file.type;
+	 	var reader = new FileReader();
+	 	reader.onerror=function(){
+	 		alert("文件过大,请清理内存后重新读取")
+	 	}
+        reader.onload=function(){
+        	var result = this.result;
+        	var img = new Image();
+            	img.src = result;
+            if (img.complete){
+            	$('.myCanvas[title'+'='+'"'+type+'"'+']').css("display","block");
+            	$('.myCanvas[title'+'='+'"'+type+'"'+']').css("height","80px");
+                getToken();
+                $('.forFileCheck[title'+'='+'"'+type+'"'+']').css('display','none');
+	            $('.choseAgain[title'+'='+'"'+type+'"'+']').css("display","block");
+            }else{
+            	$('.myCanvas[title'+'='+'"'+type+'"'+']').css("display","block");
+            	$('.myCanvas[title'+'='+'"'+type+'"'+']').css("height","80px");
+                img.onload = getToken;
+                $('.forFileCheck[title'+'='+'"'+type+'"'+']').css('display','none');
+                $('.choseAgain[title'+'='+'"'+type+'"'+']').css("display","block");
+             //    $('.forInput[title'+'='+'"'+type+'"'+']').css('margin-top','5px');
+	            // $('.forInput[title'+'='+'"'+type+'"'+']').html('重新选择');
+            }
+            function getToken(){
+            	var dataTemp = compress(img);
+            	$.post(BASE_URL + "/zhujbwx/gettoken",{
+            		fname:type
+            	},function(data){
+            		var result= JSON.parse(data);
+            		if(result && result.result == true){
+            			var text = window.atob(dataTemp.split(",")[1]);
+				        var buffer = new Uint8Array(text.length);
+				        for (var i = 0; i < text.length; i++) {
+				            buffer[i] = text.charCodeAt(i);
+				        }
+				        var blob = getBlob(buffer, typeTemp);
+				        function getBlob(buffer, format){
+					        var Builder = window.WebKitBlobBuilder || window.MozBlobBuilder;
+					        if(Builder){
+					            var builder = new Builder;
+					            builder.append(buffer);
+					            return builder.getBlob(format);
+					        } else {
+					            return new window.Blob([ buffer ], {type: format});
+					        }
+					    }
+            			var oMyForm = new FormData();
+            			var key=result.key;
+            			var uptoken=result.uptoken;
+            			oMyForm.append("token",uptoken);  
+						oMyForm.append("key", key);
+						oMyForm.append("file",blob);
+						var oReq = new XMLHttpRequest();  
+						oReq.open("POST", "http://upload.qiniu.com/");  
+						oReq.send(oMyForm);
+						oReq.onreadystatechange = function (){
+					        if(oReq.readyState==4 && oReq.status==200){
+				              	var filename=JSON.parse(oReq.responseText);
+				              	var key=filename.key;
+				              	myArray.push({"key":key,"type":type});
+				              	console.log(myArray)
+				            }
+				        }
+            		}else if(result && result.msg){
+            			alert(result.msg)
+            		}
+            	})
+
+            }
+            function compress(img){
+		        var initSize = img.src.length;
+		        var width = img.width;
+		        var height = img.height;
+	        	//如果图片大于四百万像素，计算压缩比并将大小压至400万以下
+	        	var ratio;
+		        if ((ratio = width * height / 1000000)>1) {
+		            ratio = Math.sqrt(ratio);
+		            width /= ratio;
+		            height /= ratio;
+		        }else{
+		            ratio = 1;
+		        }
+		        var canvas=$('.myCanvas[title'+'='+'"'+type+'"'+']')[0];
+				var ctx=canvas.getContext('2d');
+				var tCanvas = $("<canvas></canvas>")[0];
+    			var tctx = tCanvas.getContext("2d");
+	        	canvas.width = width;
+	        	canvas.height = height;
+				//铺底色
+	        	ctx.fillStyle = "#fff";
+	        	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	        	//如果图片像素大于100万则使用瓦片绘制
+	        	var count;
+	        	if ((count = width * height / 1000000) > 1) {
+	            	count = (Math.sqrt(count)+1); //计算要分成多少块瓦片
+					//计算每块瓦片的宽和高
+		            var nw =(width / count);
+		            var nh =(height / count);
+		            tCanvas.width = nw;
+		            tCanvas.height = nh;
+	            	for (var i = 0; i < count; i++) {
+	                	for (var j = 0; j < count; j++) {
+	                    	tctx.drawImage(img, i * nw * ratio, j * nh * ratio, nw * ratio, nh * ratio, 0, 0, nw, nh);
+	                    	ctx.drawImage(tCanvas, i * nw, j * nh, nw, nh);
+	                	}
+	            	}
+		        }else{
+		            ctx.drawImage(img, 0, 0, width, height);
+		        }
+	        	//进行最小压缩
+	        	var ndata = canvas.toDataURL("image/jpeg", 0.1);
+		        console.log("压缩前：" + initSize);
+		        console.log("压缩后：" + ndata.length);
+		        console.log("压缩率：" + (100 * (initSize - ndata.length) / initSize) + "%");
+	        	return ndata;
+	    	}
+        }
+    	reader.readAsDataURL(file);
+	}
+	$(".footer").on("click",function(){
+		var audioValue;
+		var obj=$("input").attr("name","insure");
+		for(var i=0; i<obj.length; i ++){
+	        if(obj[i].checked){
+	            audioValue=obj[i].value;
+	        }
+	    }
+		var array={first:"",second:"",third:"",fourth:"",fifth:""} ;
+		var phone=$(".phone").val();
+		var name=$(".name").val();
+		if(!phone.match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/)){
+			alert("电话号码格式错误");
+		}else if(!name){
+			alert("请填入姓名")
+		}else{
+			if(myArray.length < 5){
+				alert("请传入全部审核材料")
+			}else{
+				for(var index=0;index< myArray.length;index++){
+					var photo=myArray[index];
+					var key= photo.key;
+					var type=photo.type;
+					if(type == "identitya"){
+						array.first = key;
+					}else if(type == "identityb"){
+						array.second= key;
+					}else if(type == "drive"){
+						array.third = key;
+					}else if(type == "sure"){
+						array.fourth = key;
+					}else if(type == "check"){
+						array.fifth = key;
+					}
+				}
+				$.post(BASE_URL + "/zhujbwx/insuranceapply",{
+					name:name,
+					phone:phone,
+					goodid:'1',
+					insurancetype:audioValue,
+					identitya:array.first,
+					identityb:array.second,
+					runcertificate:array.third,
+					certificate:array.sure,
+					receipt:array.check
+				},function(data){
+					var result= JSON.parse(data);
+					if(result && result.result == true){
+						location.href="/template/complete.html"
+					}else if(result && result.msg){
+						alert(result.msg)
+					}
+				})
+			}
+		}
+	})
+</script>
