@@ -21,13 +21,8 @@
 			<p style="line-height:30px;height:30px;width:100%;text-align:center;font-size:1.2em;border-bottom:1px solid #ebebeb">由<span class="coachName"></span>教练推荐</p>
 			<div class="clear" style="clear:both"></div>
 			<div class="callforinfo" style="">
-				<p style="numberTemp">已有<span class="number">3000</span>人咨询</p>
+				<p style="numberTemp">已有<span class="number"></span>人咨询</p>
 				<div class="showPhoto">
-					<img src="../img/ok_img.png" >
-					<img src="../img/ok_img.png" >
-					<img src="../img/ok_img.png" >
-					<img src="../img/ok_img.png" >
-					<img src="../img/ok_img.png" >
 				</div>
 			</div>
 		</div>
@@ -97,6 +92,46 @@
 				alert(result.msg)
 			}
 		})
+		$.post(BASE_URL+"/zhujbwx/getinquireorders",{
+			goodsid:"1"
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true){
+				var total=result.total;
+				$(".number").html(total * 3);
+				if(total == 0){
+					$(".callforinfo").css("display","none");
+				}
+				var students=result.students;
+				if(students[0]){
+					var img=students[0].WxAvator;
+					var html= "<img src="+img+" >";
+					$(".showPhoto").append(html);
+				}
+				if(students[1]){
+					var img=students[1].WxAvator;
+					var html= "<img src="+img+" >";
+					$(".showPhoto").append(html);
+				}
+				if(students[2]){
+					var img=students[2].WxAvator;
+					var html= "<img src="+img+" >";
+					$(".showPhoto").append(html);
+				}
+				if(students[3]){
+					var img=students[3].WxAvator;
+					var html= "<img src="+img+" >";
+					$(".showPhoto").append(html);
+				}
+				if(students[4]){
+					var img=students[4].WxAvator;
+					var html= "<img src="+img+" >";
+					$(".showPhoto").append(html);
+				}
+			}else if(result && result.msg){
+				alert(result.msg)
+			}
+		})
 		$(".submit").on("click",function(){
 			var html=$(".submit").html();
 			if(html == "提交"){
@@ -110,7 +145,8 @@
 					$.post(BASE_URL+"/zhujbwx/insuranceinquire",{
 						name:name,
 						phone:phone,
-						goodid:'1'
+						goodid:'1',
+						wxstuid:wxID
 					},function(data){
 						var result = JSON.parse(data);
 						if(result && result.result == true){
