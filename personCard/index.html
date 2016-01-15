@@ -1,23 +1,132 @@
 <!DOCTYPE>
 <html>
 	<head>
-		<title>猴年购车大礼包第一弹</title>
+		<title></title>
 		<meta charset="utf-8"/>
 		<meta Content-Type="application/x-www-form-urlencoded" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-		<link rel="stylesheet" type="text/css" href="../css/style.css">
-		<script src="../js/lib/weixin.js"></script>
-		<script src="../js/lib/jquery.min.js"></script>
-		<script src="../js/script/config.js"></script>
+		<script src="../js/lib/zetpo.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<script src="./js/script/config.js"></script>
 	</head>
-	<body>
+	<body style="background-color:#ededed;">
 		<div class="container">
-			<img src="../img/check.png" class="check"  style="width:60%;position:absolute;top:80%;left:20%">
+			<h1 class="title">编辑名片</h1>
+			<div class="header">
+				<p >名片模版</p>
+				<div class="content" style="height:60px">
+					<div class="content-left">
+						<p style="margin-left:0px;">深蓝色模版</p>
+						<img src="./img/gou.png" class="chosen">
+					</div>
+					<div class="content-right" style="width:45%;">
+						<p style="margin-left:0px;margin-bottom:0px">新模版</p>
+						<p style="margin-left:0px;margin-bottom:0px">即将上线</p>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="header" style="margin-top:0px;">
+				<p>个人信息</p>
+				<div class="content information">
+					<span style="width:4em;text-align:center">姓名</span>
+					<span><input type="text" placeholder="请输入姓名" required></span>
+				</div>
+				<div class="content information">
+					<span style="width:4em;text-align:center">教龄</span>
+					<span><input type="text" placeholder="请输入教龄" required></span>
+				</div>
+				<div class="content information">
+					<span style="width:4em;text-align:center">驾校</span>
+					<span><input type="text" placeholder="请输入所属驾校" required></span>
+				</div>
+				<div class="content information">
+					<span style="width:5em;text-align:right">服务范围</span>
+					<span>成都<span style="padding-left:0.5em;padding-right:0.5em">-</span><span>
+						<select name="area">
+							<option name="青羊区" value="青羊区">青羊区</option>
+							<option name="锦江区 " value="锦江区 ">锦江区 </option>
+							<option name="金牛区 " value="金牛区 ">金牛区 </option>
+							<option name="武侯区 " value="武侯区 ">武侯区 </option>
+							<option name="成华区 " value="成华区 ">成华区 </option>
+							<option name="龙泉驿区 " value="龙泉驿区 ">龙泉驿区 </option>
+							<option name="青白江区 " value="青白江区 ">青白江区 </option>
+							<option name="新都区 " value="新都区 ">新都区 </option>
+							<option name="温江区 " value="温江区 ">温江区 </option>
+							<option name="郫 县" value="郫 县">郫 县</option>
+							<option name="双流县" value="双流县">双流县</option>
+							<option name="金堂县" value="金堂县">金堂县</option>
+							<option name="崇州市" value="崇州市">崇州市</option>
+							<option name="邛崃市" value="邛崃市">邛崃市</option>
+							<option name="都江堰市 " value="都江堰市 ">都江堰市 </option>
+							<option name="彭州市 " value="彭州市 ">彭州市 </option>
+							<option name="新津县" value="新津县">新津县</option>
+							<option name="蒲江县" value="蒲江县">蒲江县</option>
+							<option name="大邑县" value="大邑县">大邑县</option>
+						</select>
+					</span></span>
+				</div>
+				<div class="content avator">
+					<span style="width:4em;text-align:center">头像</span>
+					<span style="float:right;margin-right:1em;margin-top:8px;"><img src="./img/arrow.png"></span>
+					<span style="float:right;margin-right:1em"><img src="" class="coachavator"></span>
+				</div>
+			</div>
+			<div class="header" style="margin-top:10px;">
+				<p>教学风采</p>
+				<div class="content" style="height:80px;line-height:80px;border-bottom:1px solid #e1e1e1">
+					<p style="height:80px;line-height:80px;width:100%;text-align:center;margin-left:0px;">请至少上传4张照片</p>
+				</div>
+				<div class="content">
+					<p style="height:30px;line-height:30px;width:100%;text-align:center;color:#6ed4e2;margin-left:0px;">添加照片</p>
+				</div>
+			</div>
+			<button class="footerButton">保存</button>
 		</div>
 	</body>
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+		//模拟场景，教练进入界面，根据id去拿教练资料，拿到资料后显示教练头像
+		var getQueryStr=function(coachId){
+			var reg = new RegExp("(^|&)" + coachId + "=([^&]*)(&|$)", "i");
+		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+		    if (r != null){
+		    	return (r[2]);
+		    }else{
+		    	return null;
+		    } 
+		}
+		var coachId=getQueryStr("coachId");
+		var wxnick;
+		var wxavator;
+		var wxID;
+		//拿教练资料
+		$.post(BASE_URL+"/zhujbwx/getwxstuinfo",{
+			coachId:coachId
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true){
+				wxnick=result.student.Wxnick;
+				wxavator=result.student.WxAvator;
+				wxID=result.student.Id;
+				$(".coachName").html(wxnick);
+				$(".coachPhoto").attr("src",wxavator);
+				$.post(BASE_URL + "/zhujbwx/recordoper",{
+					operatetype:"openinsureshow",
+					beobjid:"1",
+					objid:wxID
+				},function(data){
+					var result=JSON.parse(data);
+					if(result && result.result == true){
+
+					}else if(result && result.msg){
+						alert(result.msg)
+					}
+				})
+			}else if(result && result.msg){
+				alert(result.msg)
+			}
+		})
 	})
 </script>

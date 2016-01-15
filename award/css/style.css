@@ -1,0 +1,169 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background:#fff; color:#555; font-size:14px; /*font-family: Verdana, Arial, Helvetica, sans-serif; */}
+td,th,caption { font-size:14px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:underline; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll;} 
+
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+.container{
+  width: 100%;
+}
+.clear{
+  clear: both;
+}
+/* 大转盘样式 */
+.banner{display:block;
+  width:66%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom: 20px;
+  position: absolute;
+  left: 17%;
+  top: 29%
+}
+.banner .turnplate{display:block;width:100%;position:relative;}
+.banner .turnplate canvas.item{width:100%;}
+.banner .turnplate img.pointer{
+  position: absolute;
+  width: 36.8%;
+  height: 42.5%;
+  left: 32.0%;
+  top: 24.5%;
+}
+.border{
+  width:90%;
+  height: 50px;
+  line-height: 50px;
+  margin:  0 auto;
+  background-color: #ffbf00 !important;
+  border-radius: 25px;
+  text-align: center;
+}
+.border span{
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  color: white;
+  float: left
+}
+.nav_content{
+  position: relative;
+  top:-28px;
+  width:100%;
+  text-align:center;
+  margin-top: -100px
+}
+.nav_left{
+  width:30px;
+  height: 30px;
+  background-color:#ffeb8a;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+.nav_center{
+  color: white;
+  height: 30px;
+  border-radius: 13px;
+  width: 65%;
+  margin-top: 10px;
+  background-color: #ff9a0b;
+  margin-left: 4%;
+  margin-right: 4%
+}
+.messages{
+  width:96%;
+  height: auto;
+  margin-left:2%;
+  margin-top:20px;
+}
+.message_left{
+  width: 15%;
+  height: auto;
+  float: left;
+}
+.message_left img{
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 3px;
+}
+.message_right{
+  width: 80%;
+  margin-left: 5px;
+  float: left;
+  background-color: #f27468;
+  color: white;
+  text-align: left;
+  border-radius: 5px;
+}
+.name{
+  margin-left: 10px;
+  font-size: 1.2em;
+  color: white;
+  line-height: 30px;
+}
+.detaile{
+  line-height: 30px;
+  margin-left: 10px;
+  height: 30px;
+  border-bottom: 1px solid #e66257;
+  width:90%;
+}
+.delive{
+  line-height: 30px;
+  margin-left: 10px;
+  height: 30px;
+}
+.modal{
+  /**/
+  /*width: 80%;*/
+  margin-top: 10%;
+}
+.modal-content p{
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+.congration{
+  background-color: white;
+  border-radius: 5px;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #dddddd;
+  width: 86%;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding-left: 1em
+}
+.givecoach{
+  width: 86%;
+  height: 40px;
+  background-color: #fcc200;
+  font-size: 1.2em;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin-top: 25px;
+  margin-bottom: 25px
+}
+.header{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%
+}
+.more{
+  color: white;
+  background-color: #ffbf00;
+  border: none;
+  border-radius: 3px;
+}

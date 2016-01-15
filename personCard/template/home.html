@@ -1,0 +1,56 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<script src="../js/lib/zetpo.min.js"></script>
+	</head>
+	<body>
+
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var getQueryStr=function(code){
+			var reg = new RegExp("(^|&)" + code + "=([^&]*)(&|$)", "i");
+		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+		    if (r != null){
+		    	return (r[2]);
+		    }else{
+		    	return null;
+		    } 
+		}
+		var wxcode=getQueryStr("code");
+		var wxnick;
+		var wxavator;
+		var wxID;
+		$.post(BASE_URL+"/zhujbwx/getwxstuinfo",{
+			wxcode:wxcode
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true){
+				wxnick=result.student.Wxnick;
+				wxavator=result.student.WxAvator;
+				wxID=result.student.Id;
+				$(".coachName").html(wxnick);
+				$(".coachPhoto").attr("src",wxavator);
+				$.post(BASE_URL + "/zhujbwx/recordoper",{
+					operatetype:"openinsureshow",
+					beobjid:"1",
+					objid:wxID
+				},function(data){
+					var result=JSON.parse(data);
+					if(result && result.result == true){
+
+					}else if(result && result.msg){
+						alert(result.msg)
+					}
+				})
+			}else if(result && result.msg){
+				alert(result.msg)
+			}
+		})
+	})
+</script>

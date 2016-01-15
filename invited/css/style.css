@@ -1,0 +1,96 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background:#fff; color:#555; font-size:14px; /*font-family: Verdana, Arial, Helvetica, sans-serif; */}
+td,th,caption { font-size:14px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:underline; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll;} 
+
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+.container{
+  width: 100%;
+}
+.clear{
+  clear: both;
+}
+body{
+  background-image: url('../img/invited.jpg');background-size: 100% 100%;height:auto
+}
+.main{
+  font-size: 1.5em;
+  color: white;
+}
+.coachName{
+  font-size: 1.2em;
+  color: white;
+  font-family: SimSun;
+  /*font-weight: bold;*/
+}
+.header{
+  width:100%;
+  text-align:center;
+  /*margin-top: 65%*/
+}
+.content{
+  width: 84%;
+  height: 2em;
+  margin-left: 8%;
+  margin-top: 10px;
+  line-height: 2em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.content span{
+  display: inline-block;
+  color: white;
+  font-size: 1.5em;
+}
+.line{
+  height: 0px;
+  color: white;
+  border: 1px solid white;
+  width: 38%;
+  margin-bottom: 0.3em
+}
+.price{
+  /*padding: 1.5em;*/
+  width: 90%;
+  border: 3px solid white;
+  margin-left: 5%;
+  text-align: left;
+  color: white;
+  font-size: 1.1em;
+  text-align: center;
+}
+.price p{
+  line-height: 1.2em;
+}
+.footer{
+  width: 10em;
+  text-align: center;
+  background-color: #169bdc;
+  height: 4em;
+  line-height: 4em;
+  color: white;
+  margin:  0 auto;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  border: 2px solid white;
+
+}
+.footer span{
+  display: inline-block;
+  float: left;
+  margin-left: 1em
+}
+.mainContent{
+  position: absolute;
+  top:0px;
+  width: 100%
+}

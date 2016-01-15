@@ -23,8 +23,8 @@
 		<div class="infocheck">
 			<span class="navLeft">购保方式</span>
 			<span class="forAudio">
-				<input type="radio" checked="checked"  name="insure" value="1"  style="margin-right:0.5em;" />新入保
-				<input type="radio" name="insure" value="2" style="margin-right:0.5em;margin-left:10px" />续保
+				<input type="radio" checked="checked"  name="insure" class="abc" value="1"  style="margin-right:0.5em;" />新入保
+				<input type="radio" name="insure" value="2" class="def" style="margin-right:0.5em;margin-left:10px" />续保
 			</span>
 		</div>
 		<h1 style="width:90%;font-size:0.8em;text-align:left;margin-top:34px;margin-bottom:14px;margin-left:5%;">需提供完备的行驶证,合格证,身份证,发票等证明材料</h1>
@@ -57,7 +57,7 @@
 				</div>
 				<p style="width:100%;height:20px;line-height:20px" class="choseAgain" onClick="getphoto('identityb')" title="identityb">重新选择</p>
 			</div>
-			<div class="photoCheck" >
+			<div class="photoCheck forcheck" >
 				<input type="file" accept="image/*" class="driveCode" title="sure" style="visibility: hidden;width:100%;height:1px;"  onchange="showPhoto(this,'sure')">
 				<canvas class="myCanvas" style="height:60px;width:100%" title="sure">Fallback content, in case the browser does not support Canvas.</canvas>
 				<div class="forFileCheck"  title="sure" onClick="getphoto('sure')">
@@ -66,7 +66,7 @@
 				</div>
 				<p style="width:100%;height:20px;line-height:20px" class="choseAgain" onClick="getphoto('sure')" title="sure">重新选择</p>
 			</div>
-			<div class="photoCheck" >
+			<div class="photoCheck forcheck" >
 				<input type="file" accept="image/*" class="driveCode" title="check" style="visibility: hidden;width:100%;height:1px;"  onchange="showPhoto(this,'check')">
 				<canvas class="myCanvas" style="height:60px;width:100%" title="check">Fallback content, in case the browser does not support Canvas.</canvas>
 				<div class="forFileCheck" title="check" onClick="getphoto('check')">
@@ -91,6 +91,22 @@
 	    } 
 	}
 	var wxID=getQueryStr("id");
+	var getQueryStr=function(coachId){
+		var reg = new RegExp("(^|&)" + coachId + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+	    if (r != null){
+	    	return (r[2]);
+	    }else{
+	    	return null;
+	    } 
+	}
+	var coachId=getQueryStr("coachId");
+	$(".abc").on("click",function(){
+        $(".forcheck").css("display","inline-block")
+	})
+	$(".def").on("click",function(){
+        $(".forcheck").css("display","none")
+	})
 	function getphoto(type){
 		$('.driveCode[title="'+type +'"]').trigger("click");
 	}
@@ -234,45 +250,41 @@
 		}else if(!name){
 			alert("请填入姓名")
 		}else{
-			if(myArray.length < 5){
-				alert("请传入全部审核材料")
-			}else{
-				for(var index=0;index< myArray.length;index++){
-					var photo=myArray[index];
-					var key= photo.key;
-					var type=photo.type;
-					if(type == "identitya"){
-						array.first = key;
-					}else if(type == "identityb"){
-						array.second= key;
-					}else if(type == "drive"){
-						array.third = key;
-					}else if(type == "sure"){
-						array.fourth = key;
-					}else if(type == "check"){
-						array.fifth = key;
-					}
+			for(var index=0;index< myArray.length;index++){
+				var photo=myArray[index];
+				var key= photo.key;
+				var type=photo.type;
+				if(type == "identitya"){
+					array.first = key;
+				}else if(type == "identityb"){
+					array.second= key;
+				}else if(type == "drive"){
+					array.third = key;
+				}else if(type == "sure"){
+					array.fourth = key;
+				}else if(type == "check"){
+					array.fifth = key;
 				}
-				$.post(BASE_URL + "/zhujbwx/insuranceapply",{
-					name:name,
-					phone:phone,
-					goodid:'1',
-					insurancetype:audioValue,
-					identitya:array.first,
-					identityb:array.second,
-					runcertificate:array.third,
-					certificate:array.sure,
-					receipt:array.check,
-					wxstuid:wxID
-				},function(data){
-					var result= JSON.parse(data);
-					if(result && result.result == true){
-						location.href="/template/complete.html"
-					}else if(result && result.msg){
-						alert(result.msg)
-					}
-				})
 			}
+			$.post(BASE_URL + "/zhujbwx/insuranceapply",{
+				name:name,
+				phone:phone,
+				goodid:'1',
+				insurancetype:audioValue,
+				identitya:array.first,
+				identityb:array.second,
+				runcertificate:array.third,
+				certificate:array.sure,
+				receipt:array.check,
+				wxstuid:wxID
+			},function(data){
+				var result= JSON.parse(data);
+				if(result && result.result == true){
+					window.location.href="http://webapp.idrv.com.cn/webapp/template/complete.html?coachId="+coachId;
+				}else if(result && result.msg){
+					alert(result.msg)
+				}
+			})
 		}
 	})
 </script>
