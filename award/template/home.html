@@ -19,7 +19,7 @@
 				<div class="imgheader" style="width:20%;border-radius:5px;float:left">
 					<img src="" style="border-radius:5px;width:80%;margin:0 auto;margin-top:5px;" class="coachHeader">
 				</div>
-				<div class="imgheader" style="width:70%;float:left;text-align:left;color:white;margin-left:10px;margin-top:5px;">
+				<div class="imgheader" style="width:75%;float:left;text-align:left;color:white;margin-left:10px;margin-top:5px;">
 					<span>教练：</span><span class="coachName"></span>
 					
 					<p style="padding-top:10px;"><span>签名：</span><span class="coachSign">快来帮我抽奖！快来帮我抽奖！</span></p>
@@ -48,8 +48,8 @@
 		    	<div class="modal-content" style="background-color: #ed3529;">
 		      		<p style="margin-top:30px;font-size:1.2em;color:white;margin-bottom:0px">恭喜您抽到</p>
 		      		<p class="awardDetaile" style="margin-bottom:10px;font-size:1.2em;color:white;"></p>
-		      		<img src="../img/envelope.png" style="width:50%;margin:0 auto;margin-top:-20px;display:block">
-		      		<p class="awardDetaile" style="margin-top:-35%;font-size:1.5em;color:red;"></p>
+		      		<img src="../img/envelope.png" style="width:60%;margin:0 auto;margin-top:-20px;display:block">
+		      		<p class="awardDetaile" style="margin-top:-40%;font-size:0.8em;color:red;"></p>
 		      		<div class="clear"></div>
 		      		<p style="width:80%;margin:0 auto;margin-top:34%;height:0px;border-top:1px solid white;"></p>
 		      		<p style="width:86%;margin:0 auto;margin-top:10px;color:white;text-align:left">给教练拜个早年吧:</p>
@@ -152,7 +152,7 @@
 					var reward=result.user.Rewards;
 					if(turnplate.bRotate)return;
 					turnplate.bRotate = !turnplate.bRotate;
-					//获取随机数(奖品个数范围内)
+					// 获取随机数(奖品个数范围内)
 					// var item = rnd(1,turnplate.restaraunts.length);
 					//奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
 					rotateFn(reward, turnplate.restaraunts[reward-1]);
@@ -183,7 +183,7 @@
 								</div>\
 								<div class='message_right'>\
 									<p class='name'>"+wxnick+"</p>\
-									<p class='detaile'>抽到："+turnplate.restaraunts[wxaward]+"，送给教练</p>\
+									<p class='detaile'>抽到："+turnplate.restaraunts[wxaward-1]+"，送给教练</p>\
 									<p class='delive'>留言："+message+"</p>\
 								</div>\
 							</div>";
@@ -287,8 +287,8 @@
 				wx.ready(function(){
 					wx.onMenuShareTimeline({
 				        title: '最新送礼技能，快来Get！', // 分享标题
-					    link: 'http://webapp.idrv.com.cn/invited?coachID='+state, // 分享链接  寻找教练webview
-					    imgUrl: 'http://webapp.idrv.com.cn/invited/img/word.png', // 分享图标
+					    link: 'http://webapp.idrv.com.cn/award?coachID='+state, // 分享链接  寻找教练webview
+					    imgUrl: 'http://webapp.idrv.com.cn/award/img/word.png', // 分享图标
 				        success: function () { 
 				           
 				        },
@@ -299,8 +299,8 @@
 				    wx.onMenuShareAppMessage({
 				        title: '最新送礼技能，快来Get！', // 分享标题
 				        desc: '据说抽到一等奖的，明年驾考都过了！', // 分享描述
-					    link: 'http://webapp.idrv.com.cn/invited?coachID='+state, // 分享链接
-					    imgUrl: 'http://webapp.idrv.com.cn/invited/img/word.png', // 分享图标
+					    link: 'http://webapp.idrv.com.cn/award?coachID='+state, // 分享链接
+					    imgUrl: 'http://webapp.idrv.com.cn/award/img/word.png', // 分享图标
 				        type: 'link', // 分享类型,music、video或link，不填默认为link
 				        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 				        success: function (){ 
@@ -313,8 +313,8 @@
 				    wx.onMenuShareQQ({
 					    title: '最新送礼技能，快来Get！', // 分享标题
 				        desc: '据说抽到一等奖的，明年驾考都过了！', // 分享描述
-					    link: 'http://webapp.idrv.com.cn/invited?coachID='+state, // 分享链接
-					    imgUrl: 'http://webapp.idrv.com.cn/invited/img/word.png', // 分享图标
+					    link: 'http://webapp.idrv.com.cn/award?coachID='+state, // 分享链接
+					    imgUrl: 'http://webapp.idrv.com.cn/award/img/word.png', // 分享图标
 					    success: function () { 
 					      
 					    },
@@ -325,8 +325,8 @@
 					wx.onMenuShareQZone({
 					    title: '最新送礼技能，快来Get！', // 分享标题
 				        desc: '据说抽到一等奖的，明年驾考都过了！', // 分享描述
-					    link: 'http://webapp.idrv.com.cn/invited?coachID='+state, // 分享链接
-					    imgUrl: 'http://webapp.idrv.com.cn/invited/img/word.png', // 分享图标
+					    link: 'http://webapp.idrv.com.cn/award?coachID='+state, // 分享链接
+					    imgUrl: 'http://webapp.idrv.com.cn/award/img/word.png', // 分享图标
 					    success: function () { 
 					       
 					    },
