@@ -33,10 +33,10 @@ html {overflow-y: scroll;}
 .banner .turnplate canvas.item{width:100%;}
 .banner .turnplate img.pointer{
   position: absolute;
-  width: 36.8%;
-  height: 42.5%;
-  left: 32.0%;
-  top: 24.5%;
+  width:31.5%;
+  height:42.5%;
+  left:34.6%;
+  top:23%;
 }
 .border{
   width:90%;
@@ -107,7 +107,8 @@ html {overflow-y: scroll;}
   margin-left: 10px;
   font-size: 1.2em;
   color: white;
-  line-height: 30px;
+  line-height: 20px;
+  padding-top: 5px;
 }
 .detaile{
   line-height: 30px;

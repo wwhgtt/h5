@@ -276,11 +276,11 @@
 				runcertificate:array.third,
 				certificate:array.sure,
 				receipt:array.check,
-				wxstuid:wxID
+				cusid:wxID
 			},function(data){
 				var result= JSON.parse(data);
 				if(result && result.result == true){
-					window.location.href="http://webapp.idrv.com.cn/webapp/template/complete.html?coachId="+coachId;
+					window.location.href="http://webapp.idrv.com.cn/template/complete.html?coachId="+coachId;
 				}else if(result && result.msg){
 					alert(result.msg)
 				}

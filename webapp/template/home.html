@@ -27,7 +27,7 @@
 			</div>
 		</div>
 		<div class="footerButtons">
-			<button class="goprice">直接获取报价</button>
+			<!-- <button class="goprice">直接获取报价</button> -->
 			<button class=" btn btn-warning callformessage" style="vertical-align:baseline" data-toggle="modal" data-target=".as-example-modal-lg-">咨询</button>
 		</div>
 		<div class="modal fade as-example-modal-lg-" style="margin-top:30%"  role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -62,7 +62,9 @@
 		    	return null;
 		    } 
 		}
-		var state=getQueryStr("state");
+		var stateTemp=getQueryStr("state");
+		var state=stateTemp.split("_._")[0];
+		var goodId=stateTemp.split("_._")[1];
 		var getQueryStr=function(code){
 			var reg = new RegExp("(^|&)" + code + "=([^&]*)(&|$)", "i");
 		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
@@ -83,9 +85,9 @@
 		},function(data){
 			var result=JSON.parse(data);
 			if(result && result.result == true){
-				wxID=result.student.Id;
-				stuwxavator=result.student.WxAvator;
-				stuwxnick=result.student.Wxnick;
+				wxID=result.customer.CustomerId;
+				stuwxavator=result.customer.Avator;
+				stuwxnick=result.customer.Nickname;
 				if(state !== null && state !== "null" && state !== undefined && state !== ""){
 					$.post(BASE_URL+"/zhujbwx/getuserinfo",{
 						coachid:state
@@ -106,7 +108,7 @@
 				}
 				$.post(BASE_URL + "/zhujbwx/recordoper",{
 					operatetype:"openinsureshow",
-					beobjid:"1",
+					beobjid:goodId,
 					objid:wxID
 				},function(data){
 					var result=JSON.parse(data);
@@ -252,7 +254,7 @@
 	 		}
 		})
 		$.post(BASE_URL+"/zhujbwx/getinquireorders",{
-			goodsid:"1"
+			goodsid:goodId
 		},function(data){
 			var result=JSON.parse(data);
 			if(result && result.result == true){
@@ -263,27 +265,27 @@
 				}
 				var students=result.students;
 				if(students[0]){
-					var img=students[0].WxAvator;
+					var img=students[0].Avator;
 					var html= "<img src="+img+" >";
 					$(".showPhoto").append(html);
 				}
 				if(students[1]){
-					var img=students[1].WxAvator;
+					var img=students[1].Avator;
 					var html= "<img src="+img+" >";
 					$(".showPhoto").append(html);
 				}
 				if(students[2]){
-					var img=students[2].WxAvator;
+					var img=students[2].Avator;
 					var html= "<img src="+img+" >";
 					$(".showPhoto").append(html);
 				}
 				if(students[3]){
-					var img=students[3].WxAvator;
+					var img=students[3].Avator;
 					var html= "<img src="+img+" >";
 					$(".showPhoto").append(html);
 				}
 				if(students[4]){
-					var img=students[4].WxAvator;
+					var img=students[4].Avator;
 					var html= "<img src="+img+" >";
 					$(".showPhoto").append(html);
 				}
@@ -304,8 +306,8 @@
 					$.post(BASE_URL+"/zhujbwx/insuranceinquire",{
 						name:name,
 						phone:phone,
-						goodid:'1',
-						wxstuid:wxID
+						goodid:goodId,
+						cusid:wxID
 					},function(data){
 						var result = JSON.parse(data);
 						if(result && result.result == true){
@@ -324,7 +326,7 @@
 		$(".callformessage").on("click",function(){
 			$.post(BASE_URL + "/zhujbwx/recordoper",{
 				operatetype:"openinsureinquire",
-				beobjid:"1",
+				beobjid:goodId,
 				objid:wxID
 			},function(data){
 				var result=JSON.parse(data);
@@ -335,23 +337,23 @@
 				}
 			})
 		})
-		$(".goprice").on("click",function(){
-			$.post(BASE_URL + "/zhujbwx/recordoper",{
-				operatetype:"openinsureapply",
-				beobjid:"1",
-				objid:wxID
-			},function(data){
-				var result=JSON.parse(data);
-				if(result && result.result == true){
-					if(state !== null && state !== "null"  && state !== undefined && state !== ""){
-						window.location.href="http://webapp.idrv.com.cn/webapp/template/mission.html?id="+wxID + "&coachId="+state;
-					}else{
-						window.location.href="http://webapp.idrv.com.cn/webapp/template/mission.html?id="+wxID + "&coachId="+wxID;
-					}
-				}else if(result && result.msg){
-					alert(result.msg)
-				}
-			})
-		})
+		// $(".goprice").on("click",function(){
+		// 	$.post(BASE_URL + "/zhujbwx/recordoper",{
+		// 		operatetype:"openinsureapply",
+		// 		beobjid:goodId,
+		// 		objid:wxID
+		// 	},function(data){
+		// 		var result=JSON.parse(data);
+		// 		if(result && result.result == true){
+		// 			if(state !== null && state !== "null"  && state !== undefined && state !== ""){
+		// 				window.location.href="http://webapp.idrv.com.cn/template/mission.html?id="+wxID + "&coachId="+state;
+		// 			}else{
+		// 				window.location.href="http://webapp.idrv.com.cn/template/mission.html?id="+wxID + "&coachId="+wxID;
+		// 			}
+		// 		}else if(result && result.msg){
+		// 			alert(result.msg)
+		// 		}
+		// 	})
+		// })
 	})
 </script>

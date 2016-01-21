@@ -1,1 +1,0 @@
-var BASE_URL = "/server/getname-web";

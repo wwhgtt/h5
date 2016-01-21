@@ -1,0 +1,388 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>礼品记录</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<SCRIPT src="./js/lib/jquery.min.js"></SCRIPT>
+		<SCRIPT src="./js/lib/bootstrap.min.js"></SCRIPT>
+		<script src="./js/script/config.js"></script>
+	</head>
+	<body style="text-align:center;padding-bottom:20px">
+		<img src="./img/header_bg.png"  style="width:100%;z-index:1">
+		<img src="" class="coachPhoto coachHeader" style="width:50px;height:50px;border-radius:10px;margin-top:-43%">
+		<p class="word coachName " style="margin-top: -28%"></p>
+		<p class="word">快来帮我抽奖</p>
+		<div class="circle">
+			<p style="margin-top:14px;color:#c03317">送礼人数</p>
+			<p class="count"></p>
+		</div>
+		<div class="content">
+			<span class="line"></span>
+			<span>福利</span>
+			<span class="line"></span>
+		</div>
+		<div class="main">
+			<p class="noneGift">您还没有收到了礼物哦~</p>
+			<div class="list">
+				<div class="headerContent secondAward">
+					<span class="left">一元洗衣券</span>
+					<span class="middle"></span>
+					<span class="right">兑换</span>
+				</div>
+				<div class="bodyContent secondAward">
+					<p style="padding-left:1em;color:#cccccc">他们一起送了这个礼物给您</p>
+					<div class="avator second">
+
+					</div>
+					<p class="openMore two">
+						<span><img src="./img/arrow_down.png" class="img" style="width:15px;"></span>
+						<span class="open">展开</span>
+					</p>
+				</div>
+				<div class="headerContent firstAward" style="margin-top:20px">
+					<span class="left">等蜂来随身装</span>
+					<span class="middle"></span>
+					<span class="right">兑换</span>
+				</div>
+				<div class="bodyContent firstAward">
+					<p style="padding-left:1em;color:#cccccc">他们一起送了这个礼物给您</p>
+					<div class="avator first">
+						
+					</div>
+					<p class="openMore  one">
+						<span><img src="./img/arrow_down.png" class="img" style="width:15px;"></span>
+						<span class="open">展开</span>
+					</p>
+				</div>
+				<div class="headerContent thirdAward" style="margin-top:20px">
+					<span class="left">4000元购车补贴券</span>
+					<span class="middle"></span>
+					<span class="right">兑换</span>
+				</div>
+				<div class="bodyContent thirdAward">
+					<p style="padding-left:1em;color:#cccccc">他们一起送了这个礼物给您</p>
+					<div class="avator third">
+						
+					</div>
+					<p class="openMore three">
+						<span><img src="./img/arrow_down.png" class="img" style="width:15px;"></span>
+						<span class="open">展开</span>
+					</p>
+				</div>
+				<div class="headerContent fourthAward" style="margin-top:20px">
+					<span class="left">1元APP现金</span>
+					<span class="middle"></span>
+					<span class="right">兑换</span>
+				</div>
+				<div class="bodyContent fourthAward" >
+					<p style="padding-left:1em;color:#cccccc">他们一起送了这个礼物给您</p>
+					<div class="avator fourth">
+						
+					</div>
+					<p class="openMore four">
+						<span><img src="./img/arrow_down.png" class="img" style="width:15px;"></span>
+						<span class="open">展开</span>
+					</p>
+				</div>
+				<div class="headerContent fifthAward" style="margin-top:20px">
+					<span class="left">5元APP现金</span>
+					<span class="middle"></span>
+					<span class="right">兑换</span>
+				</div>
+				<div class="bodyContent fifthAward">
+					<p style="padding-left:1em;color:#cccccc">他们一起送了这个礼物给您</p>
+					<div class="avator fifth">
+						
+					</div>
+					<p class="openMore five">
+						<span><img src="./img/arrow_down.png" class="img" style="width:15px;"></span>
+						<span class="open">展开</span>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		  	<div class="modal-dialog modal-sm">
+		    	<div class="modal-content" style="background-color: #ffcc00;">
+		      		<p style="margin-top:30px;font-size:1.2em;color:black;margin-bottom:0px">请入群联系</p>
+		      		<p style="margin-top:5px;font-size:1.2em;color:black;">教练群管理员兑换礼物</p>
+		      		<p style="margin-top:5px;font-size:1.2em;color:black;">QQ群号:521386544</p>
+		      		<button class="givecoach">好的</button>
+		    	</div>
+		 	</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var getQueryStr=function(coachId){
+		var reg = new RegExp("(^|&)" + coachId + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+	    if (r != null){
+	    	return (r[2]);
+	    }else{
+	    	return null;
+	    } 
+	}
+	var coachId=getQueryStr("coachId");
+	$(document).ready(function(){
+		var width=$(document).outerWidth();
+		var left=(width-100)/2+10;
+		$(".circle").css("left",left);
+		$.post(BASE_URL+"/zhujbwx/circle/coachinfo",{
+			 coachid:coachId
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true){
+				//这里面拿到教练和学员资料
+				var headimg=result.coach.Headimgurl;
+				$(".coachHeader").attr("src",headimg);
+				var name=result.coach.Nickname;
+				$(".coachName").html(name);
+			}else if(result && result.msg){
+				alert(result.msg)
+			}
+		})
+		var count;
+		$.post(BASE_URL +"/zhujbwx/circle/count",{
+			coachid:coachId
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true){
+				count=result.count;
+				$(".count").html(count)
+				if(count == 0 || count == "0"){
+					$(".noneGift").css("display","block")
+				}
+			}else if(result && result.msg){
+				alert(result.msg)
+			}
+		})
+		var firstAward=[],
+			secondAward=[],
+			thirdAward=[],
+			fourthAward=[],
+			fifthAward=[];
+		$.post(BASE_URL+"/zhujbwx/circle/message",{
+			coachid:coachId,
+			start:'0',
+			count:count
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true){
+				isLoad=false;
+				var user=result.users;
+				if(!user){
+					// $(".more").css("display","none")
+				}else{
+					for(var index=0;index < user.length;index++){
+						if(user[index].Rewards == 1){
+							firstAward.push(user[index]);
+							// return firstAward;
+						}else if(user[index].Rewards == 2){
+							secondAward.push(user[index]);
+							// return secondAward;
+						}else if(user[index].Rewards == 3){
+							thirdAward.push(user[index]);
+							// return thirdAward;
+						}else if(user[index].Rewards == 4){
+							fourthAward.push(user[index]);
+							// return fourthAward;
+						}else if(user[index].Rewards == 5){
+							fifthAward.push(user[index]);
+							// return fifthAward;
+						}
+					}
+					if(firstAward.length > 0){
+						$(".firstAward").css("display","block");
+						$(".firstAward").children(".middle").html("("+firstAward.length +"/10)份");
+						for(var index = 0;index<firstAward.length;index++){
+							var wxnick=firstAward[index].Nickname
+							var wxaward=firstAward[index].Rewards;
+							var wxavator=firstAward[index].Wxavator;
+							var message=firstAward[index].Message;
+							var img="<img src="+wxavator+"/>";
+							$(".first").append(img);
+							var html="<div class='giftList'>\
+										<div class='messages'>\
+											<div class='message_left'>\
+												<img src="+wxavator+">\
+											</div>\
+											<div class='message_right'>\
+												<p class='name'>\
+													<span style='color:#797979'>"+wxnick+"</span>\
+													<span style='color:#cfcfcf'>对您说</span>\
+												</p>\
+												<p class='delive'>"+message+"</p>\
+											</div>\
+										</div>\
+										<div class='clear'></div>\
+									</div>";
+							$(html).insertBefore(".one");
+						}
+					}
+					if(secondAward.length > 0){
+						$(".secondAward").css("display","block");
+						$(".secondAward").children(".middle").html("("+secondAward.length +"/5)份")
+						for(var index = 0;index<secondAward.length;index++){
+							var wxnick=secondAward[index].Nickname
+							var wxaward=secondAward[index].Rewards;
+							var wxavator=secondAward[index].Wxavator;
+							var message=secondAward[index].Message;
+							var img="<img src="+wxavator+"/>";
+							$(".second").append(img);
+							var html="<div class='giftList'>\
+										<div class='messages'>\
+											<div class='message_left'>\
+												<img src="+wxavator+">\
+											</div>\
+											<div class='message_right'>\
+												<p class='name'>\
+													<span style='color:#797979'>"+wxnick+"</span>\
+													<span style='color:#cfcfcf'>对您说</span>\
+												</p>\
+												<p class='delive'>"+message+"</p>\
+											</div>\
+										</div>\
+										<div class='clear'></div>\
+									</div>";
+							$(html).insertBefore(".two");
+						}
+					}
+					if(thirdAward.length > 0){
+						console.log(thirdAward)
+						$(".thirdAward").css("display","block");
+						$(".thirdAward").children(".middle").html("("+thirdAward.length +"/5)份");
+						for(var index = 0;index<thirdAward.length;index++){
+							var wxnick=thirdAward[index].Nickname
+							var wxaward=thirdAward[index].Rewards;
+							var wxavator=thirdAward[index].Wxavator;
+							var message=thirdAward[index].Message;
+							var img="<img src="+wxavator+"/>";
+							$(".third").append(img);
+							var html="<div class='giftList'>\
+										<div class='messages'>\
+											<div class='message_left'>\
+												<img src="+wxavator+">\
+											</div>\
+											<div class='message_right'>\
+												<p class='name'>\
+													<span style='color:#797979'>"+wxnick+"</span>\
+													<span style='color:#cfcfcf'>对您说</span>\
+												</p>\
+												<p class='delive'>"+message+"</p>\
+											</div>\
+										</div>\
+										<div class='clear'></div>\
+									</div>";
+							$(html).insertBefore(".three");
+						}
+					}
+					if(fourthAward.length > 0){
+						$(".fourthAward").css("display","block");
+						$(".fourthAward").children(".middle").html("("+fourthAward.length +"/1)份");
+						for(var index = 0;index<fourthAward.length;index++){
+							var wxnick=fourthAward[index].Nickname
+							var wxaward=fourthAward[index].Rewards;
+							var wxavator=fourthAward[index].Wxavator;
+							var message=fourthAward[index].Message;
+							var img="<img src="+wxavator+"/>";
+							$(".fourth").append(img);
+							var html="<div class='giftList'>\
+										<div class='messages'>\
+											<div class='message_left'>\
+												<img src="+wxavator+">\
+											</div>\
+											<div class='message_right'>\
+												<p class='name'>\
+													<span style='color:#797979'>"+wxnick+"</span>\
+													<span style='color:#cfcfcf'>对您说</span>\
+												</p>\
+												<p class='delive'>"+message+"</p>\
+											</div>\
+										</div>\
+										<div class='clear'></div>\
+									</div>";
+							$(html).insertBefore(".four");
+						}
+					}
+					if(fifthAward.length > 0){
+						$(".fifthAward").css("display","block");
+						$(".fifthAward").children(".middle").html("("+fifthAward.length +"/5)份");
+						for(var index = 0;index<fifthAward.length;index++){
+							var wxnick=fifthAward[index].Nickname
+							var wxaward=fifthAward[index].Rewards;
+							var wxavator=fifthAward[index].Wxavator;
+							var message=fifthAward[index].Message;
+							var img="<img src="+wxavator+"/>";
+							$(".fifth").append(img);
+							var html="<div class='giftList'>\
+										<div class='messages'>\
+											<div class='message_left'>\
+												<img src="+wxavator+">\
+											</div>\
+											<div class='message_right'>\
+												<p class='name'>\
+													<span style='color:#797979'>"+wxnick+"</span>\
+													<span style='color:#cfcfcf'>对您说</span>\
+												</p>\
+												<p class='delive'>"+message+"</p>\
+											</div>\
+										</div>\
+										<div class='clear'></div>\
+									</div>";
+							$(html).insertBefore(".five");
+						}
+					}
+				}
+			}else if(result && result.msg){
+				alert(result.msg)
+			}
+		})
+		
+		$(".openMore").on("click",function(){
+			var html=$(this).children(".open").html();
+			if(html == "展开"){
+				$(this).prevAll(".avator").css("display","none");
+				$(this).prevAll(".giftList").css("display","block");
+				$(this).children(".open").html("收起");
+				$(this).children().children(".img").attr("src","./img/arrow_up.png");
+			}else{
+				$(this).prevAll(".avator").css("display","block");
+				$(this).prevAll(".giftList").css("display","none");
+				$(this).children(".open").html("展开");
+				$(this).children().children(".img").attr("src","./img/arrow_down.png");
+			}
+		})
+		$(".right").on("click",function(){
+			$(".modal").modal("show")
+		})
+		$(".givecoach").on("click",function(){
+			$(".modal").modal("hide")
+		})
+	})
+
+</script>
+<!-- var wxnick=user[index].Nickname
+var wxaward=user[index].Rewards;
+var wxavator=user[index].Wxavator;
+var message=user[index].Message;
+var html="<div class='giftList'>\
+			<div class='messages'>\
+				<div class='message_left'>\
+					<img src="+wxavator+">\
+				</div>\
+				<div class='message_right'>\
+					<p class='name'>\
+						<span style='color:#797979'>"+wxnick+"</span>\
+						<span style='color:#cfcfcf'>对您说</span>\
+					</p>\
+					<p class='delive'>"+message+"</p>\
+				</div>\
+			</div>\
+			<div class='clear'></div>\
+		</div>";
+$(html).insertBefore(".openMore"); -->

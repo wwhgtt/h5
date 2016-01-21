@@ -21,6 +21,16 @@
 	    } 
 	}
 	var coachId=getQueryStr("coachId");
-	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d52ab0e2a540604&redirect_uri=http%3a%2f%2fwebapp.idrv.com.cn%2fwebapp%2ftemplate%2fhome.html&response_type=code&scope=snsapi_login&state="+coachId+"#wechat_redirect"
+	var getQueryStr=function(goodId){
+		var reg = new RegExp("(^|&)" + goodId + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+	    if (r != null){
+	    	return (r[2]);
+	    }else{
+	    	return null;
+	    } 
+	}
+	var goodId=getQueryStr("goodId");
+	window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d52ab0e2a540604&redirect_uri=http%3a%2f%2fwebapp.idrv.com.cn%2fwebapp%2ftemplate%2fhome.html&response_type=code&scope=snsapi_login&state="+coachId+"_._"+goodId+"#wechat_redirect"
 </script>
 <!--  -->

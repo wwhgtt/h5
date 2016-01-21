@@ -1,0 +1,236 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background:#fff; color:#555; font-size:14px; /*font-family: Verdana, Arial, Helvetica, sans-serif; */}
+td,th,caption { font-size:14px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:underline; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll;} 
+
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+.container{
+  width: 100%;
+}
+.clear{
+  clear: both;
+}
+body{
+  background:url(../img/bg.jpg);
+  background-size: 100%;
+  background-repeat: repeat;
+}
+.word{
+  width: 100%;
+  text-align: center;
+  color: white;
+  margin-top: -10px;
+  /*font-size: 0.8em*/
+}
+.circle{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  border: 5px solid #811414;
+  background-color: #ffcc00;
+  position: absolute;
+  top: 22%
+}
+.circle p{
+  margin-bottom:0px 
+}
+.count{
+  font-size: 1.5em;
+  color: #e43835
+}
+.content span{
+  display: inline-block;
+  color: #ffcc00;
+  font-size: 1.0em;
+}
+.line{
+  height: 0px;
+  color: white;
+  border-top: 1px solid #ffcc00;
+  width: 38%;
+  margin-bottom: 0.3em
+}
+.clear{
+  clear:both;
+}
+.main{
+   text-align: center;
+   width: 96%;
+   margin-left: 2%;
+   margin-top: 14px;
+}
+.content{
+  margin-top: 30%;
+}
+.list{
+  width: 100%;
+ 
+}
+.headerContent{
+  width: 100%;
+  height: 50px;
+  background-color:#ffcc00 
+}
+.headerContent span{
+  display: inline-block;
+}
+.left{
+  height: 50px;
+  line-height: 50px;
+  width: 11em;
+  text-align: left;
+  padding-left: 1em;
+  float: left;
+  color: #fffa00
+}
+.right{
+  height: 50px;
+  line-height: 50px;
+  width: 5em;
+  text-align: center;
+  float: right;
+  color: white;
+  border-left: 2px dotted white
+}
+.middle{
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #fffa00
+}
+.bodyContent{
+  height: auto;
+  background-color: white;
+  width: 96%;
+  margin-left: 2%
+}
+.bodyContent p{
+  text-align: left;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 0px !important;
+}
+.avator{
+  height: 40px;
+  line-height: 40px;
+  text-align: left;
+  width: 100%;
+  overflow: hidden;
+}
+.avator img{
+  display: inline-block;
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+}
+.openMore{
+  width: 100%;
+  text-align: right !important;
+  padding-right: 1em;
+  height: 30px;
+  line-height: 30px;
+  border-top: 1px solid #F7F0F0;
+}
+.giftList{
+  border-top: 1px solid #F7F0F0;
+  /*border-bottom: 1px solid #F7F0F0;*/
+  width:98%;
+  margin-left: 1%
+}
+.messages{
+  width:100%;
+  height: auto;
+  margin-top:10px;
+}
+.message_left{
+  width: 15%;
+  height: auto;
+  float: left;
+}
+.message_left img{
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+.message_right{
+  width: 82%;
+  float: left;
+  text-align: left;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.name{
+  margin-left: 10px;
+  font-size: 1.2em;
+  color: white;
+  line-height: 20px;
+}
+.detaile{
+  line-height: 30px;
+  margin-left: 10px;
+  height: 30px;
+  border-bottom: 1px solid #e66257;
+  width:90%;
+}
+.delive{
+  line-height: 30px;
+  margin-left: 10px;
+  height: 30px;
+  font-weight: bold;
+  font-size: 1.2em
+}
+.firstAward{
+  display: none
+}
+.secondAward{
+  display: none
+}
+.fourthAward{
+  display: none
+}
+.thirdAward{
+  display: none
+}
+.fifthAward{
+  display: none
+}
+.giftList{
+  display: none;
+}
+.modal-content p{
+  width: 100%;
+  text-align: center;
+}
+.givecoach{
+  width: 10em;
+  text-align: center;
+  margin:0 auto;
+  background-color: #e53935;
+  color: #ffcc00;
+  border: none;
+  height: 40px;
+  border-radius: 5px;
+}
+.modal-content{
+  border: 3px solid #410808;
+  padding-bottom: 30px;
+  margin-top: 20%
+}
+.noneGift{
+  font-size: 1.4em;
+  color: #ffcc00;
+  margin-top: 50px;
+  font-weight: bold;
+  display: none
+}

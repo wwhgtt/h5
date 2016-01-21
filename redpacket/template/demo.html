@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>猴年购车大礼包第一弹</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<script src="../js/lib/weixin.js"></script>
+		<script src="../js/lib/jquery.min.js"></script>
+		<script src="../js/script/config.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<img src="../img/check.png" class="check"  style="width:60%;position:absolute;top:80%;left:20%">
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".check").on("click",function(){
+			$("body").fadeOut(300,function(){
+				window.location.href="/redpacket/template/grapDemo.html";
+			});
+		})
+	})
+</script>
