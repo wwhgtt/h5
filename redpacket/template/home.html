@@ -37,6 +37,25 @@
 		    } 
 		}
 		var coachId=getQueryStr("state");
+		var codeMax=getQueryStr("code");
+		var openId=localStorage.getItem("openId");
+		if(!openId){
+			$.post(BASE_URL+"/zhujbwx/redboom/info",{
+				coachid:coachId,
+				code:codeMax
+			},function(data){
+				var result=JSON.parse(data);
+				if(result && result.result == true ){
+					openId=result.user.Openid;
+					localStorage.setItem("openId",openId);
+				}else if(result && result.msg){
+					var errorInfo=result.msg;
+		 			alert(errorInfo);
+		 		}
+			})	
+		}else{
+			//
+		}
 		var url=location.href.split("#")[0];
 		$.post(BASE_URL+"/zhujbwx/getsignature2/",{
 			url:url
@@ -66,7 +85,17 @@
 					    link: 'http://party.idrv.com.cn?coachId='+coachId, // 分享链接  寻找教练webview
 					    imgUrl: 'http://party.idrv.com.cn/img/share.png', // 分享图标
 				        success: function () { 
-				            
+				            $.post(BASE_URL+"/zhujbwx/redboom/sharecount ",{
+				           		coachid:coachId,
+				           		openid:openId
+				           },function(data){
+				           		var result=JSON.parse(data);
+								if(result && result.result == true){
+									
+								}else if(result && result.msg){
+									alert(result.msg)
+								}
+				           })
 				        },
 				        cancel: function (){ 
 				            // 用户取消分享后执行的回调函数
@@ -80,7 +109,17 @@
 				        type: 'link', // 分享类型,music、video或link，不填默认为link
 				        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 				        success: function (){ 
-				            
+				            $.post(BASE_URL+"/zhujbwx/redboom/sharecount ",{
+				           		coachid:coachId,
+				           		openid:openId
+				           },function(data){
+				           		var result=JSON.parse(data);
+								if(result && result.result == true){
+									
+								}else if(result && result.msg){
+									alert(result.msg)
+								}
+				           })
 				        },
 				        cancel: function (){ 
 				            // 用户取消分享后执行的回调函数
@@ -92,7 +131,17 @@
 					    link: 'http://party.idrv.com.cn?coachId='+coachId, // 分享链接
 					    imgUrl: 'http://party.idrv.com.cn/img/share.png', // 分享图标
 					    success: function () { 
-					       
+					       $.post(BASE_URL+"/zhujbwx/redboom/sharecount ",{
+				           		coachid:coachId,
+				           		openid:openId
+				           },function(data){
+				           		var result=JSON.parse(data);
+								if(result && result.result == true){
+									
+								}else if(result && result.msg){
+									alert(result.msg)
+								}
+				           })
 					    },
 					    cancel: function () { 
 					       // 用户取消分享后执行的回调函数
@@ -104,7 +153,17 @@
 					    link: 'http://party.idrv.com.cn?coachId='+coachId, // 分享链接
 					    imgUrl: 'http://party.idrv.com.cn/img/share.png', // 分享图标
 					    success: function () { 
-					      
+					      $.post(BASE_URL+"/zhujbwx/redboom/sharecount ",{
+				           		coachid:coachId,
+				           		openid:openId
+				           },function(data){
+				           		var result=JSON.parse(data);
+								if(result && result.result == true){
+									
+								}else if(result && result.msg){
+									alert(result.msg)
+								}
+				           })
 					    },
 					    cancel: function () { 
 					        // 用户取消分享后执行的回调函数
@@ -116,24 +175,11 @@
 	 			alert(errorInfo);
 	 		}
 		})
-		var codeMax=getQueryStr("code");
-		var openId;
-		$.post(BASE_URL+"/zhujbwx/redboom/info",{
-			coachid:coachId,
-			code:codeMax
-		},function(data){
-			var result=JSON.parse(data);
-			if(result && result.result == true ){
-				openId=result.user.Openid;
-			}else if(result && result.msg){
-				var errorInfo=result.msg;
-	 			alert(errorInfo);
-	 		}
-		})
 		$(".check").on("click",function(){
 			$("body").fadeOut(300,function(){
 				window.location.href="/redpacket/template/grap.html?coachId="+coachId+"&openId="+openId;
 			});
 		})
+		// 
 	})
 </script>

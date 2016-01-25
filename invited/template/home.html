@@ -1,47 +1,52 @@
 <!DOCTYPE>
 <html>
 	<head>
-		<title>邀请函</title>
+		<title>我被外星人绑架了</title>
 		<meta charset="utf-8"/>
 		<meta Content-Type="application/x-www-form-urlencoded" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-		<script src="../js/lib/jquery.min.js"></script>
+		<script src="../js/lib/zetpo.min.js"></script>
 		<script src="../js/script/config.js"></script>
 		<script src="../js/lib/weixin.js"></script>
-		<SCRIPT src="../js/lib/bootstrap.min.js"></SCRIPT>
+		<script src="../js/lib/swiper.jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/swiper.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/animate.min.css">
 	</head>
 	<body style="text-align:center">
-		<div class="mainContent">
-			<img src="../img/word.png" style="width:50%;margin-top:6%;">
-			<div class="header">
-				<h1 class="main">邀请人</h1>
-				<div style="width:60px;height:60px;border-radius:30px;border:2px solid white;margin-top:5px;margin:0 auto">
-					<img src="" class="coachPhoto" style="width:50px;height:50px;border-radius:25px;margin-top:3px;">
-				</div>
-				<p class="coachName" style="margin-top:10px;"></p>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+			    <div class="swiper-slide container">
+			    	<!-- 第一部分内容 -->
+			    	<div class="coachInfo">
+			    		<img src="" class="coachHeader">
+			    		<p class="coachName"></p>
+			    	</div>
+			    	<img src="../img/btn1.png" class="next">
+			    	<img src="../img/shanshan.png" style="position:fixed; bottom:0px;width:36%;left:32%" class="infinite animated bounceOut">
+			    	
+			    </div>
+			    <div class="swiper-slide container2">
+			    	<!-- 第二部分内容 -->
+					<img src="../img/p2_img1.png"  style="width:100%">
+					<img src="../img/ufo.png" class="leftImg" style="width:50%;margin-top:-15%">
+					<img src="../img/man.png"  class="rightImg" style="width:80%;float:right">
+					<img src="../img/alient.png" class="bottomImg" style="width:54%;margin-top:-10px">
+					<img src="../img/arrow_up.png" class="arrowUp" style="float:right;margin-top:33%;margin-right:20px">
+			    </div>
+			    <div class="swiper-slide container2" style="text-align:center">
+			    	<!-- 第三部分内容 -->
+					<img src="../img/p3_img1.png"  style="width:100%;">
+					<img src="../img/p3_img2.png" class="middleImg" style="width:80%;margin-top:10px">
+					<img src="../img/p3_img3.png" class="middleImg2" style="width:80%;margin-top:10px">
+					<img src="../img/btn2.png" class="middleImg3 goNext" style="width:40%;margin-top:15px;margin-left:30%" >
+			    </div>
+			    <div class="swiper-slide container3" style="text-align:center">
+			    	<!-- 第四部分内容 -->
+					<img src="../img/qr_code.png" style="margin-top:15%;" width="80%"/>
+					<img  src="../img/logo.png"  style="width:30%;margin-top:20%" />
+			    </div>
 			</div>
-			<div class="content">
-				<span class="line"></span>
-				<span>福利</span>
-				<span class="line"></span>
-			</div>
-			<div class="price">
-				<p style="margin-top:0.5em">福利一:学员每年多招20人 </p>
-				<p>福利二:收入增加3-5万</p>
-				<p style="margin-bottom:0.5em">福利三:app永久免费</p>
-			</div>
-			<div class="footer" style=" border-radius: 5px;">
-				<span style="margin-left:0px;">加入助驾帮APP</span>
-			</div>
-		</div>
-		<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-		  	<div class="modal-dialog modal-sm">
-		    	<div class="modal-content" style="margin-top:20%">
-		      		<img src="../img/app.jpg" style="width:80%;margin:0 auto">
-		    	</div>
-		 	</div>
 		</div>
 	</body>
 </html>
@@ -56,7 +61,7 @@
 		    	return null;
 		    } 
 		}
-		var state=getQueryStr("state");
+		var coachId=getQueryStr("state");
 		var getQueryStr=function(code){
 			var reg = new RegExp("(^|&)" + code + "=([^&]*)(&|$)", "i");
 		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
@@ -67,20 +72,98 @@
 		    } 
 		}
 		var wxcode=getQueryStr("code");
-		var wxnick;
-		var wxavator;
-		var wxID;
-		$.post(BASE_URL+"/zhujbwx/getwxcoachinfo",{
-			wxcode:wxcode
+		$.post(BASE_URL+"/zhujbwx/circle/coachinfo",{
+			 coachid:coachId
 		},function(data){
 			var result=JSON.parse(data);
 			if(result && result.result == true){
-				wxID=result.coach.Id;	
+				var headimg=result.coach.Headimgurl;
+				$(".coachHeader").attr("src",headimg);
+				var name=result.coach.Nickname;
+				$(".coachName").html(name+"教练");
 			}else if(result && result.msg){
 				alert(result.msg)
 			}
 		})
-		var url=location.href.split("#")[0];
+		var mySwiper = new Swiper('.swiper-container', {
+			autoplay: false,//可选选项，自动滑动
+			direction : 'vertical',
+			speed:300,
+			// onlyExternal:true,
+			freeMode : false,
+			watchSlidesProgress : true,
+			onSlideChangeStart: function(swiper){
+				console.log(mySwiper.activeIndex)
+				if(mySwiper.activeIndex == 1){
+					setTimeout(function(){
+				        $('.leftImg').addClass('animated slideInLeft');
+				        $('.leftImg').css('display','block');
+				    }, 1000);
+				    setTimeout(function(){
+				        $('.rightImg').addClass('animated slideInRight');
+				        $('.rightImg').css('display','block');
+				    }, 2500);
+				    setTimeout(function(){
+				        $('.bottomImg').addClass('animated slideInUp');
+				        $('.bottomImg').css('display','inline-block');
+				        $('.arrowUp').addClass('animated fadeInUp infinite');
+				        $('.arrowUp').css('display','inline-block');
+				    }, 4000);
+				}else if(mySwiper.activeIndex == 2){
+					setTimeout(function(){
+				        $('.middleImg').addClass('animated pulse');
+				        $('.middleImg').css('display','block');
+				    }, 1000);
+				    setTimeout(function(){
+				        $('.middleImg2').addClass('animated pulse');
+				        $('.middleImg2').css('display','block');
+				    }, 3000);
+				    setTimeout(function(){
+				        $('.middleImg3').addClass('animated pulse');
+				        $('.middleImg3').css('display','block');
+				    }, 5000);
+				}
+			}
+		})
+		// arrowUp
+		$('.infinite').click(function(){
+			mySwiper.slideNext();
+			setTimeout(function(){
+		        $('.leftImg').addClass('animated slideInLeft');
+		        $('.leftImg').css('display','block');
+		    }, 1000);
+		    setTimeout(function(){
+		        $('.rightImg').addClass('animated slideInRight');
+		        $('.rightImg').css('display','block');
+		    }, 2000);
+		    setTimeout(function(){
+		        $('.bottomImg').addClass('animated slideInUp');
+		        $('.bottomImg').css('display','inline-block');
+		        $('.arrowUp').addClass('animated fadeInUp infinite');
+		        $('.arrowUp').css('display','inline-block');
+		    }, 3000);
+		})
+		$('.arrowUp').click(function(){
+			mySwiper.slideNext();
+			setTimeout(function(){
+		        $('.middleImg').addClass('animated pulse');
+		        $('.middleImg').css('display','block');
+		    }, 1000);
+		    setTimeout(function(){
+		        $('.middleImg2').addClass('animated pulse');
+		        $('.middleImg2').css('display','block');
+		    }, 3000);
+		    setTimeout(function(){
+		        $('.middleImg3').addClass('animated pulse');
+		        $('.middleImg3').css('display','block');
+		    }, 5000);
+		})
+		$('.goNext').click(function(){
+			mySwiper.slideNext();
+		})
+	})
+</script>
+<!-- var url=location.href.split("#")[0];
 		$.post(BASE_URL+"/zhujbwx/getsignature2/",{
 			url:url
 		},function(data){
@@ -158,32 +241,4 @@
 				var errorInfo=result.msg;
 	 			alert(errorInfo);
 	 		}
-		})
-		$.post(BASE_URL+"/zhujbwx/getrecommender",{
-			recmdid:state
-		},function(data){
-			var result=JSON.parse(data);
-			if(result && result.result == true){
-				wxnick=result.wxcoachinfo.Wxnick;
-				wxavator=result.wxcoachinfo.Wxavator ;
-				$(".coachName").html(wxnick);
-				$(".coachPhoto").attr("src",wxavator);
-			}else if(result && result.msg){
-				alert(result.msg)
-			}
-		})
-		$(".footer").on("click",function(){
-			$.post(BASE_URL+"/zhujbwx/coachrcmdrcd",{
-				commender:state,
-				commendee:wxID
-			},function(data){
-				var result=JSON.parse(data);
-				if(result && result.result == true){
-					$('.modal').modal('show');
-				}else if(result && result.msg){
-					alert(result.msg)
-				}
-			})
-		})
-	})
-</script>
+		}) -->

@@ -15,81 +15,67 @@ html {overflow-y: scroll;}
 .clearfix { *zoom:1; }
 .container{
   width: 100%;
+  background: url("../img/first_page_bg.jpg") no-repeat 50% 0; 
+  background-size:cover;
 }
 .clear{
   clear: both;
 }
-body{
-  background-image: url('../img/invited.jpg');background-size: 100% 100%;height:auto
-}
-.main{
-  font-size: 1.5em;
-  color: white;
-}
 .coachName{
-  font-size: 1.2em;
-  color: white;
-  font-family: SimSun;
-  /*font-weight: bold;*/
-}
-.header{
-  width:100%;
-  text-align:center;
-  /*margin-top: 65%*/
-}
-.content{
-  width: 84%;
-  height: 2em;
-  margin-left: 8%;
+  width: 100%;
+  text-align: center;
   margin-top: 10px;
-  line-height: 2em;
-  text-align: center;
-  margin-bottom: 10px;
+  color: #686868;
 }
-.content span{
-  display: inline-block;
-  color: white;
-  font-size: 1.5em;
+.coachHeader{
+  width:80px;
+  height:80px;
+  margin: 0 auto;
+  border-radius:40px;
 }
-.line{
-  height: 0px;
-  color: white;
-  border: 1px solid white;
-  width: 38%;
-  margin-bottom: 0.3em
-}
-.price{
-  /*padding: 1.5em;*/
-  width: 90%;
-  border: 3px solid white;
-  margin-left: 5%;
-  text-align: left;
-  color: white;
-  font-size: 1.1em;
-  text-align: left;
-}
-.price p{
-  line-height: 1.2em;
-  padding-left: 2em;
-}
-.footer{
-  width: 10em;
-  text-align: center;
-  background-color: #169bdc;
-  height: 4em;
-  line-height: 4em;
-  color: white;
-  margin:  0 auto;
-  margin-top: 20px;
-  margin-bottom: 0px;
-  border: 2px solid white;
-  text-align: center;
-}
-.footer span{
-  display: inline-block;
-}
-.mainContent{
+.coachInfo{
+  width: 40%;
+  left: 30%;
   position: absolute;
-  top:0px;
-  width: 100%
+  top: 42%;
+}
+.next{
+  position:fixed;
+  bottom:15px;
+  width:26%;
+  left:37%
+}
+.container2{
+  background: url("../img/main_bg.jpg") no-repeat 50% 0; 
+  background-size:cover;
+  text-align: left;
+}
+.container3{
+   background: url("../img/end_bg.jpg") no-repeat 50% 0; 
+  background-size:cover;
+  text-align: left;
+}
+.leftImg{
+  display: none;
+}
+.rightImg{
+  display: none;
+}
+.bottomImg{
+  display: none;
+}
+.arrowUp{
+  display: none;
+}
+.middleImg{
+  display: none;
+  margin-left: 10%
+}
+.middleImg2{
+  display: none;
+   margin-left: 10%
+}
+.middleImg3{
+  display: none;
+   margin-left: 5%
 }

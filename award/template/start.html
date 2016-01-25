@@ -38,8 +38,21 @@
 	    } 
 	}
 	var code=getQueryStr("code");
+	var openId;
+	$.post(BASE_URL+"/zhujbwx/circle/info",{
+		 code:code,
+		 coachid:state
+	},function(data){
+		var result=JSON.parse(data);
+		if(result && result.result == true){
+			//这里面拿到教练和学员资料
+			openId=result.user.Openid;
+		}else if(result && result.msg){
+			alert(result.msg)
+		}
+	})
 	function go(){
-		window.location.href="http://webapp.idrv.com.cn/award/template/home.html?state="+state+"?code="+code;
+		window.location.href="http://webapp.idrv.com.cn/award/template/home.html?state="+state+"?openId="+openId;
 	}
 	// 
 	var url=location.href.split("#")[0];
@@ -71,7 +84,17 @@
 				    link: 'http://webapp.idrv.com.cn/award?coachID='+state, // 分享链接  寻找教练webview
 				    imgUrl: 'http://webapp.idrv.com.cn/award/img/word.jpg', // 分享图标
 			        success: function () { 
-			           
+			           $.post(BASE_URL+"/zhujbwx/circle/sharecount ",{
+				           		coachid:state,
+				           		openid:openId
+				           },function(data){
+				           		var result=JSON.parse(data);
+								if(result && result.result == true){
+									
+								}else if(result && result.msg){
+									alert(result.msg)
+								}
+				           })
 			        },
 			        cancel: function (){ 
 			            // 用户取消分享后执行的回调函数
@@ -85,7 +108,17 @@
 			        type: 'link', // 分享类型,music、video或link，不填默认为link
 			        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 			        success: function (){ 
-			            
+			            $.post(BASE_URL+"/zhujbwx/circle/sharecount ",{
+				           		coachid:state,
+				           		openid:openId
+				           },function(data){
+				           		var result=JSON.parse(data);
+								if(result && result.result == true){
+									
+								}else if(result && result.msg){
+									alert(result.msg)
+								}
+				           })
 			        },
 			        cancel: function (){ 
 			            // 用户取消分享后执行的回调函数
@@ -97,7 +130,17 @@
 				    link: 'http://webapp.idrv.com.cn/award?coachID='+state, // 分享链接
 				    imgUrl: 'http://webapp.idrv.com.cn/award/img/word.jpg', // 分享图标
 				    success: function () { 
-				      
+				      $.post(BASE_URL+"/zhujbwx/circle/sharecount ",{
+				           		coachid:state,
+				           		openid:openId
+				           },function(data){
+				           		var result=JSON.parse(data);
+								if(result && result.result == true){
+									
+								}else if(result && result.msg){
+									alert(result.msg)
+								}
+				           })
 				    },
 				    cancel: function () { 
 				       // 用户取消分享后执行的回调函数
@@ -109,7 +152,17 @@
 				    link: 'http://webapp.idrv.com.cn/award?coachID='+state, // 分享链接
 				    imgUrl: 'http://webapp.idrv.com.cn/award/img/word.jpg', // 分享图标
 				    success: function () { 
-				       
+				       $.post(BASE_URL+"/zhujbwx/circle/sharecount ",{
+				           		coachid:state,
+				           		openid:openId
+				           },function(data){
+				           		var result=JSON.parse(data);
+								if(result && result.result == true){
+									
+								}else if(result && result.msg){
+									alert(result.msg)
+								}
+				           })
 				    },
 				    cancel: function () { 
 				        // 用户取消分享后执行的回调函数
