@@ -1,0 +1,125 @@
+.title{
+	width: 100%;
+	text-align: center;
+	font-size: 2em;
+	line-height: 2.5em;
+	font-weight: bold;
+	color: white;
+	margin-bottom: 0px;
+}
+.header{
+	background: url(../images/header_bg.jpg);
+	background-size: 100%;
+	background-repeat: repeat;
+	padding-bottom: 20px;
+}
+.main{
+	width: 96%;
+	margin-left:2%;
+}
+.titleMain{
+	display: inline-block;
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.5em;
+	float: left;
+	font-weight: bold;
+	color: #cd3333;
+}
+.clear{
+	clear: both;
+}
+.titleMain img{
+	width: 30px;
+}
+.mainContent{
+	height: 40px;
+	line-height: 40px;
+	font-size: 1.5em;
+	background-color: #eaeaea;
+	margin-top: 0px;
+	font-weight: bold;
+}
+.mainContentTon{
+	height: 40px;
+	line-height: 40px;
+	font-size: 1.2em;
+	border-bottom: 1px solid #f1f1f1
+}
+.describe{
+	font-weight: bold;
+	font-size: 1.5em;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 2em;
+}
+.footer{
+	margin-left: 2%;
+	width: 96%
+}
+.none{
+	height: 20px;
+	background-color: #eaeaea;
+	width: 100%
+}
+.fixedButton{
+	height: 60px;
+	line-height: 60px;
+	font-size: 1.5em;
+	background-color: #cd3333;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 20px;
+	padding-top: 5px;
+}
+.info{
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.2em;
+	color: #cd3333;
+	width: 100%;
+	text-align: center;
+}
+.inputForm{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 10px;
+}
+.inputForm span{
+	display: inline-block;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+}
+.inputForm span input{
+	height: 40px;
+	line-height: 40px;
+	font-size: 1em;
+	border-radius: 5px;
+	padding-left: 1em;
+}
+.leftInfo{
+	width: 7em;
+	text-align: right;
+	font-size: 1em;
+	padding-right: 1em;
+}
+.inputForm span select{
+	height: 40px;
+	line-height: 40px;
+	font-size: 1em;
+	border-radius: 10px;
+	padding-left: 1em;
+}
+.submit{
+	color: white;
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.5em;
+	width: 100%;
+	border: none;
+	background-color: #cd3333;
+	margin-top: 20px;
+}

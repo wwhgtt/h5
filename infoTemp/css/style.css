@@ -48,7 +48,7 @@ html {overflow-y: scroll;}
 .container{
   width: 96%;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 .light span{
   display: inline-block;
@@ -78,7 +78,7 @@ html {overflow-y: scroll;}
     word-break: break-all;
     word-wrap: break-word;
     text-align: left;
-    padding:30px 15px 30px 15px;
+    padding:15px 15px 5px 15px;
     background-color: #f2f2f2;
 }
 .article a{
@@ -90,9 +90,12 @@ html {overflow-y: scroll;}
 .main h2{
   background-color: #f2f2f2;
   text-align: left;
-  height: 30px;
-  line-height: 30px;
-  padding-left: 1em;
+  padding-left: 0.5em;
+  margin-left: 0.5em;
+  float: left;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width:75%;
   font-size: 1.1em !important;
 }
 .main p{
@@ -105,6 +108,7 @@ html {overflow-y: scroll;}
 .footer{
   width: 100%;
   padding-top: 10px;
+  padding-bottom: 10px;
   background-color: #F7F4F4;
   margin-top: 30px
 }

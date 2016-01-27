@@ -6,11 +6,6 @@
 		<meta Content-Type="application/x-www-form-urlencoded" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-		<SCRIPT src="../js/lib/jquery.min.js"></SCRIPT>
-		<script src="../js/lib/weixin.js"></script>
-		<script src="../js/script/config.js"></script>
-		<script src="../js/lib/bootstrap.min.js"></script>
 	</head>
 	<body style="text-align:center;">
 		<div class="header">
@@ -69,7 +64,7 @@
 				<p>成都一资深驾校教练王先生没觉得“分次缴费、计时收费”这条意见动了自己的“铁饭碗”，“计时收费意味着市场更开放，如果学员能统一购买学时，在这个教练这里学了3小时觉得不安逸，下次就可以换教练。这样也能促进市场的良性发展，优胜劣汰。对于负责的好教练来说，反而是好事。”</p>
 				<p>但是，计时收费会不会更贵呢？王先生认为这要看政策落地的具体实施过程。“我们现在是打包收费，自然会有所优惠，如果计时收费，按照现在科目二、三必须学够学时来计算，也可能比打包价更贵。”</p>
 				<p>驾培行业积踵重重，改革路途漫长，政策具体落地实施还需时间，希望新的政策能够为教练，学员以及整个驾培行业带来新的面貌。</p>
-				<i style="font-size:0.5em;">消息来源（腾讯.大成网）</i>
+				<i style="font-size:0.5em;"> 消息来源（腾讯.大成网）</i>
 				<!-- <p>市面上也有不少产品是指向子女的，但是按照中国人的传统经验，给父母送个电子产品，似乎远不如保健品、水果、保暖内衣来的简单直接。</p> -->
 				<!-- <p>大爷大妈不是没钱，但创业企业不可能像银行理财或房地产企业那样财大气粗搞地推，所以方惠最终的总结是，互联网时代老年市场的关键在于分发，不是需求的问题，也不是钱的问题，关键在于产品和老年消费者之间至今仍不存在的平台的搭建问题。</p> -->
 				<!-- <p>年轻人关心的产品设计是不是完美，用户服务是不是到位，在同大爷大妈们搭上线之前，似乎都是伪命题。</p> -->
@@ -79,18 +74,13 @@
 				<!-- <p>在老年人消费市场，找到准确的意见领袖，往往是那把最关键的钥匙。这让方惠看到机会的同时、也倍觉苦恼：这真的是个大工程。</p> -->
 			</div>
 		</div>
-		<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-		  	<div class="modal-dialog modal-sm">
-		      	<img src="../img/guide.png" style="width:100%">
-		 	</div>
-		</div>
 		<div class="footer">
 			<div class="imgLeft">
 				<img src="../img/icon_light_off.png" class="lightShan">
 				<p>
 					<span>点灯</span>
 					<span>(</span>
-					<span class="count"></span>
+					<span class="count">156</span>
 					<span>)</span>
 				</p>
 			</div>
@@ -99,7 +89,7 @@
 				<p>
 					<span>传播</span>
 					<span>(</span>
-					<span class="countTemp"></span>
+					<span class="countTemp">200</span>
 					<span>)</span>
 				</p>
 			</div>
@@ -107,226 +97,3 @@
 		</div>
 	</body>
 </html>
-<script type="text/javascript">
-	$(document).ready(function(){
-		var getQueryStr=function(state){
-			var reg = new RegExp("(^|&)" + state + "=([^&]*)(&|$)", "i");
-		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
-		    if (r != null){
-		    	return (r[2]);
-		    }else{
-		    	return null;
-		    } 
-		}
-		var state=getQueryStr("state");
-		var coachId=state.split("_._")[0];
-		var taskId=state.split("_._")[1];
-		var getQueryStr=function(code){
-			var reg = new RegExp("(^|&)" + code + "=([^&]*)(&|$)", "i");
-		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
-		    if (r != null){
-		    	return (r[2]);
-		    }else{
-		    	return null;
-		    } 
-		}
-		var code=getQueryStr("code");
-		var customerId;
-		var IsLighted;
-		$.post(BASE_URL+"/zhujbwx/newsmodel/info",{
-			 coachid:coachId,
-			 code:code,
-			 taskid:taskId
-		},function(data){
-			var result=JSON.parse(data);
-			if(result && result.result == true){
-				var headimg=result.coach.Headimgurl;
-				$(".coachHeader").attr("src",headimg);
-				var name=result.coach.Nickname;
-				$(".coachName").html(name+"教练");
-				var studentInfo= result.user;
-				customerId=studentInfo.Customerid;
-				IsLighted=studentInfo.IsLighted;
-				if(IsLighted == 1){
-					$(".lightShan").attr("src","../img/icon_light_off.png");
-				}else{
-					$(".lightShan").attr("src","../img/icon_light_on.png");
-				}
-				// Id,Nickname,Wxavator,Openid,Sex,Coachid,Rewards,Message,Inserttime,OpenCount,ShareCount
-			}else if(result && result.msg){
-				alert(result.msg)
-			}
-		})
-		$.post(BASE_URL+"/zhujbwx/newsmodel/count",{
-			 taskid:taskId
-		},function(data){
-			var result=JSON.parse(data);
-			if(result && result.result == true){
-				var light=result.allLighted;
-				var shareCount=result.allShared;
-				$(".count").html(light*3);
-				$(".countTemp").html(shareCount*3)
-			}else if(result && result.msg){
-				alert(result.msg)
-			}
-		})
-		$(".lightShan").on("click",function(){
-			var src=$(this).attr("src");
-			if(src == "../img/icon_light_off.png"){
-				$.post(BASE_URL+"/zhujbwx/newsmodel/setinfo",{
-					taskid:taskId,
-					customerid:customerId,
-					coachid:coachId
-				},function(data){
-					var result=JSON.parse(data);
-					if(result && result.result == true){
-						var countTemp=Number($(".count").html());
-							countTemp=countTemp+1;
-							$(".count").html(countTemp)
-						$(".lightShan").attr("src","../img/icon_light_on.png");
-					}else if(result && result.msg){
-						alert(result.msg)
-					}
-				})
-			}else if(src == "../img/icon_light_on.png"){
-				alert("您已经点过灯了哦~")
-			}
-		})
-		$(".takeoff").on("click",function(){
-			$(".modal").modal("show");
-		})
-		$(".modal").on("click",function(){
-			$(".modal").modal("hide");
-		})
-		var url=location.href.split("#")[0];
-		$.post(BASE_URL+"/zhujbwx/getsignature2/",{
-			url:url
-		},function(data){
-			var result=JSON.parse(data);
-			if(result && result.result == true ){
-				var timestamp=result.timestamp,
-					nonceStr=result.noncestr,
-					signature=result.signature;
-				wx.config({
-				    debug: false, 
-				    appId: 'wx8bbeb53d26dbe214', 
-				    timestamp:timestamp, 
-				    nonceStr: nonceStr,
-				    signature:signature,
-				    jsApiList: [
-				    	"onMenuShareTimeline",
-				    	"onMenuShareAppMessage",
-				    	"onMenuShareQZone",
-				    	"onMenuShareQQ"
-				    ] 
-				});
-				wx.ready(function(){
-					wx.onMenuShareTimeline({
-				        title: '关于驾照，你真的想自学直考？', // 分享标题
-					    link: 'http://webapp.idrv.com.cn/infoTemp?coachId='+coachId +"&taskId="+taskId, // 分享链接  寻找教练webview
-					    imgUrl: 'http://webapp.idrv.com.cn/infoTemp/img/icon.jpg', // 分享图标
-				        success: function () { 
-				           $.post(BASE_URL+"/zhujbwx/newsmodel/sharecount",{
-				           		taskid:taskId,
-								customerid:customerId,
-								coachid:coachId
-							},function(data){
-								var result=JSON.parse(data);
-								if(result && result.result == true){
-									var countTemp=Number($(".countTemp").html());
-									countTemp=countTemp+1;
-									$(".countTemp").html(countTemp)
-								}else if(result && result.msg){
-									alert(result.msg)
-								}
-							})
-				        },
-				        cancel: function (){ 
-				            // 用户取消分享后执行的回调函数
-				        }
-				    });
-				    wx.onMenuShareAppMessage({
-				        title: '关于驾照，你真的想自学直考？', // 分享标题
-				        desc: '大家期望的自学直考真有想得那么爽吗？', // 分享描述
-					    link: 'http://webapp.idrv.com.cn/infoTemp?coachId='+coachId +"&taskId="+taskId, // 分享链接
-					    imgUrl: 'http://webapp.idrv.com.cn/infoTemp/img/icon.jpg', // 分享图标
-				        type: 'link', // 分享类型,music、video或link，不填默认为link
-				        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-				        success: function (){ 
-				            $.post(BASE_URL+"/zhujbwx/newsmodel/sharecount",{
-				            	taskid:taskId,
-								customerid:customerId,
-								coachid:coachId
-							},function(data){
-								var result=JSON.parse(data);
-								if(result && result.result == true){
-									var countTemp=Number($(".countTemp").html());
-									countTemp=countTemp+1;
-									$(".countTemp").html(countTemp)
-								}else if(result && result.msg){
-									alert(result.msg)
-								}
-							})
-				        },
-				        cancel: function (){ 
-				            // 用户取消分享后执行的回调函数
-				        }
-				    });
-				    wx.onMenuShareQQ({
-					    title: '关于驾照，你真的想自学直考？', // 分享标题
-				        desc: '大家期望的自学直考真有想得那么爽吗？', // 分享描述
-					    link: 'http://webapp.idrv.com.cn/infoTemp?coachId='+coachId +"&taskId="+taskId, // 分享链接
-					    imgUrl: 'http://webapp.idrv.com.cn/infoTemp/img/icon.jpg', // 分享图标
-					    success: function () { 
-					      $.post(BASE_URL+"/zhujbwx/newsmodel/sharecount",{
-					      		taskid:taskId,
-								customerid:customerId,
-								coachid:coachId
-							},function(data){
-								var result=JSON.parse(data);
-								if(result && result.result == true){
-									var countTemp=Number($(".countTemp").html());
-									countTemp=countTemp+1;
-									$(".countTemp").html(countTemp)
-								}else if(result && result.msg){
-									alert(result.msg)
-								}
-							})
-					    },
-					    cancel: function () { 
-					       // 用户取消分享后执行的回调函数
-					    }
-					});
-					wx.onMenuShareQZone({
-					    title: '关于驾照，你真的想自学直考？', // 分享标题
-				        desc: '大家期望的自学直考真有想得那么爽吗？', // 分享描述
-					    link: 'http://webapp.idrv.com.cn/infoTemp?coachId='+coachId +"&taskId="+taskId, // 分享链接
-					    imgUrl: 'http://webapp.idrv.com.cn/infoTemp/img/icon.jpg', // 分享图标
-					    success: function () { 
-					       $.post(BASE_URL+"/zhujbwx/newsmodel/sharecount",{
-					       		taskid:taskId,
-								customerid:customerId,
-								coachid:coachId
-							},function(data){
-								var result=JSON.parse(data);
-								if(result && result.result == true){
-									var countTemp=Number($(".countTemp").html());
-									countTemp=countTemp+1;
-									$(".countTemp").html(countTemp)
-								}else if(result && result.msg){
-									alert(result.msg)
-								}
-							})
-					    },
-					    cancel: function (){ 
-					        // 用户取消分享后执行的回调函数
-					    }
-					});
-				})
-			}else if(result && result.msg){
-				var errorInfo=result.msg;
-	 			alert(errorInfo);
-	 		}
-		})
-	})
-</script>
