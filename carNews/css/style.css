@@ -55,7 +55,8 @@
 }
 .footer{
 	margin-left: 2%;
-	width: 96%
+	width: 96%;
+	margin-bottom: 80px;
 }
 .none{
 	height: 20px;
@@ -72,6 +73,9 @@
 	text-align: center;
 	margin-top: 20px;
 	padding-top: 5px;
+	position: fixed;
+	bottom: 0px;
+	width: 100%
 }
 .info{
 	height: 50px;

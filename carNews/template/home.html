@@ -140,7 +140,7 @@
 	      			<span><input type="text" class="phone" required placeholder="您的电话"></span>
 	      		</div>
 	      		<div class="inputForm">
-	      			<span class="leftInfo" style="padding-left:1em;width:8em">预计购车时间</span>
+	      			<span class="leftInfo" style="padding-left:1em;width:7em">预计购车</span>
 	      			<span>
 	      				<select name="timeTemp" class="timeTemp">
 	      					<option value="1">一个月之内</option>
@@ -181,7 +181,7 @@
 		}
 		var code=getQueryStr("code");
 		var customerId;
-		$.post(BASE_URL+"/zhujbwx/newsmodel/info",{
+		$.post(BASE_URL+"/zhujbwx/sellcar/info",{
 			 coachid:coachId,
 			 code:code,
 			 taskid:taskId
@@ -189,7 +189,7 @@
 			var result=JSON.parse(data);
 			if(result && result.result == true){
 				var studentInfo= result.user;
-				customerId=studentInfo.Customerid;
+				customerId=studentInfo.CustomerId;
 				// Id,Nickname,Wxavator,Openid,Sex,Coachid,Rewards,Message,Inserttime,OpenCount,ShareCount
 			}else if(result && result.msg){
 				alert(result.msg)

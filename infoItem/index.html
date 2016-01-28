@@ -1,0 +1,36 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>不堪回首的学车经历</title>
+		<meta charset="utf-8"/>
+		<meta Content-Type="application/x-www-form-urlencoded" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	</head>
+	<body>
+		
+	</body>
+</html>
+<script type="text/javascript">
+	var getQueryStr=function(coachId){
+		var reg = new RegExp("(^|&)" + coachId + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+	    if (r != null){
+	    	return (r[2]);
+	    }else{
+	    	return null;
+	    } 
+	}
+	var coachId=getQueryStr("coachId");
+	var getQueryStr=function(taskId){
+		var reg = new RegExp("(^|&)" + taskId + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+	    if (r != null){
+	    	return (r[2]);
+	    }else{
+	    	return null;
+	    } 
+	}
+	var taskId=getQueryStr("taskId");
+		window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d52ab0e2a540604&redirect_uri=http%3a%2f%2fwebapp.idrv.com.cn%2finfoItem%2ftemplate%2fhome.html&response_type=code&scope=snsapi_login&state="+coachId+"_._"+taskId+"#wechat_redirect"
+</script>
+<!--  -->
