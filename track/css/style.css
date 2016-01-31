@@ -1,0 +1,177 @@
+.headerImg{
+	width: 100%;
+	-webkit-filter: blur(5px); /* Chrome, Opera */
+   -moz-filter: blur(5px);
+    -ms-filter: blur(5px);    
+    filter: blur(5px);
+}
+.content{
+	height: 30px;
+	line-height: 30px;
+	font-size: 1.5em;
+	color: white;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+}
+body{
+	background-color: #eeeeee !important;
+}
+.main{
+	width: 100%;
+	margin-top: 20px;
+	
+}
+.config{
+	font-size:1.2em;
+}
+.mainHeader div{
+	display: inline-block;
+	float: left;
+	border: none;
+	width: 33%;
+	height: 60px;
+}
+.mainHeader div p{
+	width: 100%;
+	text-align: center;
+	line-height: 60px;
+	margin-bottom: 0px;
+	font-size: 1.2em;
+}
+.active{
+	background-color: white;
+}
+.mainHeader{
+	border-bottom: 1px solid #dfdfdf
+}
+.clear{
+	clear: both;
+}
+.active .none{
+	position: relative;
+	top: -60px;
+	left: 0px;
+	width: 100%;
+	height: 5px;
+	background-color: #ffca3f
+}
+.mainContent{
+	background-color: white;
+	height: 450px;
+	width: 100%;
+	border-top: 1px solid #dfdfdf;
+	border-bottom: 1px solid #dfdfdf;
+	overflow-y:auto; 
+}
+.detaile{
+	height: 80px;
+	padding: 10px 0px 10px 15px;
+	width: 100%;
+	border-bottom: 1px solid #dfdfdf
+}
+.detaileImg{
+	height: 60px;
+	display: inline-block;
+	float: left;
+}
+.detaile span{
+	display: inline-block;
+	float: left;
+	margin-left: 10px;
+	height: 60px;
+	line-height: 60px;
+}
+.timeSpan{
+	float: right !important;
+    padding-right: 10px;
+    color: #d9d9d9
+}
+.userName{
+	font-size: 1.2em;
+}
+.model{
+	width: 100%;
+	height: 60px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #252525;
+	opacity: 0.8;
+	position: relative;
+	top: -60px;
+}
+.model div {
+	display: inline-block;
+	float: left;
+	width: 50%;
+	height: 40px;
+	text-align: center;
+	color: white
+}
+.model_right{
+	width: 49%;
+	border-left: 1px solid white;
+}
+.model div p{
+	margin-bottom: 0px;
+}
+.container-fulid{
+	background-color:white;
+	border-top:1px solid #dfdfdf;
+	border-bottom: 1px solid #dfdfdf;
+	margin-top: -50px;
+}
+.missionDertaile{
+	font-size: 1.2em;
+	font-weight: bold;
+	padding-left: 15px;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: 1px solid #dfdfdf;
+	text-align: left !important;
+	margin-bottom: 0px;
+}
+.mission_info{
+	text-align: left;
+	padding-left: 15px;
+	margin-top: 10px;
+}
+.rightTemp{
+	position: relative;
+	top:-35px;
+	padding-right:10px;
+	border-left:1px solid #dfdfdf
+}
+.noMessage{
+	width: 50%;
+	margin-left:25%;
+	margin-top: 20px;
+}
+.more{
+	width: 30%;
+	margin-left: 35%;
+	height: 30px;
+	background-color: #dfdfdf;
+	margin-top: 10px;
+	border: none;
+	border-radius: 5px;
+}
+.moretemp{
+	width: 30%;
+	margin-left: 35%;
+	height: 30px;
+	background-color: #dfdfdf;
+	margin-top: 10px;
+	border: none;
+	border-radius: 5px;
+}
+.moreItem{
+	width: 30%;
+	margin-left: 35%;
+	height: 30px;
+	background-color: #dfdfdf;
+	margin-top: 10px;
+	border: none;
+	border-radius: 5px;
+}

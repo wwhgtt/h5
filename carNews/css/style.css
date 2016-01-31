@@ -3,7 +3,7 @@
 	text-align: center;
 	font-size: 2em;
 	line-height: 2.5em;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	color: white;
 	margin-bottom: 0px;
 }
@@ -23,7 +23,7 @@
 	line-height: 50px;
 	font-size: 1.5em;
 	float: left;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	color: #cd3333;
 }
 .clear{
@@ -38,7 +38,7 @@
 	font-size: 1.5em;
 	background-color: #eaeaea;
 	margin-top: 0px;
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 .mainContentTon{
 	height: 40px;
@@ -47,7 +47,7 @@
 	border-bottom: 1px solid #f1f1f1
 }
 .describe{
-	font-weight: bold;
+	/*font-weight: bold;*/
 	font-size: 1.5em;
 	height: 30px;
 	line-height: 30px;
@@ -69,7 +69,7 @@
 	font-size: 1.5em;
 	background-color: #cd3333;
 	color: white;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	text-align: center;
 	margin-top: 20px;
 	padding-top: 5px;

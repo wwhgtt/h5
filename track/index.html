@@ -1,0 +1,466 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	<meta Content-Type="application/x-www-form-urlencoded" />
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+	<script src="./js/lib/jquery-1.9.1.min.js"></script>
+	<script src="./js/lib/bootstrap.min.js"></script>
+	<script src="./js/script/config.js"></script>
+	<script src="./js/lib/moment.js"></script>
+	</head>
+	<body>
+		<div class="header">
+			<img src="./images/car1.jpg" class="headerImg">
+			<p class="content"></p>
+			<div class="model">
+				<div class="model_left">
+					<p class="conmision">已得佣金(元)</p>
+					<p class="config config_b"></p>
+				</div>
+				<div class="model_right">
+					<p class="conmision">潜在佣金(元)</p>
+					<p class="config config_a"></p>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="container-fulid">
+			<p class="missionDertaile">任务详情</p>
+			<p class="mission_info">
+				
+			</p>
+		</div>
+		<div class="main">
+			<div class="mainHeader" style="width:100%">
+				<div class="left active">
+					<p class="leftInfo ">
+						<span class="first">访问</span>
+						<span class="first_info"></span>
+					</p>
+					<p class="none"></p>
+				</div>
+				<div class="middle" style="border-left:1px solid #dfdfdf;">
+					<p class="middleInfo">
+						<span class="second">线索</span>
+						<span class="second_info"></span>
+					</p>
+					<p class="none"></p>
+				</div>
+				<div class="right" style="border-left:1px solid #dfdfdf;">
+					<p class="rightInfo">
+						<span class="third">成单</span>
+						<span class="third_info"></span>
+					</p>
+					<p class="none"></p>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="mainContent">
+				
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var height=$(".headerImg").height();
+		var topTemp=(height-30)/2;
+		$(".content").css("top",topTemp);
+		var getQueryStr=function(coachId){
+			var reg = new RegExp("(^|&)" + coachId + "=([^&]*)(&|$)", "i");
+		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+		    if (r != null){
+		    	return (r[2]);
+		    }else{
+		    	return null;
+		    } 
+		}
+		var coachId=getQueryStr("coachId");
+		var getQueryStr=function(taskId){
+			var reg = new RegExp("(^|&)" + taskId + "=([^&]*)(&|$)", "i");
+		    var r = window.location.search.replace(/\?/g, "&").substr(1).match(reg);
+		    if (r != null){
+		    	return (r[2]);
+		    }else{
+		    	return null;
+		    } 
+		}
+		var taskId=getQueryStr("taskId");
+		$.post(BASE_URL+"/zhujbwx/sellcarfollow/taskinfo",{
+			taskid:taskId,
+			coachid:coachId
+		},function(data){
+			var result=JSON.parse(data);
+			if(result && result.result == true){
+				$(".left").trigger("click");
+				var task=result.task;
+				var Taskname=task.Taskname;
+				$(".content").html(Taskname);
+				var AccessAmount=task.AccessAmount;
+				if(AccessAmount <= 10000){
+					$(".first_info").html(AccessAmount)
+				}else{
+					$(".first_info").html("10000+")
+				}
+				var Describe=task.Describe;
+				$(".mission_info").html(Describe);
+				var OrderAmount=task.OrderAmount;
+				$(".third_info").html(OrderAmount);
+				var PotentialAmount=task.PotentialAmount;
+				$(".second_info").html(PotentialAmount);
+				var AcquiredCommision=task.AcquiredCommision;
+				$(".config_b").html(AcquiredCommision);
+				var PotentialCommision=task.PotentialCommision;
+				$(".config_a").html(PotentialCommision);
+			}else if(result &&result.msg){
+				alert(result.msg)
+			}
+		})
+		$(".left").on("click",function(){
+			$(this).siblings().removeClass("active");
+			$(this).addClass("active");
+			$(".mainContent").empty();
+			$.post(BASE_URL+"/zhujbwx/sellcarfollow/openinfo",{
+				taskid:taskId,
+				coachid:coachId,
+				start:"0",
+				count:"5"
+			},function(data){
+				var result=JSON.parse(data);
+				if(result && result.result == true){
+					var users=result.users;
+					if(!users){
+						var info="<img src='./images/no_message.png' class='noMessage'>";
+						$(".mainContent").append(info);
+					}else{
+						for(index in users){
+							var Avator=users[index].Avator;
+							var CustomerName=users[index].CustomerName;
+							var Updated=users[index].Updated;
+							var time=Updated.substr(0,10);
+							var date=moment().format();
+							var timeTemp;
+							if(moment(time).format() == date){
+								timeTemp=Updated.substr(12,5);
+							}else{
+								timeTemp=time
+							}
+							var html="<div class='detaile'>\
+										<img src="+"'"+Avator+"'"+"class='detaileImg'>\
+										<span class='userName'>"+CustomerName+"</span>\
+										<span class='express'>访问您</span>\
+										<span class='timeSpan'>"+timeTemp+"</span>\
+									</div>";
+							$(".mainContent").append(html);
+						}
+						if(users.length >= 5){
+							var button="<button class='more'>加载更多</button>";
+							$(".mainContent").append(button);
+						}
+					}
+				}else if(result &&result.msg){
+					alert(result.msg)
+				}
+			})
+		})
+		$(".more").on("click",function(){
+			var start=$(".detaile").length -1;
+			$.post(BASE_URL+"/zhujbwx/sellcarfollow/openinfo",{
+				taskid:taskId,
+				coachid:coachId,
+				start:start,
+				count:"5"
+			},function(data){
+				var result=JSON.parse(data);
+				if(result && result.result == true){
+					var users=result.users;
+					if(!users){
+						$(".more").css("display","none");
+						alert("没有更多了");
+					}else{
+						for(index in users){
+							var Avator=users[index].Avator;
+							var CustomerName=users[index].CustomerName;
+							var Updated=users[index].Updated;
+							var time=Updated.substr(0,10);
+							var date=moment().format();
+							var timeTemp;
+							if(moment(time).format() == date){
+								timeTemp=Updated.substr(12,5);
+							}else{
+								timeTemp=time
+							}
+							var html="<div class='detaile'>\
+										<img src="+"'"+Avator+"'"+"class='detaileImg'>\
+										<span class='userName'>"+CustomerName+"</span>\
+										<span class='express'>访问您</span>\
+										<span class='timeSpan'>"+timeTemp+"</span>\
+									</div>";
+							$(".mainContent").append(html);
+						}
+						if(users.length >= 5){
+							var button="<button class='more'>加载更多</button>";
+							$(".mainContent").append(button);
+						}
+					}
+				}else if(result &&result.msg){
+					alert(result.msg)
+				}
+			})
+		})
+		$(".middle").on("click",function(){
+			$(this).siblings().removeClass("active");
+			$(this).addClass("active");
+			$(".mainContent").empty();
+			$.post(BASE_URL+"/zhujbwx/sellcarfollow/potentialinfo ",{
+				taskid:taskId,
+				coachid:coachId,
+				start:"0",
+				count:"5"
+			},function(data){
+				var result=JSON.parse(data);
+				if(result && result.result == true){
+					var users=result.users;
+					if(!users){
+						var info="<img src='./images/no_message.png' class='noMessage'>";
+						$(".mainContent").append(info);
+					}else{
+						for(index in users){
+							var Avator=users[index].Avator;
+							var CustomerName=users[index].CustomerName;
+							var Updated=users[index].Updated;
+							var Created=users[index].Created;
+							var CustomerPhone=users[index].CustomerPhone;
+							var timeItem=Created.substr(0,10);
+							var time=Updated.substr(0,10);
+							var date=moment().format();
+							var timeTemp;
+							if(moment(time).format() == date){
+								timeTemp=Updated.substr(12,5);
+							}else{
+								timeTemp=time
+							}
+							var html="<div class='detaile'>\
+										<img src="+"'"+Avator+"'"+"class='detaileImg'>\
+										<div class='rightInfo'>\
+											<span class='userName' style='margin-bottom:0px;height:20px;line-height:20px'>"+CustomerName+"</span>\
+											<br>\
+											<p class='express'>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>线索提供时间:</span>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>"+timeItem+"</span>\
+											</p>\
+											<br>\
+											<p class='express' style='margin-top:-10px'>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>反馈时间:</span>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>"+timeTemp+" </span>\
+											</p>\
+										</div>\
+										<div class='rightTemp' style='float:right;'>\
+											<a href="+"'tel:"+CustomerPhone+"'"+" style='padding-left:10px'><img src='./images/phone_icon.png'></a>\
+										</div>\
+									</div>";
+							$(".mainContent").append(html);
+						}
+						if(users.length >= 5){
+							var button="<button class='moretemp'>加载更多</button>";
+							$(".mainContent").append(button);
+						}
+					}
+				}else if(result &&result.msg){
+					alert(result.msg)
+				}
+			})
+		})
+		$("moretemp").on("click",function(){
+			var start=$(".detaile").length -1;
+			$.post(BASE_URL+"/zhujbwx/sellcarfollow/potentialinfo ",{
+				taskid:taskId,
+				coachid:coachId,
+				start:start,
+				count:"5"
+			},function(data){
+				var result=JSON.parse(data);
+				if(result && result.result == true){
+					var users=result.users;
+					if(!users){
+						$(".more").css("display","none");
+						alert("没有更多了");
+					}else{
+						for(index in users){
+							var Avator=users[index].Avator;
+							var CustomerName=users[index].CustomerName;
+							var Updated=users[index].Updated;
+							var Created=users[index].Created;
+							var CustomerPhone=users[index].CustomerPhone;
+							var timeItem=Created.substr(0,10);
+							var time=Updated.substr(0,10);
+							var date=moment().format();
+							var timeTemp;
+							if(moment(time).format() == date){
+								timeTemp=Updated.substr(12,5);
+							}else{
+								timeTemp=time
+							}
+							var html="<div class='detaile'>\
+										<img src="+"'"+Avator+"'"+"class='detaileImg'>\
+										<div class='rightInfo'>\
+											<span class='userName' style='margin-bottom:0px;height:20px;line-height:20px'>"+CustomerName+"</span>\
+											<br>\
+											<p class='express'>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>线索提供时间:</span>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>"+timeItem+"</span>\
+											</p>\
+											<br>\
+											<p class='express' style='margin-top:-10px'>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>反馈时间:</span>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>"+timeTemp+" </span>\
+											</p>\
+										</div>\
+										<div class='rightTemp' style='float:right;'>\
+											<a href="+"'tel:"+CustomerPhone+"'"+" style='padding-left:10px'><img src='./images/phone_icon.png'></a>\
+										</div>\
+									</div>";
+							$(".mainContent").append(html);
+						}
+						if(users.length >= 5){
+							var button="<button class='moretemp'>加载更多</button>";
+							$(".mainContent").append(button);
+						}
+					}
+				}else if(result &&result.msg){
+					alert(result.msg)
+				}
+			})
+		})
+		$(".right").on("click",function(){
+			$(this).siblings().removeClass("active");
+			$(this).addClass("active");
+			$(".mainContent").empty();
+			$.post(BASE_URL+"/zhujbwx/sellcarfollow/orderinfo",{
+				taskid:taskId,
+				coachid:coachId,
+				start:"0",
+				count:"5"
+			},function(data){
+				var result=JSON.parse(data);
+				if(result && result.result == true){
+					var users=result.users;
+					if(!users){
+						var info="<img src='./images/no_message.png' class='noMessage'>";
+						$(".mainContent").append(info);
+					}else{
+						for(index in users){
+							var Avator=users[index].Avator;
+							var CustomerName=users[index].CustomerName;
+							var Updated=users[index].Updated;
+							var Created=users[index].Created;
+							var CustomerPhone=users[index].CustomerPhone;
+							var timeItem=Created.substr(0,10);
+							var time=Updated.substr(0,10);
+							var date=moment().format();
+							var timeTemp;
+							if(moment(time).format() == date){
+								timeTemp=Updated.substr(12,5);
+							}else{
+								timeTemp=time
+							}
+							var html="<div class='detaile'>\
+										<img src="+"'"+Avator+"'"+"class='detaileImg'>\
+										<div class='rightInfo'>\
+											<span class='userName' style='margin-bottom:0px;height:20px;line-height:20px'>"+CustomerName+"</span>\
+											<br>\
+											<p class='express'>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>线索提供时间:</span>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>"+timeItem+"</span>\
+											</p>\
+											<br>\
+											<p class='express' style='margin-top:-10px'>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>成单时间:</span>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>"+timeTemp+" </span>\
+											</p>\
+										</div>\
+										<div class='rightTemp' style='float:right;'>\
+											<a href="+"'tel:"+CustomerPhone+"'"+" style='padding-left:10px'><img src='./images/phone_icon.png'></a>\
+										</div>\
+									</div>";
+							$(".mainContent").append(html);
+						}
+						if(users.length >= 5){
+							var button="<button class='moreItem'>加载更多</button>";
+							$(".mainContent").append(button);
+						}
+					}
+				}else if(result &&result.msg){
+					alert(result.msg)
+				}
+			})
+		})
+		$(".moreItem").on("click",function(){
+			var start=$(".detaile").length -1;
+			$.post(BASE_URL+"/zhujbwx/sellcarfollow/orderinfo",{
+				taskid:taskId,
+				coachid:coachId,
+				start:start,
+				count:"5"
+			},function(data){
+				var result=JSON.parse(data);
+				if(result && result.result == true){
+					var users=result.users;
+					if(!users){
+						$(".more").css("display","none");
+						alert("没有更多了");
+					}else{
+						for(index in users){
+							var Avator=users[index].Avator;
+							var CustomerName=users[index].CustomerName;
+							var Updated=users[index].Updated;
+							var Created=users[index].Created;
+							var CustomerPhone=users[index].CustomerPhone;
+							var timeItem=Created.substr(0,10);
+							var time=Updated.substr(0,10);
+							var date=moment().format();
+							var timeTemp;
+							if(moment(time).format() == date){
+								timeTemp=Updated.substr(12,5);
+							}else{
+								timeTemp=time
+							}
+							var html="<div class='detaile'>\
+										<img src="+"'"+Avator+"'"+"class='detaileImg'>\
+										<div class='rightInfo'>\
+											<span class='userName' style='margin-bottom:0px;height:20px;line-height:20px'>"+CustomerName+"</span>\
+											<br>\
+											<p class='express'>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>线索提供时间:</span>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>"+timeItem+"</span>\
+											</p>\
+											<br>\
+											<p class='express' style='margin-top:-10px'>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>成单时间:</span>\
+												<span style='height:20px;line-height:20px;font-size:0.8em'>"+timeTemp+" </span>\
+											</p>\
+										</div>\
+										<div class='rightTemp' style='float:right;'>\
+											<a href="+"'tel:"+CustomerPhone+"'"+" style='padding-left:10px'><img src='./images/phone_icon.png'></a>\
+										</div>\
+									</div>";
+							$(".mainContent").append(html);
+						}
+						if(users.length >= 5){
+							var button="<button class='moreItem'>加载更多</button>";
+							$(".mainContent").append(button);
+						}
+					}
+				}else if(result &&result.msg){
+					alert(result.msg)
+				}
+			})
+		})
+	})
+
+</script>
+<!-- %2ftrack-->
